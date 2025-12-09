@@ -33,6 +33,17 @@ jobs:
         with:
           path: 'site'
 
+      - name: Verify uploaded artifact exists
+        run: |
+          echo "Checking artifacts for run: $GITHUB_RUN_ID"
+          resp=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${{ github.repository }}/actions/runs/${GITHUB_RUN_ID}/artifacts")
+          echo "$resp" | sed -n '1,200p'
+          total=$(echo "$resp" | grep -o '"total_count"[[:space:]]*:[[:space:]]*[0-9]\+' | grep -o '[0-9]\+')
+          if [ -z "$total" ] || [ "$total" -eq 0 ]; then
+            echo "ERROR: no artifacts found for run $GITHUB_RUN_ID. Upload may have failed."
+            exit 1
+          fi
+
       - name: Debug: show run id and list artifacts
         run: |
           echo "GITHUB_RUN_ID=$GITHUB_RUN_ID"
