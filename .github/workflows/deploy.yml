@@ -20,10 +20,17 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
+      - name: Prepare site folder
+        run: |
+          rm -rf site || true
+          mkdir -p site
+          cp -r index.html site/
+          if [ -d assets ]; then cp -r assets site/; fi
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: 'site'
 
       - name: Deploy to GitHub Pages
         id: deployment
