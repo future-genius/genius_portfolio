@@ -13,8 +13,8 @@
 
         body {
             font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
-            color: #f0f0f0;
+            background: linear-gradient(180deg, #000000 0%, #0d0d0d 50%, #050505 100%);
+            color: #e8e8e8;
             overflow-x: hidden;
             min-height: 100vh;
             position: relative;
@@ -189,15 +189,16 @@
         }
 
         header {
-            background: linear-gradient(180deg, rgba(15, 15, 15, 0.98), rgba(20, 20, 20, 0.95));
-            backdrop-filter: blur(25px);
-            border-bottom: 1px solid rgba(200, 200, 200, 0.12);
-            color: #f0f0f0;
+            background: linear-gradient(180deg, rgba(5, 5, 5, 0.98), rgba(10, 10, 10, 0.96));
+            backdrop-filter: blur(30px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            color: #e8e8e8;
             padding: 100px 20px 70px;
             text-align: center;
             position: relative;
             z-index: 50;
             animation: slideIn 0.9s ease-out;
+            transition: all 0.4s ease;
         }
 
         header h1 {
@@ -207,10 +208,11 @@
             margin-bottom: 8px;
             letter-spacing: 3px;
             text-transform: uppercase;
-            background: linear-gradient(135deg, #ffffff 0%, #d0d0d0 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #c0c0c0 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            transition: all 0.4s ease;
         }
 
         header p {
@@ -245,12 +247,12 @@
         .sidebar {
             width: 320px;
             min-width: 220px;
-            background: linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(25, 25, 25, 0.9));
-            border: 1px solid rgba(200, 200, 200, 0.15);
-            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(15, 15, 15, 0.7), rgba(10, 10, 10, 0.85));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
             padding: 32px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(30px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(20px);
             height: fit-content;
             align-self: flex-start;
             position: sticky;
@@ -260,22 +262,22 @@
         }
 
         .sidebar:hover {
-            background: linear-gradient(135deg, rgba(35, 35, 35, 0.85), rgba(28, 28, 28, 0.95));
-            border-color: rgba(200, 200, 200, 0.25);
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.75), rgba(15, 15, 15, 0.9));
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
             transform: translateY(-5px);
         }
 
         .profile-photo {
             width: 100%;
             height: 380px;
-            background: linear-gradient(135deg, rgba(80, 80, 80, 0.3), rgba(60, 60, 60, 0.2));
-            border: 1.5px solid rgba(200, 200, 200, 0.2);
-            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(40, 40, 40, 0.2), rgba(30, 30, 30, 0.15));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #888;
+            color: #777;
             font-size: 0.95rem;
             margin-bottom: 24px;
             overflow: hidden;
@@ -284,8 +286,8 @@
         }
 
         .profile-photo:hover {
-            border-color: rgba(200, 200, 200, 0.35);
-            box-shadow: 0 0 40px rgba(255, 255, 255, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.08), inset 0 0 20px rgba(255, 255, 255, 0.04);
             transform: scale(1.02);
         }
 
@@ -305,24 +307,25 @@
         /* Buttons */
         .btn {
             display: inline-block;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(220, 220, 220, 0.9));
-            color: #0a0a0a;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(200, 200, 200, 0.08));
+            color: #ffffff;
             padding: 12px 18px;
-            border-radius: 10px;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: 700;
             font-size: 0.95rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             letter-spacing: 0.5px;
         }
 
         .btn:hover { 
-            background: linear-gradient(135deg, #ffffff, #e0e0e0);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(220, 220, 220, 0.12));
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.25);
-            letter-spacing: 1px;
+            box-shadow: 0 12px 30px rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 0.8px;
         }
 
         .btn:active {
@@ -331,13 +334,13 @@
 
         .btn-ghost {
             background: transparent;
-            color: #e0e0e0;
-            border: 1.5px solid rgba(200, 200, 200, 0.4);
+            color: #d0d0d0;
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
         }
 
         .btn-ghost:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(200, 200, 200, 0.7);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.3);
             color: #ffffff;
         }
 
@@ -355,39 +358,39 @@
             justify-content: center; 
             width: 40px; 
             height: 40px; 
-            border-radius: 10px; 
-            background: linear-gradient(135deg, rgba(100, 100, 100, 0.2), rgba(80, 80, 80, 0.1));
-            border: 1px solid rgba(200, 200, 200, 0.2);
-            color: #d0d0d0; 
+            border-radius: 6px; 
+            background: linear-gradient(135deg, rgba(80, 80, 80, 0.12), rgba(60, 60, 60, 0.08));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #c0c0c0; 
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: all 0.35s ease;
         }
 
         .socials a:hover { 
-            background: linear-gradient(135deg, rgba(200, 200, 200, 0.3), rgba(150, 150, 150, 0.2));
-            border-color: rgba(200, 200, 200, 0.5);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(200, 200, 200, 0.15);
+            background: linear-gradient(135deg, rgba(150, 150, 150, 0.2), rgba(120, 120, 120, 0.12));
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
             color: #ffffff;
         }
 
         /* Project card */
         .project-card {
-            background: linear-gradient(135deg, rgba(40, 40, 40, 0.6), rgba(30, 30, 30, 0.7));
-            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.5), rgba(12, 12, 12, 0.65));
+            border-radius: 8px;
             padding: 28px;
-            border: 1px solid rgba(200, 200, 200, 0.15);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(15px);
+            transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
             animation: slideIn 1.3s ease-out;
         }
 
         .project-card:hover { 
-            transform: translateY(-12px);
-            background: linear-gradient(135deg, rgba(50, 50, 50, 0.7), rgba(35, 35, 35, 0.8));
-            border-color: rgba(200, 200, 200, 0.3);
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            transform: translateY(-10px) scale(1.01);
+            background: linear-gradient(135deg, rgba(25, 25, 25, 0.6), rgba(15, 15, 15, 0.75));
+            border-color: rgba(255, 255, 255, 0.18);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .project-card h3 { 
@@ -409,22 +412,23 @@
         }
 
         .section {
-            background: linear-gradient(135deg, rgba(35, 35, 35, 0.7), rgba(25, 25, 25, 0.8));
-            backdrop-filter: blur(25px);
-            border: 1px solid rgba(200, 200, 200, 0.15);
-            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(15, 15, 15, 0.5), rgba(10, 10, 10, 0.65));
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
             padding: 50px;
             margin-bottom: 60px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
             animation: slideIn 1.2s ease-out;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
         }
 
         .section:hover {
-            background: linear-gradient(135deg, rgba(42, 42, 42, 0.8), rgba(30, 30, 30, 0.9));
-            border-color: rgba(200, 200, 200, 0.25);
-            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12);
-            transform: translateY(-8px);
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.6), rgba(15, 15, 15, 0.75));
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            transform: translateY(-6px);
+        }
         }
 
         .section h2 {
@@ -436,14 +440,23 @@
             position: relative;
             padding-bottom: 20px;
             font-weight: 800;
-            background: linear-gradient(135deg, #ffffff 0%, #c0c0c0 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #b0b0b0 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            transition: all 0.4s ease;
         }
 
         .section h2:after {
             content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+            transition: all 0.4s ease;
+        }
             position: absolute;
             bottom: 0;
             left: 0;
