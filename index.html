@@ -1344,6 +1344,94 @@
             cursor: pointer;
         }
 
+        /* PixelShift: global variables and UI polish (monochrome only) */
+        :root {
+            --bg-900: #000000;
+            --bg-800: #0b0b0b;
+            --bg-700: #121212;
+            --muted: #bdbdbd;
+            --muted-2: #9a9a9a;
+            --glass: rgba(255,255,255,0.04);
+            --accent: rgba(255,255,255,0.14);
+            --thin-line: rgba(255,255,255,0.06);
+            --glow-weak: rgba(255,255,255,0.06);
+        }
+
+        /* Moving grid layer (subtle animated grid lines) */
+        .grid-layer {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 40px 40px, 40px 40px;
+            mix-blend-mode: overlay;
+            opacity: 0.06;
+            transform: translateZ(0);
+            animation: gridShift 60s linear infinite;
+            will-change: background-position, opacity;
+        }
+
+        @keyframes gridShift {
+            from { background-position: 0 0, 0 0; }
+            to { background-position: 800px 800px, -800px -800px; }
+        }
+
+        /* Parallax layers marker (can be applied to any element for layered depth) */
+        .parallax-layer { will-change: transform, opacity; }
+
+        /* Reveal helpers */
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2,0.9,0.2,1); }
+        .reveal.is-visible { opacity: 1; transform: translateY(0); }
+        .reveal.fade { transform: translateY(8px); }
+        .reveal.slide-left { transform: translateX(28px); }
+        .reveal.wipe { clip-path: inset(0 100% 0 0); transition: clip-path 0.9s ease, opacity 0.9s ease; }
+        .reveal.wipe.is-visible { clip-path: inset(0 0 0 0); }
+
+        /* Thin animated separators and section title underline */
+        .section h2::after { content: ''; position: absolute; bottom: 0; left: 0; height: 3px; width: 0; background: linear-gradient(90deg, rgba(255,255,255,0.9), rgba(255,255,255,0.25)); border-radius: 2px; transition: width 0.7s cubic-bezier(0.2,0.9,0.2,1); }
+        .section h2.revealed::after { width: 80px; }
+
+        /* Premium glass-morphism card glow and micro 3D interactions */
+        .project-card, .contact-link, .section, .sidebar {
+            transform-style: preserve-3d;
+            perspective: 900px;
+        }
+
+        .project-card {
+            transition: transform 0.45s cubic-bezier(0.2,0.9,0.2,1), box-shadow 0.45s ease, filter 0.45s ease;
+            will-change: transform, box-shadow, filter;
+        }
+
+        .project-card.glow-edge {
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 40px var(--glow-weak);
+            border: 1px solid var(--glass);
+        }
+
+        /* 3D micro-tilt transform target */
+        .tilt { transition: transform 0.45s cubic-bezier(0.2,0.9,0.2,1); transform-origin: center; }
+
+        /* Hover depth (applied when pointer enters) */
+        .project-card:hover { transform: translateY(-14px) scale(1.01) translateZ(20px); }
+
+        /* Button micro interactions */
+        .btn { transform-style: preserve-3d; }
+        .btn:hover { transform: translateY(-4px) translateZ(6px); box-shadow: 0 10px 30px rgba(255,255,255,0.06); }
+
+        /* Thin animated borders and separators */
+        .thin-line { height: 1px; background: linear-gradient(90deg, transparent, var(--thin-line), transparent); transition: transform 0.6s ease, opacity 0.6s ease; }
+
+        /* Subtle focus ring for keyboard users */
+        a:focus, button:focus { outline: 2px solid rgba(255,255,255,0.06); outline-offset: 3px; }
+
+        /* Accessibility: reduce-motion respect */
+        @media (prefers-reduced-motion: reduce) {
+            .grid-layer { animation-duration: 120s; }
+            * { transition: none !important; animation: none !important; }
+        }
+
     </style>
 </head>
 <body>
@@ -1363,6 +1451,9 @@
         <div class="accent-line-1"></div>
         <div class="accent-line-2"></div>
     </div>
+
+    <!-- PixelShift grid overlay for subtle moving lines -->
+    <div class="grid-layer parallax-layer" data-depth="0.06" aria-hidden="true"></div>
 
     <header>
         <div style="display:flex;align-items:center;justify-content:space-between;max-width:1300px;margin:0 auto;padding:0 30px;gap:20px;">
@@ -1853,6 +1944,100 @@
             closeBtn.addEventListener('click', closeModal);
             modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
             document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+        })();
+    </script>
+
+    <script>
+        // PixelShift: 3D tilt micro-interactions + enhanced reveal/stagger
+        (function(){
+            // Respect reduced motion
+            const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // Utility: enable tilt on an element
+            function enableTilt(el, options = {}){
+                if (reduce) return;
+                const maxTilt = options.maxTilt || 8; // degrees
+                const scale = options.scale || 1.01;
+                const speed = options.speed || 300; // ms for transition
+
+                el.style.transformStyle = 'preserve-3d';
+                el.style.transition = `transform 0.25s cubic-bezier(0.2,0.9,0.2,1)`;
+                el.style.willChange = 'transform';
+
+                function onMove(e){
+                    const rect = el.getBoundingClientRect();
+                    const px = (e.clientX - rect.left) / rect.width;
+                    const py = (e.clientY - rect.top) / rect.height;
+                    const tiltY = (maxTilt/2 - px * maxTilt).toFixed(2);
+                    const tiltX = (py * maxTilt - maxTilt/2).toFixed(2);
+                    el.style.transform = `perspective(900px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateZ(6px) scale(${scale})`;
+                }
+
+                function onLeave(){
+                    el.style.transform = '';
+                }
+
+                el.addEventListener('pointermove', onMove);
+                el.addEventListener('pointerleave', onLeave);
+                el.addEventListener('pointercancel', onLeave);
+                el.addEventListener('blur', onLeave);
+            }
+
+            // Apply tilt to project cards on desktop only
+            function initTilts(){
+                if (!window.matchMedia('(min-width: 900px)').matches) return;
+                document.querySelectorAll('.project-card').forEach(card => {
+                    card.classList.add('tilt', 'glow-edge');
+                    enableTilt(card, { maxTilt: 8, scale: 1.01 });
+                });
+                const profile = document.querySelector('.profile-photo');
+                if (profile) {
+                    profile.classList.add('tilt');
+                    enableTilt(profile, { maxTilt: 6, scale: 1.02 });
+                }
+            }
+
+            // Enhanced Reveal: add 'reveal' class and stagger visibility using IntersectionObserver
+            function initReveal(){
+                const els = Array.from(document.querySelectorAll('.section, .project-card, .contact-link, header h1, .section h2'));
+                els.forEach((el, i) => {
+                    // don't overwrite existing inline animations; only add if not already animated
+                    if (!el.classList.contains('reveal')) el.classList.add('reveal');
+                    // special: mark section titles for underline animation
+                    if (el.matches('.section h2')) el.classList.add('title-animate');
+                });
+
+                const io = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const delay = Math.min(300, Math.floor((entry.target.dataset.index || 0) * 60));
+                            window.setTimeout(() => {
+                                entry.target.classList.add('is-visible');
+                                if (entry.target.matches('.section h2')) entry.target.classList.add('revealed');
+                            }, delay);
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+
+                els.forEach((el, i) => { el.dataset.index = i; io.observe(el); });
+            }
+
+            // Initialize helpers after a small delay so layout is stable
+            function ready(){
+                initReveal();
+                initTilts();
+            }
+
+            if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready);
+            else ready();
+
+            // Re-init on resize to only enable tilt for large viewports
+            let resizeTO;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTO);
+                resizeTO = setTimeout(() => { initTilts(); }, 300);
+            });
         })();
     </script>
 </body>
