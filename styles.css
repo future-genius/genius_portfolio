@@ -759,3 +759,8 @@ svg path, svg circle, svg rect, svg line, svg polygon, svg polyline, svg g { str
 /* Keep photos and certificate previews colored (exclude from SVG/grayscale rules) */
 img { filter: none !important; }
 .cert-thumb, .cert-modal img, .profile-photo img, .project-card img { filter: none !important; }
+
+/* Make certificate thumbnails grayscale but keep modal preview colored */
+.cert-thumb { filter: grayscale(100%) contrast(95%) !important; }
+.cert-thumb:hover { filter: grayscale(60%) contrast(100%) !important; transform: translateY(-4px) scale(1.01) !important; }
+.cert-modal img { filter: none !important; }
