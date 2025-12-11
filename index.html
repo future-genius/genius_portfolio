@@ -1463,10 +1463,34 @@
             border-color: rgba(255,255,255,0.06) !important;
         }
 
-        /* grayscale SVGs & images to match monochrome theme */
-        img, .project-card img, .cert-thumb { filter: grayscale(100%) contrast(95%) !important; }
-        svg { filter: grayscale(100%) brightness(110%) !important; }
-        svg * { stroke: rgba(255,255,255,0.9) !important; fill: none !important; }
+        /* Convert SVG icons and inline gradients to monochrome while keeping photographs colored */
+        svg { filter: grayscale(100%) brightness(100%) !important; }
+        svg stop { stop-color: #ffffff !important; stop-opacity: 0.9 !important; }
+        svg path, svg circle, svg rect, svg line, svg polygon, svg polyline, svg g { stroke: rgba(255,255,255,0.95) !important; fill: rgba(255,255,255,0.02) !important; }
+
+        /* Neutralize inline CSS gradients (linear & radial) across elements */
+        *[style*="linear-gradient"], *[style*="radial-gradient"] {
+            background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)) !important;
+            background-image: none !important;
+            box-shadow: 0 18px 50px rgba(0,0,0,0.6) !important;
+            border-color: rgba(255,255,255,0.06) !important;
+        }
+
+        /* Force color-neutral badges, tags and inline colored elements */
+        .project-card span, .project-card a, .project-card .tag, .project-card [style*="color:"] {
+            background: rgba(255,255,255,0.02) !important;
+            color: var(--mono-90) !important;
+            border-color: rgba(255,255,255,0.06) !important;
+        }
+
+        /* Ensure textual content in cards is monochrome */
+        .project-card, .project-card * {
+            color: var(--mono-90) !important;
+        }
+
+        /* Keep photos and certificate previews colored (exclude from SVG/grayscale rules) */
+        img { filter: none !important; }
+        .cert-thumb, .cert-modal img, .profile-photo img, .project-card img { filter: none !important; }
 
         /* stronger, smooth transitions and accessible motion */
         * { transition: background-color 0.35s ease, color 0.35s ease, transform 0.35s cubic-bezier(0.2,0.9,0.2,1) !important; }
@@ -1494,6 +1518,44 @@
             .section::after { animation: none !important; opacity: 0.15; }
             * { transition: none !important; }
         }
+
+        /* Aggressive monochrome overrides to neutralize inline gradients and SVG stops */
+        svg stop { stop-color: var(--mono-90) !important; stop-opacity: 1 !important; }
+        svg, svg * { stroke: var(--mono-90) !important; fill: var(--mono-30) !important; filter: none !important; }
+
+        /* Neutralize decorative shapes and floating graphics */
+        .shape, .shape-1, .shape-2, .shape-3, .float-blob, .float-ring, .float-square,
+        .accent-line-1, .accent-line-2 {
+            background: radial-gradient(circle, rgba(255,255,255,0.04), rgba(255,255,255,0.01)) !important;
+            border-color: rgba(255,255,255,0.04) !important;
+            opacity: 0.06 !important;
+            filter: blur(18px) !important;
+            mix-blend-mode: overlay !important;
+        }
+
+        /* Neutralize any inline background gradients on inner wrappers */
+        .project-card > div[style], .section > div[style], .sidebar > div[style], .contact-link > div[style] {
+            background-image: none !important;
+            background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)) !important;
+            border-color: rgba(255,255,255,0.06) !important;
+        }
+
+        /* Force badges, tags and inline spans to monochrome */
+        .project-card span, .project-card a, .project-card .btn, .project-card .cert-btn {
+            background: rgba(255,255,255,0.02) !important;
+            color: var(--mono-90) !important;
+            border-color: rgba(255,255,255,0.06) !important;
+        }
+
+        /* Force link colors to monochrome */
+        a, a:visited, a:active { color: var(--mono-90) !important; }
+
+        /* Ensure images remain visible but tone-mapped to greyscale */
+        img, .project-card img, .cert-thumb { filter: grayscale(100%) contrast(95%) brightness(95%) !important; }
+
+        /* Reduce colored box-shadows that may carry hue by using semi-white glows */
+        .project-card, .sidebar, .section, .contact-link { box-shadow: 0 30px 80px rgba(255,255,255,0.03) !important; }
+
 
     </style>
 </head>
