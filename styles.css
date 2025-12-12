@@ -1226,6 +1226,40 @@ img, picture, video {
     mix-blend-mode: normal !important;
 }
 
+/* Also ensure any element that uses an inline background image remains full color */
+[style*="url("] {
+    -webkit-filter: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    z-index: 10 !important;
+}
+
+/* Specific selectors for common photo containers */
+.project-card img,
+.project-card a img,
+.project-card > div:first-child img,
+.cert-thumb,
+.profile-photo img,
+header img,
+.float-blob img,
+.float-ring img {
+    -webkit-filter: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    z-index: 20 !important;
+    position: relative !important;
+}
+
+/* If a pseudo-element overlay exists, ensure it doesn't obscure the photo */
+.project-card::before,
+.project-card > div:first-child::before,
+.project-card > div:first-child > div::before {
+    z-index: 1 !important;
+}
+
 /* SVGs: desaturate iconography unless they are photos (embedded raster images) */
 svg {
     -webkit-filter: grayscale(100%) saturate(0%) !important;
