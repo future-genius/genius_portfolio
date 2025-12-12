@@ -1274,6 +1274,25 @@ header h1, header p, .section h2, .keep-gradient {
     #certifications .project-card > div:first-child { height: 260px !important; }
 }
 
+/* Ensure certification thumbnails render in full color and above overlays */
+#certifications .project-card img.cert-thumb,
+#certifications .project-card > div:first-child img,
+#certifications img {
+    -webkit-filter: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 5 !important;
+}
+
+/* If a decorative overlay exists, push it behind the image */
+#certifications .project-card > div:first-child > div,
+#certifications .project-card > a > div {
+    z-index: 1 !important;
+    pointer-events: none !important;
+}
+
 
 /* ===== FEATURED PROJECTS: FORCE BLACK & WHITE (PHOTOS EXEMPT) ===== */
 /* Ensure the whole Featured Projects area remains monochrome except for <img> elements */
