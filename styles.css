@@ -1293,6 +1293,73 @@ header h1, header p, .section h2, .keep-gradient {
     pointer-events: none !important;
 }
 
+/* ===== GLOBAL: FORCE PURE BLACK BACKGROUND & BRIGHT TEXT ===== */
+html, body {
+    background: #000000 !important;
+    color: #f7f7f7 !important;
+}
+
+/* Make main containers fully black to avoid grey tones */
+header,
+.content-wrapper,
+.section,
+.project-card,
+.sidebar,
+footer,
+.grid-layer,
+.background-shapes,
+.contact-link,
+.skill-card {
+    background: #000000 !important;
+    background-image: none !important;
+    border-color: rgba(255,255,255,0.04) !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8) !important;
+}
+
+/* Ensure text remains readable and bright */
+.section h2, header h1, header p, .project-card h3, .project-card p, .skill-card > div:first-child, footer p {
+    color: #ffffff !important;
+}
+
+/* Links and buttons: bright with subtle transparent backing */
+a, a:visited, .btn, .nav-links a {
+    color: #f3f3f3 !important;
+}
+
+/* Maintain images full-color and on top */
+img, picture, video {
+    -webkit-filter: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    z-index: 10 !important;
+    position: relative !important;
+}
+
+/* Reduce any remaining glow colors to neutral whites */
+svg stop, svg path, svg circle, svg rect {
+    filter: grayscale(100%) brightness(1.05) !important;
+}
+
+/* Keep decorative accent lines subtle and white-only */
+.accent-line-1, .accent-line-2 {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent) !important;
+}
+
+/* Ensure badges/tags are neutral */
+.project-card span, .badge, .tag {
+    background: rgba(255,255,255,0.02) !important;
+    color: #eaeaea !important;
+    border-color: rgba(255,255,255,0.04) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition-duration: 0.001ms !important;
+        animation-duration: 0.001ms !important;
+    }
+}
+
+
 
 /* ===== FEATURED PROJECTS: FORCE BLACK & WHITE (PHOTOS EXEMPT) ===== */
 /* Ensure the whole Featured Projects area remains monochrome except for <img> elements */
