@@ -1189,3 +1189,55 @@ html {
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(180deg, rgba(220,220,220,0.8), rgba(180,180,180,0.6));
 }
+
+/* ===== FEATURED PROJECTS: FORCE BLACK & WHITE (PHOTOS EXEMPT) ===== */
+/* Ensure the whole Featured Projects area remains monochrome except for <img> elements */
+#projects .project-card {
+    background: linear-gradient(135deg, rgba(18,18,18,0.65), rgba(8,8,8,0.85)) !important;
+    border-color: rgba(255,255,255,0.06) !important;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5) !important;
+}
+
+/* Desaturate all children except images so SVGs, badges and inline-gradients look greyscale */
+#projects .project-card *:not(img) {
+    -webkit-filter: grayscale(100%) saturate(0%) !important;
+    filter: grayscale(100%) saturate(0%) !important;
+}
+
+/* Force typographic and badge colors to neutral greys */
+#projects .project-card h3,
+#projects .project-card p,
+#projects .project-card span,
+#projects .project-card a {
+    color: #d0d0d0 !important;
+    background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)) !important;
+    border-color: rgba(255,255,255,0.06) !important;
+}
+
+#projects .project-card h3 a { color: #e8e8e8 !important; }
+
+/* Keep images in project cards full color */
+#projects .project-card img {
+    -webkit-filter: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+}
+
+/* Hover: subtle monochrome lift */
+#projects .project-card:hover {
+    transform: translateY(-8px) scale(1.01) !important;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6) !important;
+}
+
+/* ===== CERTIFICATION PREVIEW SIZE ===== */
+/* Increase preview height for certificate thumbnails */
+#certifications .project-card > div:first-child,
+#certifications .project-card > a > img,
+#certifications .project-card > div:first-child img.cert-thumb {
+    height: 340px !important;
+}
+
+@media (max-width: 768px) {
+    #certifications .project-card > div:first-child { height: 260px !important; }
+}
+
