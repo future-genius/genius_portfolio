@@ -1190,6 +1190,91 @@ html {
     background: linear-gradient(180deg, rgba(220,220,220,0.8), rgba(180,180,180,0.6));
 }
 
+/* ===== SITE-WIDE PREMIUM MONOCHROME ENFORCEMENT ===== */
+/* Desaturate and neutralize all UI elements while preserving actual photos/images */
+:root {
+    --mono-900: #000000;
+    --mono-800: #0b0b0b;
+    --mono-700: #111111;
+    --mono-600: #1a1a1a;
+    --mono-400: #bdbdbd;
+    --mono-200: #e6e6e6;
+}
+
+/* Apply a strict greyscale filter to all non-image content */
+body *:not(img):not(picture):not(svg):not(.keep-color) {
+    -webkit-filter: grayscale(100%) saturate(0%) contrast(0.95) !important;
+    filter: grayscale(100%) saturate(0%) contrast(0.95) !important;
+    color: var(--mono-200) !important;
+    background-image: none !important;
+    background: linear-gradient(180deg, var(--mono-800), var(--mono-700)) !important;
+    border-color: rgba(255,255,255,0.06) !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.55) !important;
+}
+
+/* Ensure interactive elements remain clear and readable */
+button, a, input, textarea, select {
+    color: var(--mono-200) !important;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)) !important;
+    border: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+/* Keep images and certificate thumbnails in full color */
+img, picture, video {
+    -webkit-filter: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+}
+
+/* SVGs: desaturate iconography unless they are photos (embedded raster images) */
+svg {
+    -webkit-filter: grayscale(100%) saturate(0%) !important;
+    filter: grayscale(100%) saturate(0%) !important;
+}
+
+/* Preserve header text gradients where intentionally kept */
+header h1, header p, .section h2, .keep-gradient {
+    -webkit-filter: none !important;
+    filter: none !important;
+    background: initial !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+}
+
+/* Neutralize inline background colors/gradients on project cards and badges */
+.project-card, .project-card * {
+    background-image: none !important;
+    background: linear-gradient(180deg, var(--mono-800), var(--mono-700)) !important;
+    border-color: rgba(255,255,255,0.06) !important;
+}
+
+/* Badges and tags: neutral greys */
+.project-card span, .project-card .tag, .project-card .badge {
+    background: rgba(255,255,255,0.03) !important;
+    color: var(--mono-200) !important;
+    border: 1px solid rgba(255,255,255,0.05) !important;
+}
+
+/* ===== CERTIFICATIONS: WIDER PREVIEW COLUMNS ===== */
+/* Override inline grid to increase per-card min width for larger certificate previews */
+#certifications > div {
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)) !important;
+    gap: 32px !important;
+}
+
+/* ensure each certification card preview uses the larger height already set */
+#certifications .project-card > div:first-child,
+#certifications .project-card > a > img,
+#certifications .project-card > div:first-child img.cert-thumb {
+    height: 340px !important;
+}
+
+@media (max-width: 768px) {
+    #certifications > div { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; }
+    #certifications .project-card > div:first-child { height: 260px !important; }
+}
+
+
 /* ===== FEATURED PROJECTS: FORCE BLACK & WHITE (PHOTOS EXEMPT) ===== */
 /* Ensure the whole Featured Projects area remains monochrome except for <img> elements */
 #projects .project-card {
