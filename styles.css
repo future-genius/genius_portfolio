@@ -1193,6 +1193,48 @@ img, picture, video, .cert-thumb, .profile-photo img, .project-card img, [style*
 /* Make sure svg icons used as decoration are neutral (optional) */
 svg { filter: grayscale(100%) !important; }
 
+/* ===== STRICT: REMOVE ANY GREY TONES SITE-WIDE ===== */
+/* Target all elements except real images/background photos and force pure black/white palette */
+*:not(img):not(picture):not(video):not([style*="url("]) {
+    background: #000000 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+/* Neutralize inline rgba/hsla backgrounds but preserve elements that use background images (photos) */
+[style*="background"]:not([style*="url("]) {
+    background: #000000 !important;
+    background-image: none !important;
+}
+
+/* Make badges, tags, and controls pure white text with transparent backgrounds */
+.project-card span, .badge, .tag, .nav-links a, .btn, .btn-ghost {
+    background: transparent !important;
+    color: #ffffff !important;
+    border-color: rgba(255,255,255,0.06) !important;
+    box-shadow: none !important;
+}
+
+/* Ensure any svg decorations use white strokes/fills (icons only) */
+svg:not([data-keep-color]) * { stroke: #ffffff !important; fill: #ffffff !important; }
+
+/* Force images and background-image photos to full color and above overlays */
+img, picture, video, [style*="url("] {
+    -webkit-filter: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    opacity: 1 !important;
+    z-index: 999 !important;
+    position: relative !important;
+}
+
+/* Ensure pseudo-element overlays are behind images */
+*::before, *::after { z-index: 0 !important; }
+
+
 
 /* ===== ACCESSIBILITY ===== */
 :focus-visible {
