@@ -1142,6 +1142,58 @@ header p,
     }
 }
 
+/* ===== FINAL OVERRIDES: PURE BLACK SITE, IMAGES IN ORIGINAL COLOR ===== */
+/* Force site background to pure black and all UI elements to use black backgrounds */
+html, body {
+    background: #000000 !important;
+    color: #ffffff !important;
+}
+
+/* Make all containers pure black and text bright white */
+header, .content-wrapper, .section, .project-card, .sidebar, footer, .contact-link, .skill-card {
+    background: #000000 !important;
+    background-image: none !important;
+    border-color: rgba(255,255,255,0.04) !important;
+}
+
+/* Override inline styles that try to inject color backgrounds; keep images unaffected */
+*:not(img):not(picture):not(video):not(.keep-color)[style] {
+    background: #000000 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+}
+
+/* Ensure text and headings are white and readable */
+h1, h2, h3, h4, h5, h6, p, a, li, span, button {
+    color: #ffffff !important;
+}
+
+/* Ensure buttons and links have neutral backgrounds */
+.btn, .nav-links a, a.button {
+    background: transparent !important;
+    color: #ffffff !important;
+    border-color: rgba(255,255,255,0.06) !important;
+}
+
+/* Keep all photos, thumbnails and background-image photos in their original color */
+img, picture, video, .cert-thumb, .profile-photo img, .project-card img, [style*="url("] {
+    -webkit-filter: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 50 !important;
+}
+
+/* If a decorative overlay exists, push it behind images */
+.project-card::before, .project-card > div:first-child::before, .project-card > div:first-child > div::before {
+    z-index: 1 !important;
+}
+
+/* Make sure svg icons used as decoration are neutral (optional) */
+svg { filter: grayscale(100%) !important; }
+
+
 /* ===== ACCESSIBILITY ===== */
 :focus-visible {
     outline: 2px solid rgba(255,255,255,0.3);
