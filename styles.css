@@ -1297,87 +1297,37 @@ img, picture, video, [style*="url("] {
 /* Ensure any leftover CSS variables set to grey are neutralized */
 :root { color-scheme: dark; }
 
-/* ===== FORCE BOXES TO PURE BLACK + GUI ACCENTS ===== */
-/* Make header and its inner container fully black */
-header, header > div {
-    background: #000000 !important;
+/* ===== FORCE ENTIRE SITE TO PURE BLACK + PRESERVE IMAGES ===== */
+/* Make the whole page and all major containers pure black and text white */
+html, body, header, footer, .content-wrapper, .main, .section, .project-card, .sidebar, .profile-photo, .cert-thumb, .grid-layer, .background-shapes, .nav-links a, .btn, .btn-ghost {
+    background-color: #000000 !important;
     background-image: none !important;
-    backdrop-filter: none !important;
-    border-bottom: none !important;
-    box-shadow: none !important;
-}
-
-/* Force section headings and boxed content to black */
-.section, .section h2, .project-card, .sidebar, .profile-photo, .project-card > div, .cert-thumb, .content-wrapper, .main, .contact-link {
-    background: #000000 !important;
-    background-image: none !important;
+    color: #ffffff !important;
     border-color: transparent !important;
     box-shadow: none !important;
 }
 
-/* Turn any inline gradient boxes to black unless they contain an image (url()) */
-[style*="background: linear-gradient"]:not([style*="url("]) {
+/* Neutralize any inline gradients or background-images that are not photos */
+[style*="linear-gradient"]:not([style*="url("]) {
     background-image: none !important;
     background-color: #000000 !important;
-    border-color: transparent !important;
-    box-shadow: none !important;
 }
 
-/* Reduce large decorative shapes that create grey bands */
-.background-shapes .shape, .background-shapes .float-blob, .background-shapes .float-square {
-    opacity: 0.02 !important;
-    background: transparent !important;
-    filter: blur(6px) !important;
+/* Decorative shapes fully hidden to avoid grey banding */
+.background-shapes { display: none !important; }
+.grid-layer { background-image: none !important; }
+
+/* Keep img/picture/video and elements with url() in their style in full color and above overlays */
+img, picture, video, [style*="url("] {
+    -webkit-filter: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 9999 !important;
 }
 
-/* Keep accent rings but darken them so they do not create visible grey boxes */
-.background-shapes .float-ring { border-color: rgba(255,255,255,0.02) !important; opacity: 0.03 !important; }
-
-/* Section heading styling (black bar + white text + small GUI accent) */
-.section h2 {
-    display: inline-block;
-    padding: 18px 22px;
-    background: #000000 !important;
-    color: #ffffff !important;
-    border-radius: 6px;
-    position: relative;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.7) !important;
-}
-
-.section h2::after {
-    content: '';
-    position: absolute;
-    right: -18px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 10px;
-    height: 2px;
-    background: #ffffff;
-    opacity: 0.9;
-}
-
-/* Small GUI chips for project cards (white corner accents) */
-.project-card::before {
-    content: '';
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    width: 36px;
-    height: 6px;
-    background: #ffffff;
-    opacity: 0.06;
-    border-radius: 3px;
-}
-
-/* Ensure buttons that used grey gradients are black */
-.btn, .btn-ghost, a[style*="background: linear-gradient"] {
-    background-image: none !important;
-    background-color: #0a0a0a !important;
-    border-color: rgba(255,255,255,0.06) !important;
-    color: #ffffff !important;
-}
-
-/* Strong enforcement for any remaining inline color tokens referencing the common greys */
+/* Force any inline style color tokens commonly used for greys to white */
 *[style*="#d0d0d0"], *[style*="#b0b0b0"], *[style*="#c0c0c0"], *[style*="#e0e0e0"], *[style*="#f0f0f0"], *[style*="#eaeaea"], *[style*="#f3f3f3"], *[style*="#f7f7f7"], *[style*="#999"], *[style*="#888"], *[style*="#a8a8a8"] {
     color: #ffffff !important;
 }
