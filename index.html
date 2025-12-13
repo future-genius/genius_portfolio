@@ -640,3 +640,25 @@
 </body>
 </html>
 
+<script>
+    // Mouse movement detector: toggles grey shadows while the cursor is moving
+    (function(){
+        const body = document.body;
+        let timeout = null;
+        const activeClass = 'cursor-active';
+
+        function pointerMoved(e){
+            // enable class
+            if (!body.classList.contains(activeClass)) body.classList.add(activeClass);
+            // reset timer
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                body.classList.remove(activeClass);
+            }, 700);
+        }
+
+        window.addEventListener('pointermove', pointerMoved, {passive: true});
+        window.addEventListener('touchstart', pointerMoved, {passive: true});
+    })();
+</script>
+

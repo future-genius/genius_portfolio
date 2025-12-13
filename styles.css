@@ -1640,3 +1640,33 @@ svg stop, svg path, svg circle, svg rect {
     #certifications .project-card > div:first-child { height: 260px !important; }
 }
 
+/* ===== MOUSE-ACTIVATED GREY SHADOWS ===== */
+:root {
+    --shadow-r: 33;
+    --shadow-g: 33;
+    --shadow-b: 33;
+    --shadow-alpha: 0.62;
+}
+
+/* Default: no heavy shadows (pure black look) */
+header, .project-card, .sidebar, .profile-photo, .section {
+    box-shadow: none !important;
+    transition: box-shadow 200ms ease, transform 180ms ease;
+}
+
+/* When the cursor is active (moving), apply subtle grey shadows */
+.cursor-active header,
+.cursor-active .project-card,
+.cursor-active .sidebar,
+.cursor-active .profile-photo,
+.cursor-active .section {
+    box-shadow: 0 30px 80px rgba(var(--shadow-r), var(--shadow-g), var(--shadow-b), var(--shadow-alpha)) !important;
+}
+
+/* Slightly stronger shadow on hovered project card to emphasize lift */
+.cursor-active #projects .project-card:hover {
+    box-shadow: 0 40px 110px rgba(var(--shadow-r), var(--shadow-g), var(--shadow-b), 0.7) !important;
+    transform: translateY(-10px) scale(1.01) !important;
+}
+
+
