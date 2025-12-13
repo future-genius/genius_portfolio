@@ -894,6 +894,51 @@ body:not(.cursor-active) * {
     box-shadow: none !important;
 }
 
+/* ============================
+   FORCE BOX INTERIORS: PURE BLACK + WHITE TEXT
+   - Ensure all box-like containers and their child surfaces are pure black
+   - Exempt media elements so images/videos remain unaffected
+   - Use high specificity and !important to override lingering greys
+   ============================ */
+
+.section,
+.project-card,
+.skill-card,
+.sidebar,
+.profile-photo,
+.project-card > div:first-child,
+.header,
+header,
+.content-wrapper,
+.main {
+    background-color: #000000 !important;
+    background: #000000 !important;
+    background-image: none !important;
+    color: rgba(255,255,255,0.95) !important;
+    border-color: rgba(255,255,255,0.06) !important;
+}
+
+/* Force interior children to be black, but do NOT override media elements */
+.section *:not(img):not(picture):not(video):not(svg),
+.project-card *:not(img):not(picture):not(video):not(svg),
+.skill-card *:not(img):not(picture):not(video):not(svg),
+.sidebar *:not(img):not(picture):not(video):not(svg),
+.profile-photo *:not(img):not(picture):not(video):not(svg) {
+    background-color: #000000 !important;
+    background: #000000 !important;
+    background-image: none !important;
+    color: rgba(255,255,255,0.95) !important;
+    border-color: rgba(255,255,255,0.06) !important;
+}
+
+/* Make sure images/videos retain original look */
+img, picture, video, svg {
+    background: transparent !important;
+    background-color: transparent !important;
+    filter: none !important;
+}
+
+
 
 /* ===== STRICT ABSOLUTE PURE-BLACK OVERRIDE ===== */
 /* This enforces the user's non-negotiable rule: all non-media surfaces must be pure black. */
