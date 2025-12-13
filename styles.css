@@ -798,6 +798,103 @@ header > div {
     opacity: 1;
 }
 
+/* ============================
+   SURGICAL STRIKE: REMOVE ALL GREY SURFACES
+   - Replace gradient/rgba backgrounds with pure black
+   - Remove overlay pseudo-elements completely
+   - Enforce opacity-based white text only
+   - Add global gradient kill switch and temporary debug blackout
+   ============================ */
+
+/* 1) Replace common surface backgrounds with pure black and safe box-shadow */
+.section,
+header,
+.sidebar,
+.profile-photo,
+.project-card,
+.skill-card,
+.nav-links a,
+.socials a,
+.btn,
+.btn-ghost,
+.project-card > div:first-child,
+.background-shapes,
+.float-blob,
+.float-ring,
+.float-square,
+.grid-layer,
+.accent-line-1,
+.accent-line-2 {
+    background-image: none !important;
+    background: #000000 !important;
+    background-color: #000000 !important;
+    color: rgba(255,255,255,0.85) !important;
+    border-color: rgba(255,255,255,0.08) !important;
+    /* cards get subtle light dusting to separate via shadow only */
+    box-shadow: 0 20px 50px rgba(255,255,255,0.08) !important;
+}
+
+/* 2) Kill overlay pseudo-elements used for glow/lines/gradients */
+.section::before,
+.project-card::before,
+.skill-card::after,
+.socials a::after,
+.nav-links a::before,
+.float-blob::before,
+.float-ring::before,
+.float-square::before,
+.background-shapes::before,
+.grid-layer::before,
+.accent-line-1::before,
+.accent-line-2::before,
+.glow,
+.overlay {
+    background: none !important;
+    background-image: none !important;
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    content: '' !important;
+    height: 0 !important;
+    width: 0 !important;
+}
+
+/* 3) Ensure text contrast is opacity-based white only (no grey hexes) */
+body, .section h2, header h1, header p, .project-card h3, .project-card p, .sidebar h3, .sidebar > p {
+    color: rgba(255,255,255,0.85) !important;
+}
+
+/* 4) GLOBAL GRADIENT KILL SWITCH (must be at the end) */
+* {
+    background-image: none !important;
+}
+
+/* 5) DEBUG BLACKOUT: force pure black surfaces temporarily
+   Keep this block while you visually verify; it can be removed after validation.
+   Re-enable media and buttons so they still show. */
+/* DEBUG: force full-black */
+* {
+    background-color: #000000 !important;
+}
+
+/* Re-enable visual media/buttons/shadows while keeping surfaces black */
+img, picture, video, canvas, svg {
+    background: transparent !important;
+    background-color: transparent !important;
+    filter: none !important;
+}
+
+.btn, .btn-ghost, .socials a, .nav-links a {
+    background-image: none !important;
+    background-color: transparent !important;
+}
+
+/* Shadows allowed only when body has .cursor-active (pointer-movement) */
+body:not(.cursor-active) * {
+    box-shadow: none !important;
+}
+
+
 /* ===== STRICT ABSOLUTE PURE-BLACK OVERRIDE ===== */
 /* This enforces the user's non-negotiable rule: all non-media surfaces must be pure black. */
 /* Images, videos, and elements with explicit url() backgrounds are exempted so media remains full-color. */
