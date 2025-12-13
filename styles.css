@@ -1940,5 +1940,85 @@ body, h1, h2, h3, h4, h5, p, a, span, div, li {
 .project-card, .sidebar, header, .section, .profile-photo { box-shadow: none !important; }
 
 
+/* ============================
+   GLOBAL PURE-BLACK OVERRIDE (FINAL)
+   - Absolute enforcement: all UI surfaces pure #000000
+   - No gradients, no rgba panel backgrounds, no overlays
+   - Images/videos preserved in full color
+   - Text: primary white; secondary/muted via opacity only
+   ============================ */
+
+:root{ --pure-black:#000000; --pure-white:#ffffff }
+
+/* Kill any background images/gradients globally */
+*{ background-image: none !important; }
+
+/* Ensure page background is pure black */
+html, body { background: var(--pure-black) !important; color: var(--pure-white) !important; }
+
+/* Core box selectors: force pure black interiors and white text */
+header, .header, .content-wrapper, .main, .section, .project-card, .skill-card, .sidebar, .profile-photo, .contact-link, .cert-modal .box, footer, .nav-links a, .btn, .btn-ghost, .badge, .tag {
+    background: var(--pure-black) !important;
+    background-image: none !important;
+    background-color: var(--pure-black) !important;
+    color: var(--pure-white) !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Force children inside boxes to be black (except media) */
+.section *, .project-card *, .skill-card *, .sidebar *, .profile-photo * {
+    background: var(--pure-black) !important;
+    background-image: none !important;
+    color: var(--pure-white) !important;
+}
+
+/* Remove all pseudo-element overlays that introduce greys */
+*::before, *::after {
+    background: none !important;
+    background-image: none !important;
+    display: none !important;
+    content: "" !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Text rules: primary white; secondary/muted via opacity only */
+body, h1, h2, h3, h4, h5, h6, p, a, li, span, button { color: var(--pure-white) !important; }
+.secondary { color: rgba(255,255,255,0.75) !important; }
+.muted { color: rgba(255,255,255,0.55) !important; }
+
+/* Images and media remain untouched and full color */
+img, picture, video, canvas, svg {
+    background: transparent !important;
+    background-color: transparent !important;
+    filter: none !important;
+    -webkit-filter: none !important;
+    mix-blend-mode: normal !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 9999 !important;
+}
+
+/* Allow shadows only via .cursor-active or :hover; shadows must be light, white-tinted only */
+.cursor-active header, .cursor-active .project-card, .cursor-active .sidebar, .cursor-active .profile-photo, .cursor-active .section {
+    box-shadow: 0 20px 50px rgba(255,255,255,0.08) !important;
+}
+
+/* Ensure badges/tags/buttons have transparent black-free backgrounds and white text */
+.badge, .tag, .project-card span, .nav-links a, .btn, .btn-ghost { background: transparent !important; color: var(--pure-white) !important; border-color: transparent !important; }
+
+/* Neutralize scrollbar thumbs that used gradients */
+::-webkit-scrollbar-track { background: #000000 !important; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08) !important; border: none !important; }
+
+/* Final safety: any inline style setting rgba/gradient/background is overridden unless it's a photo url() */
+*[style]:not(img):not(picture):not(video):not(svg) {
+    background: var(--pure-black) !important;
+    background-image: none !important;
+    color: var(--pure-white) !important;
+}
+
+
 
 
