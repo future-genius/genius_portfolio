@@ -798,6 +798,35 @@ header > div {
     opacity: 1;
 }
 
+/* ===== STRICT ABSOLUTE PURE-BLACK OVERRIDE ===== */
+/* This enforces the user's non-negotiable rule: all non-media surfaces must be pure black. */
+/* Images, videos, and elements with explicit url() backgrounds are exempted so media remains full-color. */
+:not(img):not(picture):not(video) * {
+    background-image: none !important;
+    background-color: #000000 !important;
+    background: #000000 !important;
+    color: #ffffff !important;
+    border-color: rgba(255,255,255,0.08) !important;
+    box-shadow: none !important;
+}
+
+/* Very high level safety net: ensure every element defaults to pure black surface */
+* {
+    background-color: #000000 !important;
+}
+
+/* Keep actual media elements untouched visually */
+img, picture, video, canvas, svg {
+    background: transparent !important;
+    filter: none !important;
+}
+
+/* Pointer-activated subtle grey shadows only when explicitly allowed via .cursor-active */
+body:not(.cursor-active) * {
+    box-shadow: none !important;
+}
+
+
 .skill-card > div:first-child {
     font-size: 1.1rem;
     font-weight: 800;
@@ -1746,6 +1775,28 @@ svg stop, svg path, svg circle, svg rect { filter: none !important; }
 
 /* Buttons keep black background and white text (no gradient) */
 .btn, .btn-ghost, a[role="button"] { background: var(--pure-black) !important; color: var(--pure-white) !important; border: none !important; }
+/* FINAL ABSOLUTE OVERRIDE - PURE BLACK EVERYWHERE (EXCEPT MEDIA) */
+/* Apply the user's non-negotiable rule while preserving images/video */
+*:not(img):not(picture):not(video):not([style*="url("]) {
+    background-color: #000000 !important;
+    background-image: none !important;
+}
+
+/* Global text rules (no grey hex codes) */
+body, h1, h2, h3, h4, h5, p, a, span, div, li {
+    color: #ffffff !important;
+}
+
+/* Secondary and muted via opacity only */
+.secondary { color: rgba(255,255,255,0.75) !important; }
+.muted { color: rgba(255,255,255,0.55) !important; }
+
+/* Force allowed border style only when present */
+*:not(img):not(picture):not(video) { border-color: transparent !important; }
+
+/* Box shadows allowed only via .cursor-active or :hover; otherwise none */
+.project-card, .sidebar, header, .section, .profile-photo { box-shadow: none !important; }
+
 
 
 
