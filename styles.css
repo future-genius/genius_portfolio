@@ -1669,4 +1669,83 @@ header, .project-card, .sidebar, .profile-photo, .section {
     transform: translateY(-10px) scale(1.01) !important;
 }
 
+/* ===== STRICT PURE-BLACK ENFORCEMENT (ABSOLUTE) ===== */
+/* Final guard: remove any gradients, grey backgrounds, borders and blur from all elements
+   while preserving images and elements that explicitly include url(...) backgrounds. */
+:root { --pure-black: #000000; --pure-white: #ffffff; --shadow-color: 33,33,33; }
+
+html, body {
+    background-color: var(--pure-black) !important;
+    background-image: none !important;
+    color: var(--pure-white) !important;
+}
+
+/* Remove any gradient/background-image on non-media elements (leave photos alone) */
+*:not(img):not(picture):not(video):not([style*="url("]) {
+    background-image: none !important;
+    background: var(--pure-black) !important;
+    background-color: var(--pure-black) !important;
+}
+
+/* Neutralize inline gradients and grey rgba(...) declarations */
+*[style*="linear-gradient"], *[style*="rgba("] {
+    background-image: none !important;
+    background-color: var(--pure-black) !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+}
+
+/* Remove any grey borders — keep borderless or subtle bright outlines if needed */
+* { border-color: transparent !important; }
+
+/* Typography: primary white, secondary dimmed white (opacity only) */
+body, p, li, a, span, div, h1, h2, h3, h4, h5 {
+    color: var(--pure-white) !important;
+}
+
+/* Give secondary text a dimmed white using opacity (not grey hex) */
+.muted, .small, p.small, .project-card p, .sidebar > p, header p {
+    color: rgba(255,255,255,0.78) !important;
+}
+
+/* Cards and containers: pure black, rounded corners, subtle shadow only on pointer movement */
+.project-card, .sidebar, .profile-photo, .section, header, footer, .content-wrapper, .main {
+    background: var(--pure-black) !important;
+    border-radius: 12px !important;
+    box-shadow: none !important;
+}
+
+/* Keep images in full color and above other layers */
+img, picture, video, [style*="url("] {
+    filter: none !important;
+    -webkit-filter: none !important;
+    mix-blend-mode: normal !important;
+    z-index: 9999 !important;
+    position: relative !important;
+}
+
+/* Shadows must only be grey and low-opacity and appear via .cursor-active */
+.cursor-active .project-card, .cursor-active .sidebar, .cursor-active .profile-photo, .cursor-active header, .cursor-active .section {
+    box-shadow: 0 28px 68px rgba(var(--shadow-color), 0.45) !important;
+}
+
+/* Hover interactions: elevation using transform + slightly stronger grey shadow (still low opacity) */
+.project-card:hover, .btn:hover, .sidebar:hover {
+    transform: translateY(-6px) scale(1.01) !important;
+}
+
+/* Remove any existing gradients from SVG elements (keep fills if images are intended) */
+svg stop, svg path, svg circle, svg rect { filter: none !important; }
+
+/* Disable decorative background container to avoid grey banding */
+.background-shapes { display: none !important; }
+.grid-layer { display: none !important; }
+
+/* Ensure modal/lightbox boxes are pure black */
+.cert-modal .box { background: var(--pure-black) !important; color: var(--pure-white) !important; box-shadow: none !important; }
+
+/* Buttons keep black background and white text (no gradient) */
+.btn, .btn-ghost, a[role="button"] { background: var(--pure-black) !important; color: var(--pure-white) !important; border: none !important; }
+
+
 
