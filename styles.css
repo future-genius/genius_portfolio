@@ -1,3 +1,173 @@
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --edge: #0a0a0a;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  background: var(--black);
+  color: var(--white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+.site-header { position: sticky; top: 0; z-index: 60; background: var(--black); border-bottom: 1px solid var(--edge); }
+.header-inner { display:flex; align-items:center; justify-content:space-between; padding:14px 0; }
+.brand { font-weight:700; letter-spacing:1px; }
+.nav { display:flex; gap:18px; }
+.nav a { color:var(--white); text-decoration:none; font-weight:600; padding:8px 6px; }
+.nav a:hover, .nav a:focus { transform: translateY(-2px); transition: transform .18s ease; }
+.nav-toggle { display:none; background:transparent; color:var(--white); border:1px solid transparent; padding:8px 12px; font-weight:700; }
+
+.preloader { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:var(--black); z-index:120; }
+.preloader-dot { width:14px; height:14px; background:var(--white); border-radius:50%; animation: pulse 900ms ease-in-out infinite; }
+@keyframes pulse { 0%{ transform:scale(.75); opacity:.6 } 50%{ transform:scale(1.2); opacity:1 } 100%{ transform:scale(.75); opacity:.6 } }
+.preloader.loaded { display:none; }
+
+.section { padding:64px 0; }
+.section-title { font-size:20px; margin:0 0 18px 0; font-weight:700; }
+
+.hero-grid { display:flex; gap:28px; align-items:center; justify-content:space-between; }
+.hero-name { font-size:40px; margin:0 0 6px 0; font-weight:800; }
+.hero-role { margin:0 0 14px 0; font-weight:600; }
+.hero-lead { margin:0 0 18px 0; max-width:60ch; }
+.hero-ctas { display:flex; gap:14px; align-items:center; flex-wrap:wrap; margin-top:8px; }
+
+.btn { display:inline-block; padding:10px 14px; color:var(--white); text-decoration:none; border:1px solid var(--edge); border-radius:8px; font-weight:700; }
+.btn.primary { border-color:var(--white); }
+.btn:hover, .btn:focus { transform: translateY(-3px); transition: transform .16s ease; }
+
+.about-grid { display:grid; grid-template-columns:160px 1fr; gap:20px; align-items:start; }
+.profile-photo img { width:160px; height:160px; object-fit:cover; display:block; border-radius:8px; border:1px solid var(--edge); }
+
+.skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; }
+.skill-card { padding:12px; border-radius:8px; border:1px solid var(--edge); text-align:center; font-weight:700; }
+
+.projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; }
+.project-card { padding:14px; border-radius:10px; border:1px solid var(--edge); display:flex; flex-direction:column; gap:10px; }
+.project-card img { width:100%; height:160px; object-fit:cover; border-radius:6px; display:block; }
+
+.timeline { display:flex; flex-direction:column; gap:12px; }
+.timeline-item { padding:10px 0; border-bottom:1px solid var(--edge); }
+
+.contact-actions { display:flex; gap:12px; margin-top:12px; flex-wrap:wrap; }
+
+.site-footer { border-top:1px solid var(--edge); padding:22px 0; background:var(--black); }
+.footer-inner { display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+.back-to-top { background:transparent; color:var(--white); border:1px solid var(--edge); padding:8px 10px; border-radius:6px; font-weight:700; }
+
+.reveal { opacity:0; transform:translateY(10px); transition:opacity .5s ease, transform .5s ease; }
+.reveal.is-visible { opacity:1; transform:none; }
+
+a { color:var(--white); }
+a:focus { outline:2px solid var(--white); outline-offset:3px; }
+
+@media (max-width:900px){
+  .nav { display:none; position:absolute; right:20px; top:64px; background:var(--black); border:1px solid var(--edge); padding:12px; flex-direction:column; gap:8px; }
+  .nav.open { display:flex; }
+  .nav-toggle { display:inline-block; }
+  .hero-grid { flex-direction:column; align-items:flex-start; gap:18px; }
+  .about-grid { grid-template-columns:120px 1fr; }
+}
+
+@media (max-width:480px){
+  .hero-name { font-size:28px; }
+  .hero-lead { font-size:15px; }
+  .profile-photo img { width:120px; height:120px; }
+  .skills-grid { grid-template-columns:repeat(2,1fr); }
+}
+:root{
+  --black:#000000;
+  --white:#ffffff;
+  --container:1200px;
+}
+
+/* Reset & base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+  background:var(--black);
+  color:var(--white);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.container{max-width:var(--container);margin:0 auto;padding:0 20px}
+
+/* Header */
+.site-header{position:sticky;top:0;z-index:60;background:var(--black);border-bottom:1px solid #0a0a0a}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+.brand{font-weight:700;letter-spacing:1px}
+.nav{display:flex;gap:20px}
+.nav a{color:var(--white);text-decoration:none;font-weight:500}
+.nav-toggle{display:none;background:transparent;border:1px solid transparent;color:var(--white);padding:8px 12px}
+
+/* Hero */
+.section{padding:72px 0}
+.hero-grid{display:flex;gap:24px;align-items:center;justify-content:space-between}
+.hero-title{font-size:38px;margin:0 0 8px}
+.hero-sub{margin:0 0 18px;font-weight:600}
+.lead{margin:0 0 18px;max-width:56ch}
+.socials{display:flex;gap:12px}
+.socials a{color:var(--white);text-decoration:none}
+.btn{display:inline-block;padding:10px 16px;border:1px solid var(--white);color:var(--white);text-decoration:none;font-weight:600}
+
+/* About */
+.about-grid{display:grid;grid-template-columns:160px 1fr;gap:24px;align-items:start}
+.profile-card img{width:160px;height:160px;object-fit:cover;border-radius:8px;display:block}
+.about-list{margin:12px 0 0 0;padding-left:18px}
+
+/* Skills */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.skill{padding:12px;border:1px solid #0a0a0a;border-radius:8px;text-align:center;font-weight:600}
+
+/* Projects */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.project-card{padding:14px;background:var(--black);border:1px solid #0a0a0a;border-radius:10px}
+.project-card img{width:100%;height:160px;object-fit:cover;border-radius:6px;display:block;margin-bottom:12px}
+.project-card h3{margin:0 0 8px}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tags span{padding:6px 8px;border:1px solid #0a0a0a;border-radius:6px;font-size:13px}
+
+/* Timeline */
+.timeline{display:flex;flex-direction:column;gap:12px}
+.timeline-item{display:flex;gap:16px;align-items:flex-start}
+.timeline-left{font-weight:700}
+
+/* Contact */
+.contact-actions{display:flex;gap:12px;margin-top:12px}
+
+/* Footer */
+.site-footer{border-top:1px solid #0a0a0a;padding:28px 0}
+.footer-inner{display:flex;align-items:center;justify-content:space-between}
+.back-top{background:transparent;border:1px solid var(--white);color:var(--white);padding:8px 10px}
+
+/* Responsive */
+@media (max-width:900px){
+  .hero-grid{flex-direction:column;align-items:flex-start}
+  .about-grid{grid-template-columns:120px 1fr}
+  .nav{display:none}
+  .nav-toggle{display:inline-block}
+  .nav.open{display:flex;flex-direction:column;gap:12px;padding:12px 0}
+}
+
+/* Utility: subtle reveal (no shadows/gradients) */
+.reveal{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease}
+.reveal.is-visible{opacity:1;transform:none}
+
+/* Selection */
+::selection{background:transparent;color:inherit}
+
+/* Accessibility focus */
+a:focus,a.btn:focus,button:focus{outline:2px solid var(--white);outline-offset:2px}
 /* ============================================
    PREMIUM FUTURISTIC PORTFOLIO - REDESIGN
    Monochrome Black/White/Grey Theme
@@ -1494,6 +1664,46 @@ img, picture, video, [style*="url("] {
 /* Ensure any leftover CSS variables set to grey are neutralized */
 :root { color-scheme: dark; }
 
+/* ===== USER REQUEST: Ensure sections are solid black and images remain full-color ===== */
+/* Make all section-like containers strictly pure black (no transparency, no backdrop blur) */
+.section, header, .content-wrapper, .project-card, .sidebar, footer, .contact-link, .skill-card {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    background-image: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-color: rgba(255,255,255,0.04) !important;
+}
+
+/* Remove any opacity/rgba-based backgrounds on these containers */
+[style*="background: rgba("], .section[style], .project-card[style], [style*="linear-gradient"] {
+    background-image: none !important;
+    background-color: #000000 !important;
+}
+
+/* Ensure images, SVGs, videos and background-image photos are full-color and not desaturated */
+img, picture, video, canvas, svg, .cert-thumb, .profile-photo img, .project-card img, [style*="url("] {
+    -webkit-filter: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    opacity: 1 !important;
+    transition: none !important;
+}
+
+/* Override any earlier rules that forced SVGs to grayscale */
+svg, svg * {
+    -webkit-filter: none !important;
+    filter: none !important;
+    stroke: currentColor !important;
+    fill: currentColor !important;
+}
+
+/* Ensure elements with inline styles that attempted semi-transparent black are solid black */
+*[style*="rgba(0,0,0,"], *[style*="opacity:"] {
+    background-color: #000000 !important;
+}
+
+
 /* ===== FORCE ENTIRE SITE TO PURE BLACK + PRESERVE IMAGES ===== */
 /* Make the whole page and all major containers pure black and text white */
 html, body, header, footer, .content-wrapper, .main, .section, .project-card, .sidebar, .profile-photo, .cert-thumb, .grid-layer, .background-shapes, .nav-links a, .btn, .btn-ghost {
@@ -1529,6 +1739,46 @@ img, picture, video, [style*="url("] {
     color: #ffffff !important;
 }
 
+/* ===== FINAL INLINE OVERRIDE: REMOVE ANY REMAINING GREY BOXES ===== */
+/* Catch any inline borders or rgba backgrounds and force pure-black interiors + white text */
+*[style*="border"] {
+    border: none !important;
+}
+
+/* Inline rgba(...) usages (borders/backgrounds/text) -> force black background + white text */
+*[style*="rgba("] {
+    background-image: none !important;
+    background-color: #000000 !important;
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Common inline grey hex tokens -> force white text */
+*[style*="#d0d0d0"], *[style*="#c0c0c0"], *[style*="#b0b0b0"], *[style*="#d0e8ff"], *[style*="#f0d0e0"] {
+    color: #ffffff !important;
+    background-color: #000000 !important;
+}
+
+/* Ensure badges, tags and inline-styled buttons inside cards are white on transparent/black */
+.project-card span, .project-card a, .project-card [style*="padding"], .contact-link a, .nav-links a, .btn {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Safety: force all elements except media to have pure-black surfaces and white text */
+:not(img):not(picture):not(video) *[style] {
+    background-image: none !important;
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: none !important;
+}
+
+
 
 
 
@@ -1552,13 +1802,13 @@ html {
 
 /* Selection styling */
 ::selection {
-    background: rgba(255,255,255,0.2);
-    color: #ffffff;
+    background: transparent !important;
+    color: inherit !important;
 }
 
 ::-moz-selection {
-    background: rgba(255,255,255,0.2);
-    color: #ffffff;
+    background: transparent !important;
+    color: inherit !important;
 }
 
 /* Scrollbar styling */
