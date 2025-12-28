@@ -666,3 +666,33 @@
   </script>
 </body>
 </html>
+
+<!-- Safety: ensure inline hidden state then replay on DOM ready (forces opacity/transform) -->
+<script>
+  (function(){
+    function targets(){
+      const sels = ['header','main#main','#hero','main.container section'];
+      const nodes = [];
+      sels.forEach(s => Array.from(document.querySelectorAll(s)).forEach(n=>nodes.push(n)));
+      return nodes;
+    }
+    function collectChildren(root){
+      const sel = ['h1','h2','h3','p','li','.project-card','.gui-box','.contact-link'];
+      const list = [];
+      sel.forEach(s=> Array.from(root.querySelectorAll(s)).forEach(el=> list.push(el)));
+      return list;
+    }
+    document.addEventListener('DOMContentLoaded', function(){
+      try{
+        const roots = targets();
+        roots.forEach(r=> collectChildren(r).forEach(el=>{
+          el.classList.add('reveal');
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(60px)';
+        }));
+        void document.body.offsetHeight;
+        setTimeout(function(){ if(window.replayReveals) window.replayReveals(); else if(window.resetAndPlay) window.resetAndPlay(); }, 60);
+      }catch(e){/* ignore */}
+    });
+  })();
+</script>
