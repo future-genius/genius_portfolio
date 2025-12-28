@@ -191,9 +191,11 @@ section{position:relative}
 .frame-options button{background:transparent;border:1px solid var(--panel-border);padding:6px;border-radius:6px;color:var(--muted-text);cursor:pointer}
 .frame-options button.active{border-color:var(--text);color:var(--text)}
 
-/* Entrance animation for sections: float in on load */
-.section{transform:translateY(18px);opacity:0;transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .5s ease;will-change:transform,opacity}
-.section.in-view{transform:none;opacity:1}
+/* Entrance animation for sections: handled via the unified .reveal system (down → up, opacity + translate only) */
+/* Remove per-section transform to avoid duplicate/conflicting transitions; use .reveal for animation control. */
+.section{padding:10px 0}
+/* legacy .section.in-view kept for compatibility but does not apply transforms */
+.section.in-view{opacity:1}
 
 /* Card tilt / mouse tracking */
 .card-tilt{transform-style:preserve-3d;will-change:transform}
@@ -226,8 +228,8 @@ section{position:relative}
 .section-box{border:1px solid var(--panel-border);padding:28px;border-radius:12px;background:var(--panel);margin-top:20px}
 
 /* Reveal animation base (pure black/white only). Elements start hidden and translate then fade in. */
-.reveal{opacity:0;transform:translateY(60px);transition:opacity 600ms cubic-bezier(.4,0,.2,1),transform 600ms cubic-bezier(.4,0,.2,1);will-change:opacity,transform}
-.reveal-left{transform:translateX(60px)}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 480ms cubic-bezier(.22,.9,.28,1),transform 480ms cubic-bezier(.22,.9,.28,1);will-change:opacity,transform}
+.reveal-left{transform:translateX(40px)}
 .reveal.reveal-animated{opacity:1;transform:translateY(0) translateX(0)}
 
 /* Per-section visual differentiation (subtle, grayscale accents) */
