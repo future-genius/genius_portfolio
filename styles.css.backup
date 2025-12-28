@@ -1,0 +1,2437 @@
+:root {
+  --black: #000000;
+  --white: #ffffff;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  background: var(--black);
+  color: var(--white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+.site-header { position: sticky; top: 0; z-index: 60; background: var(--black); border-bottom: 1px solid var(--white); }
+.header-inner { display:flex; align-items:center; justify-content:space-between; padding:14px 0; }
+.brand { font-weight:700; letter-spacing:1px; }
+.nav { display:flex; gap:18px; }
+.nav a { color:var(--white); text-decoration:none; font-weight:600; padding:8px 6px; }
+.nav a:hover, .nav a:focus { transform: translateY(-2px); transition: transform .18s ease; }
+.nav-toggle { display:none; background:transparent; color:var(--white); border:1px solid transparent; padding:8px 12px; font-weight:700; }
+
+.preloader { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:var(--black); z-index:120; }
+.preloader-dot { width:12px; height:12px; background:var(--white); border-radius:50%; animation: pulse-fade 900ms ease-in-out infinite; }
+@keyframes pulse-fade { 0%{ opacity:0.4 } 50%{ opacity:1 } 100%{ opacity:0.4 } }
+.preloader.loaded { display:none; }
+
+.section { padding:64px 0; }
+.section-title { font-size:20px; margin:0 0 18px 0; font-weight:700; }
+
+.hero-grid { display:flex; gap:28px; align-items:center; justify-content:space-between; }
+.hero-name { font-size:40px; margin:0 0 6px 0; font-weight:800; }
+.hero-role { margin:0 0 14px 0; font-weight:600; }
+.hero-lead { margin:0 0 18px 0; max-width:60ch; }
+.hero-ctas { display:flex; gap:14px; align-items:center; flex-wrap:wrap; margin-top:8px; }
+
+.btn { display:inline-block; padding:10px 14px; color:var(--white); text-decoration:none; border:1px solid var(--white); border-radius:8px; font-weight:700; }
+.btn.primary { border-color:var(--white); }
+.btn:hover, .btn:focus { transform: translateY(-3px); transition: transform .16s ease; }
+
+.about-grid { display:grid; grid-template-columns:160px 1fr; gap:20px; align-items:start; }
+.profile-photo img { width:160px; height:160px; object-fit:cover; display:block; border-radius:8px; border:1px solid var(--white); }
+
+.skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; }
+.skill-card { padding:12px; border-radius:8px; border:1px solid var(--white); text-align:center; font-weight:700; }
+
+.projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; }
+.project-card { padding:14px; border-radius:10px; border:1px solid var(--white); display:flex; flex-direction:column; gap:10px; }
+.project-card img { width:100%; height:160px; object-fit:cover; border-radius:6px; display:block; }
+
+.timeline { display:flex; flex-direction:column; gap:12px; }
+.timeline-item { padding:10px 0; border-bottom:1px solid var(--white); }
+
+.contact-actions { display:flex; gap:12px; margin-top:12px; flex-wrap:wrap; }
+
+.site-footer { border-top:1px solid var(--white); padding:22px 0; background:var(--black); }
+.footer-inner { display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+.back-to-top { background:transparent; color:var(--white); border:1px solid var(--white); padding:8px 10px; border-radius:6px; font-weight:700; }
+
+@keyframes revealSlide { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+.reveal { opacity: 0; transform: translateY(30px); animation: revealSlide 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; will-change: opacity, transform; }
+.reveal.is-visible { opacity: 1; transform: none; animation: none; }
+
+a { color:var(--white); }
+a:focus { outline:2px solid var(--white); outline-offset:3px; }
+
+@media (max-width:900px){
+  .nav { display:none; position:absolute; right:20px; top:64px; background:var(--black); border:1px solid var(--edge); padding:12px; flex-direction:column; gap:8px; }
+  .nav.open { display:flex; }
+  .nav-toggle { display:inline-block; }
+  .hero-grid { flex-direction:column; align-items:flex-start; gap:18px; }
+  .about-grid { grid-template-columns:120px 1fr; }
+}
+
+@media (max-width:480px){
+  .hero-name { font-size:28px; }
+  .hero-lead { font-size:15px; }
+  .profile-photo img { width:120px; height:120px; }
+  .skills-grid { grid-template-columns:repeat(2,1fr); }
+}
+:root{
+  --black:#000000;
+  --white:#ffffff;
+  --container:1200px;
+}
+
+/* Reset & base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+  background:var(--black);
+  color:var(--white);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.container{max-width:var(--container);margin:0 auto;padding:0 20px}
+
+/* Header */
+.site-header{position:sticky;top:0;z-index:60;background:var(--black);border-bottom:1px solid #0a0a0a}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+.brand{font-weight:700;letter-spacing:1px}
+.nav{display:flex;gap:20px}
+.nav a{color:var(--white);text-decoration:none;font-weight:500}
+.nav-toggle{display:none;background:transparent;border:1px solid transparent;color:var(--white);padding:8px 12px}
+
+/* Hero */
+.section{padding:72px 0}
+.hero-grid{display:flex;gap:24px;align-items:center;justify-content:space-between}
+.hero-title{font-size:38px;margin:0 0 8px}
+.hero-sub{margin:0 0 18px;font-weight:600}
+.lead{margin:0 0 18px;max-width:56ch}
+.socials{display:flex;gap:12px}
+.socials a{color:var(--white);text-decoration:none}
+.btn{display:inline-block;padding:10px 16px;border:1px solid var(--white);color:var(--white);text-decoration:none;font-weight:600}
+
+/* About */
+.about-grid{display:grid;grid-template-columns:160px 1fr;gap:24px;align-items:start}
+.profile-card img{width:160px;height:160px;object-fit:cover;border-radius:8px;display:block}
+.about-list{margin:12px 0 0 0;padding-left:18px}
+
+/* Skills */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.skill{padding:12px;border:1px solid #0a0a0a;border-radius:8px;text-align:center;font-weight:600}
+
+/* Projects */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.project-card{padding:14px;background:var(--black);border:1px solid #0a0a0a;border-radius:10px}
+.project-card img{width:100%;height:160px;object-fit:cover;border-radius:6px;display:block;margin-bottom:12px}
+.project-card h3{margin:0 0 8px}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tags span{padding:6px 8px;border:1px solid #0a0a0a;border-radius:6px;font-size:13px}
+
+/* Timeline */
+.timeline{display:flex;flex-direction:column;gap:12px}
+.timeline-item{display:flex;gap:16px;align-items:flex-start}
+.timeline-left{font-weight:700}
+
+/* Contact */
+.contact-actions{display:flex;gap:12px;margin-top:12px}
+
+/* Footer */
+.site-footer{border-top:1px solid #0a0a0a;padding:28px 0}
+.footer-inner{display:flex;align-items:center;justify-content:space-between}
+.back-top{background:transparent;border:1px solid var(--white);color:var(--white);padding:8px 10px}
+
+/* Responsive */
+@media (max-width:900px){
+  .hero-grid{flex-direction:column;align-items:flex-start}
+  .about-grid{grid-template-columns:120px 1fr}
+  .nav{display:none}
+  .nav-toggle{display:inline-block}
+  .nav.open{display:flex;flex-direction:column;gap:12px;padding:12px 0}
+}
+
+/* Utility: subtle reveal (no shadows/gradients) */
+.reveal{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease}
+.reveal.is-visible{opacity:1;transform:none}
+
+/* Selection */
+::selection{background:transparent;color:inherit}
+
+/* Accessibility focus */
+a:focus,a.btn:focus,button:focus{outline:2px solid var(--white);outline-offset:2px}
+/* ============================================
+   PREMIUM FUTURISTIC PORTFOLIO - REDESIGN
+   Monochrome Black/White/Grey Theme
+   Glass-morphism + HUD + Micro-animations
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== BASE STYLES ===== */
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(180deg, #000000 0%, #0a0a0a 40%, #050505 100%);
+    color: #ffffff;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
+}
+
+/* ===== ANIMATED BACKGROUND LAYER ===== */
+.background-shapes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Floating geometric shapes */
+.shape {
+    position: absolute;
+    opacity: 0.05;
+    border-radius: 50%;
+    filter: blur(50px);
+    will-change: transform;
+}
+
+.shape-1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255,255,255,0.25), rgba(200,200,200,0.08));
+    top: -150px;
+    right: -100px;
+    animation: float 35s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+.shape-2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(180,180,180,0.15), rgba(150,150,150,0.05));
+    bottom: 10%;
+    left: -100px;
+    animation: float 42s infinite cubic-bezier(0.4, 0, 0.6, 1) reverse;
+}
+
+.shape-3 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(220,220,220,0.2), rgba(180,180,180,0.06));
+    bottom: 5%;
+    right: 8%;
+    animation: float 38s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+/* Floating GUI elements */
+.float-blob {
+    width: 320px;
+    height: 240px;
+    border-radius: 40% 60% 50% 50% / 50% 40% 60% 50%;
+    background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.12), rgba(200,200,200,0.02));
+    top: -80px;
+    left: 5%;
+    filter: blur(25px);
+    opacity: 0.06;
+    mix-blend-mode: overlay;
+    animation: drift 45s infinite linear;
+    will-change: transform;
+}
+
+.float-ring {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(220,220,220,0.08);
+    background: transparent;
+    top: 15%;
+    right: 12%;
+    opacity: 0.07;
+    filter: blur(4px);
+    animation: slowRotate 60s infinite linear;
+    will-change: transform;
+}
+
+.float-square {
+    width: 180px;
+    height: 180px;
+    background: linear-gradient(135deg, rgba(200,200,200,0.06), rgba(160,160,160,0.02));
+    right: 5%;
+    top: 60%;
+    border-radius: 20px;
+    filter: blur(15px);
+    opacity: 0.05;
+    animation: float 40s infinite ease-in-out;
+    will-change: transform;
+}
+
+/* Accent lines for HUD feel */
+.accent-line-1 {
+    position: absolute;
+    width: 700px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200,200,200,0.2), transparent);
+    top: 12%;
+    left: -300px;
+    animation: slideHorizontal 18s infinite linear;
+    transform: rotate(12deg);
+    opacity: 0.6;
+}
+
+.accent-line-2 {
+    position: absolute;
+    width: 1px;
+    height: 500px;
+    background: linear-gradient(180deg, transparent, rgba(180,180,180,0.15), transparent);
+    top: 25%;
+    right: 8%;
+    animation: slideVertical 22s infinite linear;
+    opacity: 0.6;
+}
+
+/* Animated Grid Overlay */
+.grid-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.4;
+    mix-blend-mode: overlay;
+    animation: gridShift 120s linear infinite;
+    will-change: background-position;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes float {
+    0%, 100% { transform: translateY(0px) translateX(0px) scale(1); }
+    25% { transform: translateY(-50px) translateX(40px) scale(1.05); }
+    50% { transform: translateY(-100px) translateX(-30px) scale(0.98); }
+    75% { transform: translateY(-50px) translateX(60px) scale(1.02); }
+}
+
+@keyframes drift {
+    0% { transform: translate3d(0,0,0) scale(1) rotate(0deg); }
+    25% { transform: translate3d(40px,-40px,0) scale(1.02) rotate(5deg); }
+    50% { transform: translate3d(-30px,-80px,0) scale(0.98) rotate(10deg); }
+    75% { transform: translate3d(50px,-30px,0) scale(1.03) rotate(-5deg); }
+    100% { transform: translate3d(0,0,0) scale(1) rotate(360deg); }
+}
+
+@keyframes slowRotate {
+    0% { transform: rotate(0deg) translateY(-10px); }
+    50% { transform: rotate(180deg) translateY(10px); }
+    100% { transform: rotate(360deg) translateY(-10px); }
+}
+
+@keyframes slideHorizontal {
+    0% { transform: translateX(-700px) rotate(12deg); }
+    100% { transform: translateX(100vw) rotate(12deg); }
+}
+
+@keyframes slideVertical {
+    0% { transform: translateY(-500px); }
+    100% { transform: translateY(100vh); }
+}
+
+@keyframes gridShift {
+    0% { background-position: 0 0; }
+    100% { background-position: 100px 100px; }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(255,255,255,0.1), inset 0 1px 0 rgba(255,255,255,0.05); }
+    50% { box-shadow: 0 0 40px rgba(255,255,255,0.15), inset 0 1px 0 rgba(255,255,255,0.08); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+}
+
+/* ==================================================
+   STATIC MODE OVERRIDE — disable all animations/transitions
+   User requested: remove all animation/transition effects
+   This enforces visible, non-animated elements while
+   preserving layout, text and boxes.
+   ==================================================*/
+*,
+*::before,
+*::after {
+    animation: none !important;
+    transition: none !important;
+    will-change: auto !important;
+}
+
+/* Ensure reveal/entrance elements are visible */
+.reveal, .reveal.is-visible, .section, .project-card, .card-inner,
+.float-blob, .float-ring, .float-square, .shape, .grid-layer,
+.accent-line-1, .accent-line-2, .preloader-dot, .cert-thumb,
+.project-card img, .nav a, .btn, .skip-link, #sidebar,
+.float-box, .preview-icon {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+}
+
+/* Hide decorative animated layers completely (optional) */
+.background-shapes, .grid-layer, .float-blob, .float-ring, .shape, .float-square, .accent-line-1, .accent-line-2 {
+    display: none !important;
+}
+
+/* ==========================
+     FORCE: Black Boxes / No Gradients
+     Strong overrides to make every box/card fully black, remove borders, radii, gradients,
+     and neutralize decorative effects while keeping content readable.
+     ========================== */
+
+html, body {
+    background: #000000 !important;
+    color: #ffffff !important;
+}
+
+/* Disable all animations, transitions, filters and transforms globally */
+*, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    filter: none !important;
+    will-change: auto !important;
+}
+
+/* Remove decorative background layers and animated shapes */
+.background-shapes,
+.shape,
+.shape-1,
+.shape-2,
+.shape-3,
+.float-blob,
+.float-ring,
+.float-square,
+.accent-line-1,
+.accent-line-2,
+.grid-layer {
+    display: none !important;
+    opacity: 0 !important;
+    background: transparent !important;
+}
+
+/* Force all box-like elements to pure black, remove borders, shadows and radii */
+.project-card,
+.skill-card,
+.profile-card,
+.profile-photo,
+.profile-photo img,
+.cert-thumb,
+.container,
+.section,
+.hero,
+.about-grid,
+.projects-grid,
+.skills-grid,
+.contact-actions,
+.timeline-item,
+.site-header,
+.site-footer,
+.footer-inner,
+.nav,
+.header-inner,
+.project-card img,
+.project-card .tags span,
+.tags span,
+.btn,
+.back-to-top,
+.back-top {
+    background-image: none !important;
+    background: #000000 !important;
+    background-color: #000000 !important;
+    border: none !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+/* Neutralize any inline style backgrounds that may use gradients */
+[style*="background"] {
+    background: #000000 !important;
+    background-image: none !important;
+}
+
+/* Hide preloader */
+.preloader, #preloader, .preloader-dot { display:none !important; }
+
+/* Disable reveal/tilt classes and keep elements visible */
+.reveal, .is-visible, .tilt, .glow-edge, .cursor-active { opacity: 1 !important; transform: none !important; }
+
+/* Neutralize interactive micro-interactions */
+.nav a:hover, .btn:hover, .nav a:focus, a:hover, a:focus { transform: none !important; }
+
+/* Force SVG accents to use solid white strokes/fills (no gradients) and remove filters */
+.project-card svg, .project-card svg * {
+    stroke: #ffffff !important;
+    fill: #ffffff !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    opacity: 1 !important;
+}
+
+/* Make images show without blend modes or filters */
+img { filter: none !important; mix-blend-mode: normal !important; }
+
+/* Keep focus outlines accessible but simple */
+a:focus, button:focus { outline: 2px solid #ffffff !important; outline-offset: 2px !important; }
+
+
+/* ===== HEADER ===== */
+header {
+    position: relative;
+    z-index: 10;
+    padding: 100px 30px 60px;
+    background: linear-gradient(180deg, rgba(10,10,10,0.9), rgba(10,10,10,0.7));
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    animation: slideInDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+header h1 {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin: 0 0 12px 0;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    animation: slideInUp 0.8s ease-out 0.1s both;
+}
+
+header p {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    color: #ffffff;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    margin: 0;
+    animation: slideInUp 0.8s ease-out 0.2s both;
+}
+
+header > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    gap: 30px;
+}
+
+/* ===== LAYOUT CONTAINER ===== */
+.content-wrapper {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    gap: 40px;
+    max-width: 1400px;
+    width: 100%;
+    margin: 60px auto;
+    padding: 0 30px;
+    flex: 1;
+}
+
+.main {
+    flex: 1;
+    min-width: 0;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+    width: 320px;
+    background: linear-gradient(135deg, rgba(15,15,15,0.8), rgba(10,10,10,0.95));
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 32px;
+    height: fit-content;
+    align-self: flex-start;
+    position: sticky;
+    top: 40px;
+    animation: slideInUp 0.8s ease-out 0.3s both;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+    transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.sidebar:hover {
+    background: linear-gradient(135deg, rgba(20,20,20,0.85), rgba(15,15,15,0.98));
+    border-color: rgba(255,255,255,0.12);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
+    transform: translateY(-8px);
+}
+
+.profile-photo {
+    width: 100%;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, rgba(40,40,40,0.3), rgba(30,30,30,0.2));
+    border: 1.5px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 28px;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 0 30px rgba(255,255,255,0.05), inset 0 1px 0 rgba(255,255,255,0.08);
+    animation: glow 3s ease-in-out infinite;
+}
+
+.profile-photo:hover {
+    border-color: rgba(255,255,255,0.2);
+    box-shadow: 0 20px 50px rgba(255,255,255,0.1), inset 0 1px 0 rgba(255,255,255,0.12);
+    transform: scale(1.02);
+}
+
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.profile-photo:hover img {
+    transform: scale(1.08);
+}
+
+.sidebar h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 20px 0 8px 0;
+    letter-spacing: 0.3px;
+}
+
+.sidebar > p {
+    font-size: 0.9rem;
+    color: #ffffff;
+    margin: 0 0 24px 0;
+    line-height: 1.5;
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 24px 0;
+}
+
+.nav-links a {
+    display: block;
+    padding: 12px 16px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-links a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.2));
+    transform: translateX(-3px);
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+    border-color: rgba(255,255,255,0.12);
+    color: #ffffff;
+    padding-left: 20px;
+}
+
+.nav-links a:hover::before {
+    transform: translateX(0);
+}
+
+/* Social Links */
+.socials {
+    display: flex;
+    gap: 12px;
+    margin: 24px 0;
+}
+
+.socials a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    border: 1px solid rgba(255,255,255,0.08);
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+}
+
+.socials a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.socials a:hover {
+    background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+    border-color: rgba(255,255,255,0.15);
+    color: #ffffff;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.1);
+}
+
+.socials a:hover::after {
+    opacity: 1;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: 1.5px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    letter-spacing: 0.3px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
+    border-color: rgba(255,255,255,0.25);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3), 0 0 30px rgba(255,255,255,0.08);
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:active {
+    transform: translateY(-2px);
+}
+
+.btn-ghost {
+    background: transparent;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    color: #ffffff;
+}
+
+.btn-ghost:hover {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.35);
+    color: #ffffff;
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 101;
+}
+
+.hamburger span {
+    width: 26px;
+    height: 2.5px;
+    background: linear-gradient(90deg, #ffffff, #c0c0c0);
+    border-radius: 2px;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(12px, 12px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(20px);
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(8px, -8px);
+}
+
+/* ===== SECTIONS ===== */
+.section {
+    position: relative;
+    background: linear-gradient(135deg, rgba(15,15,15,0.6), rgba(10,10,10,0.8));
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 60px;
+    margin-bottom: 70px;
+    animation: slideInUp 0.8s ease-out both;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
+    transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    overflow: hidden;
+    background: #000000 !important;
+    background-color: #000000 !important;
+    background-image: none !important;
+    color: rgba(255,255,255,0.95) !important;
+}
+
+.section *:not(img):not(picture):not(video):not(svg) {
+    background-color: #000000 !important;
+    background: #000000 !important;
+    background-image: none !important;
+    color: rgba(255,255,255,0.95) !important;
+    border-color: rgba(255,255,255,0.06) !important;
+}
+
+.section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    pointer-events: none;
+}
+
+.section:nth-child(1) { animation-delay: 0.2s; }
+.section:nth-child(2) { animation-delay: 0.3s; }
+.section:nth-child(3) { animation-delay: 0.4s; }
+.section:nth-child(4) { animation-delay: 0.5s; }
+.section:nth-child(5) { animation-delay: 0.6s; }
+
+.section:hover {
+    background: linear-gradient(135deg, rgba(20,20,20,0.65), rgba(15,15,15,0.85));
+    border-color: rgba(255,255,255,0.12);
+    box-shadow: 0 30px 90px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+    transform: translateY(-8px);
+}
+
+.section h2 {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 45px 0;
+    letter-spacing: -0.5px;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(255,255,255,0.2));
+    border-radius: 2px;
+    animation: slideInRight 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes slideInRight {
+    to { width: 80px; }
+}
+
+/* Section content styling */
+.section p, .info {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #d0d0d0;
+    margin: 0 0 20px 0;
+}
+
+.section strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* ===== PROJECT CARDS ===== */
+.project-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(25,25,25,0.6), rgba(15,15,15,0.8));
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 32px;
+    margin-bottom: 0;
+    animation: slideInUp 0.8s ease-out both;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
+    transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    perspective: 1200px;
+    background: #000000 !important;
+    background-color: #000000 !important;
+    background-image: none !important;
+    color: rgba(255,255,255,0.95) !important;
+}
+
+.project-card *:not(img):not(picture):not(video):not(svg) {
+    background-color: #000000 !important;
+    background: #000000 !important;
+    background-image: none !important;
+    color: rgba(255,255,255,0.95) !important;
+    border-color: rgba(255,255,255,0.06) !important;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.project-card:hover {
+    background: linear-gradient(135deg, rgba(35,35,35,0.7), rgba(20,20,20,0.85));
+    border-color: rgba(255,255,255,0.15);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+    transform: translateY(-12px) scale(1.01);
+}
+
+.project-card:hover::before {
+    opacity: 1;
+}
+
+.project-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.3px;
+    position: relative;
+    z-index: 2;
+}
+
+.project-card p {
+    color: #c0c0c0;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 0 0 20px 0;
+    flex-grow: 1;
+    position: relative;
+    z-index: 2;
+}
+
+/* Project card image */
+.project-card > div:first-child {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(135deg, rgba(80,80,80,0.2), rgba(60,60,60,0.1));
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.3);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.project-card:hover > div:first-child {
+    box-shadow: inset 0 0 60px rgba(0,0,0,0.2), 0 0 30px rgba(255,255,255,0.05);
+}
+
+.project-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.project-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Project tags/badges */
+.project-card span {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+    color: #c0c0c0;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.08);
+    margin-right: 10px;
+    margin-bottom: 10px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    z-index: 2;
+}
+
+.project-card span:hover {
+    background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+    border-color: rgba(255,255,255,0.15);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* Project card link button */
+.project-card a[target="_blank"] {
+    display: inline-block;
+    margin-top: 16px;
+    position: relative;
+    z-index: 2;
+}
+
+/* ===== SKILLS GRID ===== */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 30px;
+}
+
+.skill-card {
+    background: linear-gradient(135deg, rgba(30,30,30,0.6), rgba(20,20,20,0.8));
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 28px;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: slideInUp 0.8s ease-out both;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+}
+
+.skill-card:nth-child(1) { animation-delay: 0.1s; }
+.skill-card:nth-child(2) { animation-delay: 0.15s; }
+.skill-card:nth-child(3) { animation-delay: 0.2s; }
+.skill-card:nth-child(4) { animation-delay: 0.25s; }
+.skill-card:nth-child(5) { animation-delay: 0.3s; }
+.skill-card:nth-child(6) { animation-delay: 0.35s; }
+
+.skill-card:hover {
+    background: linear-gradient(135deg, rgba(40,40,40,0.7), rgba(25,25,25,0.85));
+    border-color: rgba(255,255,255,0.12);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+    transform: translateY(-8px);
+}
+
+.skill-card:hover::after {
+    opacity: 1;
+}
+
+/* ============================
+   SURGICAL STRIKE: REMOVE ALL GREY SURFACES
+   - Replace gradient/rgba backgrounds with pure black
+   - Remove overlay pseudo-elements completely
+   - Enforce opacity-based white text only
+   - Add global gradient kill switch and temporary debug blackout
+   ============================ */
+
+/* 1) Replace common surface backgrounds with pure black and safe box-shadow */
+.section,
+header,
+.sidebar,
+.profile-photo,
+.project-card,
+.skill-card,
+.nav-links a,
+.socials a,
+.btn,
+.btn-ghost,
+.project-card > div:first-child,
+.background-shapes,
+.float-blob,
+.float-ring,
+.float-square,
+.grid-layer,
+.accent-line-1,
+.accent-line-2 {
+    background-image: none !important;
+    background: #000000 !important;
+    background-color: #000000 !important;
+    color: rgba(255,255,255,0.85) !important;
+    border-color: rgba(255,255,255,0.08) !important;
+    /* cards get subtle light dusting to separate via shadow only */
+    box-shadow: 0 20px 50px rgba(255,255,255,0.08) !important;
+}
+
+/* 2) Kill overlay pseudo-elements used for glow/lines/gradients */
+.section::before,
+.project-card::before,
+.skill-card::after,
+.socials a::after,
+.nav-links a::before,
+.float-blob::before,
+.float-ring::before,
+.float-square::before,
+.background-shapes::before,
+.grid-layer::before,
+.accent-line-1::before,
+.accent-line-2::before,
+.glow,
+.overlay {
+    background: none !important;
+    background-image: none !important;
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    content: '' !important;
+    height: 0 !important;
+    width: 0 !important;
+}
+
+/* 3) Ensure text contrast is opacity-based white only (no grey hexes) */
+body, .section h2, header h1, header p, .project-card h3, .project-card p, .sidebar h3, .sidebar > p {
+    color: rgba(255,255,255,0.85) !important;
+}
+
+/* 4) GLOBAL GRADIENT KILL SWITCH (must be at the end) */
+* {
+    background-image: none !important;
+}
+
+/* 5) DEBUG BLACKOUT: force pure black surfaces temporarily
+   Keep this block while you visually verify; it can be removed after validation.
+   Re-enable media and buttons so they still show. */
+/* DEBUG: force full-black */
+* {
+    background-color: #000000 !important;
+}
+
+/* Re-enable visual media/buttons/shadows while keeping surfaces black */
+img, picture, video, canvas, svg {
+    background: transparent !important;
+    background-color: transparent !important;
+    filter: none !important;
+}
+
+.btn, .btn-ghost, .socials a, .nav-links a {
+    background-image: none !important;
+    background-color: transparent !important;
+}
+
+/* Shadows allowed only when body has .cursor-active (pointer-movement) */
+body:not(.cursor-active) * {
+    box-shadow: none !important;
+}
+
+/* ============================
+   FORCE BOX INTERIORS: PURE BLACK + WHITE TEXT
+   - Ensure all box-like containers and their child surfaces are pure black
+   - Exempt media elements so images/videos remain unaffected
+   - Use high specificity and !important to override lingering greys
+   ============================ */
+
+.section,
+.project-card,
+.skill-card,
+.sidebar,
+.profile-photo,
+.project-card > div:first-child,
+.header,
+header,
+.content-wrapper,
+.main {
+    background-color: #000000 !important;
+    background: #000000 !important;
+    background-image: none !important;
+    color: rgba(255,255,255,0.95) !important;
+    border-color: rgba(255,255,255,0.06) !important;
+}
+
+/* Force interior children to be black, but do NOT override media elements */
+.section *:not(img):not(picture):not(video):not(svg),
+.project-card *:not(img):not(picture):not(video):not(svg),
+.skill-card *:not(img):not(picture):not(video):not(svg),
+.sidebar *:not(img):not(picture):not(video):not(svg),
+.profile-photo *:not(img):not(picture):not(video):not(svg) {
+    background-color: #000000 !important;
+    background: #000000 !important;
+    background-image: none !important;
+    color: rgba(255,255,255,0.95) !important;
+    border-color: rgba(255,255,255,0.06) !important;
+}
+
+/* Make sure images/videos retain original look */
+img, picture, video, svg {
+    background: transparent !important;
+    background-color: transparent !important;
+    filter: none !important;
+}
+
+
+
+/* ===== STRICT ABSOLUTE PURE-BLACK OVERRIDE ===== */
+/* This enforces the user's non-negotiable rule: all non-media surfaces must be pure black. */
+/* Images, videos, and elements with explicit url() backgrounds are exempted so media remains full-color. */
+:not(img):not(picture):not(video) * {
+    background-image: none !important;
+    background-color: #000000 !important;
+    background: #000000 !important;
+    color: #ffffff !important;
+    border-color: rgba(255,255,255,0.08) !important;
+    box-shadow: none !important;
+}
+
+/* Very high level safety net: ensure every element defaults to pure black surface */
+* {
+    background-color: #000000 !important;
+}
+
+/* Keep actual media elements untouched visually */
+img, picture, video, canvas, svg {
+    background: transparent !important;
+    filter: none !important;
+}
+
+/* Pointer-activated subtle grey shadows only when explicitly allowed via .cursor-active */
+body:not(.cursor-active) * {
+    box-shadow: none !important;
+}
+
+
+.skill-card > div:first-child {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+}
+
+.skill-card > div:last-child {
+    color: #b0b0b0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== CONTACT SECTION ===== */
+.contact-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+}
+
+.contact-link {
+    background: linear-gradient(135deg, rgba(35,35,35,0.6), rgba(20,20,20,0.8));
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: slideInUp 0.8s ease-out both;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.contact-link:nth-child(1) { animation-delay: 0.1s; }
+.contact-link:nth-child(2) { animation-delay: 0.15s; }
+.contact-link:nth-child(3) { animation-delay: 0.2s; }
+.contact-link:nth-child(4) { animation-delay: 0.25s; }
+.contact-link:nth-child(5) { animation-delay: 0.3s; }
+
+.contact-link:hover {
+    background: linear-gradient(135deg, rgba(45,45,45,0.7), rgba(25,25,25,0.85));
+    border-color: rgba(255,255,255,0.15);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+    transform: translateY(-10px);
+}
+
+.contact-link:hover::before {
+    opacity: 1;
+}
+
+.contact-link > div:first-child {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+}
+
+.contact-link a {
+    color: #c0c0c0;
+    text-decoration: none;
+    font-weight: 600;
+    word-break: break-all;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    display: inline-block;
+}
+
+.contact-link a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #ffffff, rgba(255,255,255,0.5));
+    transition: width 0.3s ease;
+}
+
+.contact-link a:hover {
+    color: #ffffff;
+}
+
+.contact-link a:hover::after {
+    width: 100%;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 60px 30px;
+    color: #888;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    margin-top: auto;
+    background: linear-gradient(180deg, transparent, rgba(10,10,10,0.4));
+    animation: slideInUp 0.8s ease-out 0.7s both;
+}
+
+footer p {
+    font-size: 0.95rem;
+    margin: 8px 0;
+    font-weight: 300;
+    letter-spacing: 0.3px;
+    transition: color 0.3s ease;
+    color: #999;
+}
+
+footer p:hover {
+    color: #b0b0b0;
+}
+
+/* ===== TEXT GRADIENT PRESERVATION ===== */
+header h1,
+header p,
+.section h2,
+.keep-gradient {
+    background: initial !important;
+    background-clip: text !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: initial !important;
+    filter: none !important;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1200px) {
+    .content-wrapper {
+        gap: 30px;
+        padding: 0 25px;
+    }
+
+    .section {
+        padding: 50px;
+    }
+
+    .project-card {
+        padding: 28px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .content-wrapper {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .sidebar {
+        width: 100%;
+        position: fixed;
+        left: 0;
+        top: 180px;
+        height: calc(100vh - 180px);
+        border-radius: 0;
+        z-index: 100;
+        transform: translateX(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        padding: 28px;
+        overflow-y: auto;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .main {
+        width: 100%;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    header p {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 80px 20px 50px;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+    }
+
+    header p {
+        font-size: 0.9rem;
+    }
+
+    .section {
+        padding: 40px 24px;
+        margin-bottom: 50px;
+    }
+
+    .section h2 {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+
+    .skills-grid,
+    .contact-links {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .project-card {
+        padding: 24px;
+    }
+
+    footer {
+        padding: 50px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 70px 16px 45px;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+        margin-bottom: 6px;
+    }
+
+    header p {
+        font-size: 0.85rem;
+    }
+
+    header > div {
+        gap: 12px;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+    }
+
+    .section {
+        padding: 32px 18px;
+        margin-bottom: 40px;
+    }
+
+    .section h2 {
+        font-size: 1.5rem;
+        margin-bottom: 24px;
+    }
+
+    .section h2::after {
+        width: 60px;
+    }
+
+    .project-card {
+        padding: 20px;
+    }
+
+    .project-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .project-card p {
+        font-size: 0.95rem;
+    }
+
+    .skills-grid,
+    .contact-links {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .skill-card,
+    .contact-link {
+        padding: 24px;
+    }
+
+    .sidebar {
+        top: 170px;
+        padding: 20px;
+    }
+
+    footer {
+        padding: 40px 16px;
+    }
+
+    footer p {
+        font-size: 0.9rem;
+    }
+
+    /* Hide decorative elements on mobile */
+    .accent-line-1,
+    .accent-line-2 {
+        opacity: 0.3;
+    }
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    body {
+        animation: none;
+    }
+
+    .grid-layer {
+        animation: none;
+        opacity: 0.2;
+    }
+}
+
+/* ===== FINAL OVERRIDES: PURE BLACK SITE, IMAGES IN ORIGINAL COLOR ===== */
+/* Force site background to pure black and all UI elements to use black backgrounds */
+html, body {
+    background: #000000 !important;
+    color: #ffffff !important;
+}
+
+/* Make all containers pure black and text bright white */
+header, .content-wrapper, .section, .project-card, .sidebar, footer, .contact-link, .skill-card {
+    background: #000000 !important;
+    background-image: none !important;
+    border-color: rgba(255,255,255,0.04) !important;
+}
+
+/* Override inline styles that try to inject color backgrounds; keep images unaffected */
+*:not(img):not(picture):not(video):not(.keep-color)[style] {
+    background: #000000 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+}
+
+/* Ensure text and headings are white and readable */
+h1, h2, h3, h4, h5, h6, p, a, li, span, button {
+    color: #ffffff !important;
+}
+
+/* Ensure buttons and links have neutral backgrounds */
+.btn, .nav-links a, a.button {
+    background: transparent !important;
+    color: #ffffff !important;
+    border-color: rgba(255,255,255,0.06) !important;
+}
+
+/* Keep all photos, thumbnails and background-image photos in their original color */
+img, picture, video, .cert-thumb, .profile-photo img, .project-card img, [style*="url("] {
+    -webkit-filter: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 50 !important;
+}
+
+/* If a decorative overlay exists, push it behind images */
+.project-card::before, .project-card > div:first-child::before, .project-card > div:first-child > div::before {
+    z-index: 1 !important;
+}
+
+/* Make sure svg icons used as decoration are neutral (optional) */
+svg { filter: grayscale(100%) !important; }
+
+/* ===== STRICT: REMOVE ANY GREY TONES SITE-WIDE ===== */
+/* Target all elements except real images/background photos and force pure black/white palette */
+*:not(img):not(picture):not(video):not([style*="url("]) {
+    background: #000000 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+/* Neutralize inline rgba/hsla backgrounds but preserve elements that use background images (photos) */
+[style*="background"]:not([style*="url("]) {
+    background: #000000 !important;
+    background-image: none !important;
+}
+
+/* Make badges, tags, and controls pure white text with transparent backgrounds */
+.project-card span, .badge, .tag, .nav-links a, .btn, .btn-ghost {
+    background: transparent !important;
+    color: #ffffff !important;
+    border-color: rgba(255,255,255,0.06) !important;
+    box-shadow: none !important;
+}
+
+/* Ensure any svg decorations use white strokes/fills (icons only) */
+svg:not([data-keep-color]) * { stroke: #ffffff !important; fill: #ffffff !important; }
+
+/* Force images and background-image photos to full color and above overlays */
+img, picture, video, [style*="url("] {
+    -webkit-filter: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    opacity: 1 !important;
+    z-index: 999 !important;
+    position: relative !important;
+}
+
+/* Ensure pseudo-element overlays are behind images */
+*::before, *::after { z-index: 0 !important; }
+
+/* ===== EXTRA: PURGE ANY REMAINING GREY TONES (#212121 - #252525) ===== */
+:root { --pure-black: #000000; --pure-white: #ffffff; }
+
+/* Strongly enforce pure black backgrounds on most containers */
+html, body, header, .content-wrapper, .section, .project-card, .sidebar, footer, .contact-link, .skill-card, .grid-layer, .background-shapes {
+    background-color: var(--pure-black) !important;
+    background-image: none !important;
+    color: var(--pure-white) !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Override inline styles that set gradients or grey backgrounds unless they contain an actual photo (url()) */
+[style]:not([style*="url("]):not(img):not(picture):not(video) {
+    background-color: var(--pure-black) !important;
+    background-image: none !important;
+    color: var(--pure-white) !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Ensure pseudo-element backgrounds or overlays don't introduce grey tints */
+*::before, *::after {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Make any hard-coded color stops in SVG icons white (unless explicitly kept) */
+svg:not([data-keep-color]) stop, svg:not([data-keep-color]) path, svg:not([data-keep-color]) circle, svg:not([data-keep-color]) rect {
+    stop-color: var(--pure-white) !important;
+    stroke: var(--pure-white) !important;
+    fill: var(--pure-white) !important;
+}
+
+/* Finally, ensure images and elements with background images remain in original color */
+img, picture, video, [style*="url("] {
+    -webkit-filter: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 9999 !important;
+}
+
+/* Final aggressive greys -> black/white enforcement */
+/* Inline style grey text -> force white */
+*[style*="#d0d0d0"], *[style*="#b0b0b0"], *[style*="#c0c0c0"], *[style*="#e0e0e0"], *[style*="#f0f0f0"], *[style*="#eaeaea"], *[style*="#f3f3f3"], *[style*="#f7f7f7"], *[style*="#999"], *[style*="#888"], *[style*="#a8a8a8"] {
+    color: var(--pure-white) !important;
+    background-color: var(--pure-black) !important;
+    border-color: transparent !important;
+}
+
+/* Inline style grey rgba backgrounds and borders -> force black/transparent */
+*[style*="rgba(200, 200, 200"], *[style*="rgba(150, 150, 150"], *[style*="rgba(180,180,180"], *[style*="rgba(160,160,160"], *[style*="rgba(80, 80, 80"], *[style*="rgba(60, 60, 60"] {
+    background-image: none !important;
+    background-color: var(--pure-black) !important;
+    border-color: rgba(0,0,0,0.6) !important;
+    box-shadow: none !important;
+}
+
+/* Ensure any leftover CSS variables set to grey are neutralized */
+:root { color-scheme: dark; }
+
+/* ===== USER REQUEST: Ensure sections are solid black and images remain full-color ===== */
+/* Make all section-like containers strictly pure black (no transparency, no backdrop blur) */
+.section, header, .content-wrapper, .project-card, .sidebar, footer, .contact-link, .skill-card {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    background-image: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-color: rgba(255,255,255,0.04) !important;
+}
+
+/* Remove any opacity/rgba-based backgrounds on these containers */
+[style*="background: rgba("], .section[style], .project-card[style], [style*="linear-gradient"] {
+    background-image: none !important;
+    background-color: #000000 !important;
+}
+
+/* Ensure images, SVGs, videos and background-image photos are full-color and not desaturated */
+img, picture, video, canvas, svg, .cert-thumb, .profile-photo img, .project-card img, [style*="url("] {
+    -webkit-filter: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    opacity: 1 !important;
+    transition: none !important;
+}
+
+/* Override any earlier rules that forced SVGs to grayscale */
+svg, svg * {
+    -webkit-filter: none !important;
+    filter: none !important;
+    stroke: currentColor !important;
+    fill: currentColor !important;
+}
+
+/* Ensure elements with inline styles that attempted semi-transparent black are solid black */
+*[style*="rgba(0,0,0,"], *[style*="opacity:"] {
+    background-color: #000000 !important;
+}
+
+
+/* ===== FORCE ENTIRE SITE TO PURE BLACK + PRESERVE IMAGES ===== */
+/* Make the whole page and all major containers pure black and text white */
+html, body, header, footer, .content-wrapper, .main, .section, .project-card, .sidebar, .profile-photo, .cert-thumb, .grid-layer, .background-shapes, .nav-links a, .btn, .btn-ghost {
+    background-color: #000000 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Neutralize any inline gradients or background-images that are not photos */
+[style*="linear-gradient"]:not([style*="url("]) {
+    background-image: none !important;
+    background-color: #000000 !important;
+}
+
+/* Decorative shapes fully hidden to avoid grey banding */
+.background-shapes { display: none !important; }
+.grid-layer { background-image: none !important; }
+
+/* Keep img/picture/video and elements with url() in their style in full color and above overlays */
+img, picture, video, [style*="url("] {
+    -webkit-filter: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 9999 !important;
+}
+
+/* Force any inline style color tokens commonly used for greys to white */
+*[style*="#d0d0d0"], *[style*="#b0b0b0"], *[style*="#c0c0c0"], *[style*="#e0e0e0"], *[style*="#f0f0f0"], *[style*="#eaeaea"], *[style*="#f3f3f3"], *[style*="#f7f7f7"], *[style*="#999"], *[style*="#888"], *[style*="#a8a8a8"] {
+    color: #ffffff !important;
+}
+
+/* ===== FINAL INLINE OVERRIDE: REMOVE ANY REMAINING GREY BOXES ===== */
+/* Catch any inline borders or rgba backgrounds and force pure-black interiors + white text */
+*[style*="border"] {
+    border: none !important;
+}
+
+/* Inline rgba(...) usages (borders/backgrounds/text) -> force black background + white text */
+*[style*="rgba("] {
+    background-image: none !important;
+    background-color: #000000 !important;
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Common inline grey hex tokens -> force white text */
+*[style*="#d0d0d0"], *[style*="#c0c0c0"], *[style*="#b0b0b0"], *[style*="#d0e8ff"], *[style*="#f0d0e0"] {
+    color: #ffffff !important;
+    background-color: #000000 !important;
+}
+
+/* Ensure badges, tags and inline-styled buttons inside cards are white on transparent/black */
+.project-card span, .project-card a, .project-card [style*="padding"], .contact-link a, .nav-links a, .btn {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Safety: force all elements except media to have pure-black surfaces and white text */
+:not(img):not(picture):not(video) *[style] {
+    background-image: none !important;
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: none !important;
+}
+
+
+
+
+
+
+/* ===== ACCESSIBILITY ===== */
+:focus-visible {
+    outline: 2px solid rgba(255,255,255,0.3);
+    outline-offset: 2px;
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid rgba(255,255,255,0.3);
+    outline-offset: 4px;
+}
+
+/* Smooth scroll support */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Selection styling */
+::selection {
+    background: transparent !important;
+    color: inherit !important;
+}
+
+::-moz-selection {
+    background: transparent !important;
+    color: inherit !important;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(30,30,30,0.5);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(200,200,200,0.6), rgba(150,150,150,0.4));
+    border-radius: 5px;
+    border: 2px solid rgba(20,20,20,0.8);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, rgba(220,220,220,0.8), rgba(180,180,180,0.6));
+}
+
+/* ===== SITE-WIDE PREMIUM MONOCHROME ENFORCEMENT ===== */
+/* Desaturate and neutralize all UI elements while preserving actual photos/images */
+:root {
+    --mono-900: #000000;
+    --mono-800: #0b0b0b;
+    --mono-700: #111111;
+    --mono-600: #1a1a1a;
+    --mono-400: #bdbdbd;
+    --mono-200: #e6e6e6;
+}
+
+/* Apply a strict greyscale filter to all non-image content */
+body *:not(img):not(picture):not(svg):not(.keep-color) {
+    -webkit-filter: grayscale(100%) saturate(0%) contrast(0.95) !important;
+    filter: grayscale(100%) saturate(0%) contrast(0.95) !important;
+    color: var(--mono-200) !important;
+    background-image: none !important;
+    background: linear-gradient(180deg, var(--mono-800), var(--mono-700)) !important;
+    border-color: rgba(255,255,255,0.06) !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.55) !important;
+}
+
+/* Ensure interactive elements remain clear and readable */
+button, a, input, textarea, select {
+    color: var(--mono-200) !important;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)) !important;
+    border: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+/* Keep images and certificate thumbnails in full color */
+img, picture, video {
+    -webkit-filter: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+}
+
+/* Also ensure any element that uses an inline background image remains full color */
+[style*="url("] {
+    -webkit-filter: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    z-index: 10 !important;
+}
+
+/* Specific selectors for common photo containers */
+.project-card img,
+.project-card a img,
+.project-card > div:first-child img,
+.cert-thumb,
+.profile-photo img,
+header img,
+.float-blob img,
+.float-ring img {
+    -webkit-filter: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    z-index: 20 !important;
+    position: relative !important;
+}
+
+/* If a pseudo-element overlay exists, ensure it doesn't obscure the photo */
+.project-card::before,
+.project-card > div:first-child::before,
+.project-card > div:first-child > div::before {
+    z-index: 1 !important;
+}
+
+/* SVGs: desaturate iconography unless they are photos (embedded raster images) */
+svg {
+    -webkit-filter: grayscale(100%) saturate(0%) !important;
+    filter: grayscale(100%) saturate(0%) !important;
+}
+
+/* Preserve header text gradients where intentionally kept */
+header h1, header p, .section h2, .keep-gradient {
+    -webkit-filter: none !important;
+    filter: none !important;
+    background: initial !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+}
+
+/* Neutralize inline background colors/gradients on project cards and badges */
+.project-card, .project-card * {
+    background-image: none !important;
+    background: linear-gradient(180deg, var(--mono-800), var(--mono-700)) !important;
+    border-color: rgba(255,255,255,0.06) !important;
+}
+
+/* Badges and tags: neutral greys */
+.project-card span, .project-card .tag, .project-card .badge {
+    background: rgba(255,255,255,0.03) !important;
+    color: var(--mono-200) !important;
+    border: 1px solid rgba(255,255,255,0.05) !important;
+}
+
+/* ===== CERTIFICATIONS: WIDER PREVIEW COLUMNS ===== */
+/* Override inline grid to increase per-card min width for larger certificate previews */
+#certifications > div {
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)) !important;
+    gap: 32px !important;
+}
+
+/* ensure each certification card preview uses the larger height already set */
+#certifications .project-card > div:first-child,
+#certifications .project-card > a > img,
+#certifications .project-card > div:first-child img.cert-thumb {
+    height: 340px !important;
+}
+
+@media (max-width: 768px) {
+    #certifications > div { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; }
+    #certifications .project-card > div:first-child { height: 260px !important; }
+}
+
+/* Ensure certification thumbnails render in full color and above overlays */
+#certifications .project-card img.cert-thumb,
+#certifications .project-card > div:first-child img,
+#certifications img {
+    -webkit-filter: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 5 !important;
+}
+
+/* If a decorative overlay exists, push it behind the image */
+#certifications .project-card > div:first-child > div,
+#certifications .project-card > a > div {
+    z-index: 1 !important;
+    pointer-events: none !important;
+}
+
+/* ===== GLOBAL: FORCE PURE BLACK BACKGROUND & BRIGHT TEXT ===== */
+html, body {
+    background: #000000 !important;
+    color: #f7f7f7 !important;
+}
+
+/* Make main containers fully black to avoid grey tones */
+header,
+.content-wrapper,
+.section,
+.project-card,
+.sidebar,
+footer,
+.grid-layer,
+.background-shapes,
+.contact-link,
+.skill-card {
+    background: #000000 !important;
+    background-image: none !important;
+    border-color: rgba(255,255,255,0.04) !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8) !important;
+}
+
+/* Ensure text remains readable and bright */
+.section h2, header h1, header p, .project-card h3, .project-card p, .skill-card > div:first-child, footer p {
+    color: #ffffff !important;
+}
+
+/* Links and buttons: bright with subtle transparent backing */
+a, a:visited, .btn, .nav-links a {
+    color: #f3f3f3 !important;
+}
+
+/* Maintain images full-color and on top */
+img, picture, video {
+    -webkit-filter: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+    z-index: 10 !important;
+    position: relative !important;
+}
+
+/* Reduce any remaining glow colors to neutral whites */
+svg stop, svg path, svg circle, svg rect {
+    filter: grayscale(100%) brightness(1.05) !important;
+}
+
+/* Keep decorative accent lines subtle and white-only */
+.accent-line-1, .accent-line-2 {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent) !important;
+}
+
+/* Ensure badges/tags are neutral */
+.project-card span, .badge, .tag {
+    background: rgba(255,255,255,0.02) !important;
+    color: #eaeaea !important;
+    border-color: rgba(255,255,255,0.04) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition-duration: 0.001ms !important;
+        animation-duration: 0.001ms !important;
+    }
+}
+
+
+
+/* ===== FEATURED PROJECTS: FORCE BLACK & WHITE (PHOTOS EXEMPT) ===== */
+/* Ensure the whole Featured Projects area remains monochrome except for <img> elements */
+#projects .project-card {
+    background: linear-gradient(135deg, rgba(18,18,18,0.65), rgba(8,8,8,0.85)) !important;
+    border-color: rgba(255,255,255,0.06) !important;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5) !important;
+}
+
+/* Desaturate all children except images so SVGs, badges and inline-gradients look greyscale */
+#projects .project-card *:not(img) {
+    -webkit-filter: grayscale(100%) saturate(0%) !important;
+    filter: grayscale(100%) saturate(0%) !important;
+}
+
+/* Force typographic and badge colors to neutral greys */
+#projects .project-card h3,
+#projects .project-card p,
+#projects .project-card span,
+#projects .project-card a {
+    color: #d0d0d0 !important;
+    background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)) !important;
+    border-color: rgba(255,255,255,0.06) !important;
+}
+
+#projects .project-card h3 a { color: #e8e8e8 !important; }
+
+/* Keep images in project cards full color */
+#projects .project-card img {
+    -webkit-filter: none !important;
+    filter: none !important;
+    mix-blend-mode: normal !important;
+}
+
+/* Hover: subtle monochrome lift */
+#projects .project-card:hover {
+    transform: translateY(-8px) scale(1.01) !important;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6) !important;
+}
+
+/* ===== CERTIFICATION PREVIEW SIZE ===== */
+/* Increase preview height for certificate thumbnails */
+#certifications .project-card > div:first-child,
+#certifications .project-card > a > img,
+#certifications .project-card > div:first-child img.cert-thumb {
+    height: 340px !important;
+}
+
+@media (max-width: 768px) {
+    #certifications .project-card > div:first-child { height: 260px !important; }
+}
+
+/* ===== MOUSE-ACTIVATED GREY SHADOWS ===== */
+:root {
+    --shadow-r: 33;
+    --shadow-g: 33;
+    --shadow-b: 33;
+    --shadow-alpha: 0.62;
+}
+
+/* Default: no heavy shadows (pure black look) */
+header, .project-card, .sidebar, .profile-photo, .section {
+    box-shadow: none !important;
+    transition: box-shadow 200ms ease, transform 180ms ease;
+}
+
+/* When the cursor is active (moving), apply subtle grey shadows */
+.cursor-active header,
+.cursor-active .project-card,
+.cursor-active .sidebar,
+.cursor-active .profile-photo,
+.cursor-active .section {
+    box-shadow: 0 30px 80px rgba(var(--shadow-r), var(--shadow-g), var(--shadow-b), var(--shadow-alpha)) !important;
+}
+
+/* Slightly stronger shadow on hovered project card to emphasize lift */
+.cursor-active #projects .project-card:hover {
+    box-shadow: 0 40px 110px rgba(var(--shadow-r), var(--shadow-g), var(--shadow-b), 0.7) !important;
+    transform: translateY(-10px) scale(1.01) !important;
+}
+
+/* ===== STRICT PURE-BLACK ENFORCEMENT (ABSOLUTE) ===== */
+/* Final guard: remove any gradients, grey backgrounds, borders and blur from all elements
+   while preserving images and elements that explicitly include url(...) backgrounds. */
+:root { --pure-black: #000000; --pure-white: #ffffff; --shadow-color: 33,33,33; }
+
+html, body {
+    background-color: var(--pure-black) !important;
+    background-image: none !important;
+    color: var(--pure-white) !important;
+}
+
+/* Remove any gradient/background-image on non-media elements (leave photos alone) */
+*:not(img):not(picture):not(video):not([style*="url("]) {
+    background-image: none !important;
+    background: var(--pure-black) !important;
+    background-color: var(--pure-black) !important;
+}
+
+/* Neutralize inline gradients and grey rgba(...) declarations */
+*[style*="linear-gradient"], *[style*="rgba("] {
+    background-image: none !important;
+    background-color: var(--pure-black) !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+}
+
+/* Remove any grey borders — keep borderless or subtle bright outlines if needed */
+* { border-color: transparent !important; }
+
+/* Typography: primary white, secondary dimmed white (opacity only) */
+body, p, li, a, span, div, h1, h2, h3, h4, h5 {
+    color: var(--pure-white) !important;
+}
+
+/* Give secondary text a dimmed white using opacity (not grey hex) */
+.muted, .small, p.small, .project-card p, .sidebar > p, header p {
+    color: rgba(255,255,255,0.78) !important;
+}
+
+/* Cards and containers: pure black, rounded corners, subtle shadow only on pointer movement */
+.project-card, .sidebar, .profile-photo, .section, header, footer, .content-wrapper, .main {
+    background: var(--pure-black) !important;
+    border-radius: 12px !important;
+    box-shadow: none !important;
+}
+
+/* Keep images in full color and above other layers */
+img, picture, video, [style*="url("] {
+    filter: none !important;
+    -webkit-filter: none !important;
+    mix-blend-mode: normal !important;
+    z-index: 9999 !important;
+    position: relative !important;
+}
+
+/* Shadows must only be grey and low-opacity and appear via .cursor-active */
+.cursor-active .project-card, .cursor-active .sidebar, .cursor-active .profile-photo, .cursor-active header, .cursor-active .section {
+    box-shadow: 0 28px 68px rgba(var(--shadow-color), 0.45) !important;
+}
+
+/* Hover interactions: elevation using transform + slightly stronger grey shadow (still low opacity) */
+.project-card:hover, .btn:hover, .sidebar:hover {
+    transform: translateY(-6px) scale(1.01) !important;
+}
+
+/* Remove any existing gradients from SVG elements (keep fills if images are intended) */
+svg stop, svg path, svg circle, svg rect { filter: none !important; }
+
+/* Disable decorative background container to avoid grey banding */
+.background-shapes { display: none !important; }
+.grid-layer { display: none !important; }
+
+/* Ensure modal/lightbox boxes are pure black */
+.cert-modal .box { background: var(--pure-black) !important; color: var(--pure-white) !important; box-shadow: none !important; }
+
+/* Buttons keep black background and white text (no gradient) */
+.btn, .btn-ghost, a[role="button"] { background: var(--pure-black) !important; color: var(--pure-white) !important; border: none !important; }
+/* FINAL ABSOLUTE OVERRIDE - PURE BLACK EVERYWHERE (EXCEPT MEDIA) */
+/* Apply the user's non-negotiable rule while preserving images/video */
+*:not(img):not(picture):not(video):not([style*="url("]) {
+    background-color: #000000 !important;
+    background-image: none !important;
+}
+
+/* Global text rules (no grey hex codes) */
+body, h1, h2, h3, h4, h5, p, a, span, div, li {
+    color: #ffffff !important;
+}
+
+/* Secondary and muted via opacity only */
+.secondary { color: rgba(255,255,255,0.75) !important; }
+.muted { color: rgba(255,255,255,0.55) !important; }
+
+/* Force allowed border style only when present */
+*:not(img):not(picture):not(video) { border-color: transparent !important; }
+
+/* Box shadows allowed only via .cursor-active or :hover; otherwise none */
+.project-card, .sidebar, header, .section, .profile-photo { box-shadow: none !important; }
+
+
+/* ============================
+   GLOBAL PURE-BLACK OVERRIDE (FINAL)
+   - Absolute enforcement: all UI surfaces pure #000000
+   - No gradients, no rgba panel backgrounds, no overlays
+   - Images/videos preserved in full color
+   - Text: primary white; secondary/muted via opacity only
+   ============================ */
+
+:root{ --pure-black:#000000; --pure-white:#ffffff }
+
+/* Kill any background images/gradients globally */
+*{ background-image: none !important; }
+
+/* Ensure page background is pure black */
+html, body { background: var(--pure-black) !important; color: var(--pure-white) !important; }
+
+/* Core box selectors: force pure black interiors and white text */
+header, .header, .content-wrapper, .main, .section, .project-card, .skill-card, .sidebar, .profile-photo, .contact-link, .cert-modal .box, footer, .nav-links a, .btn, .btn-ghost, .badge, .tag {
+    background: var(--pure-black) !important;
+    background-image: none !important;
+    background-color: var(--pure-black) !important;
+    color: var(--pure-white) !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Force children inside boxes to be black (except media) */
+.section *, .project-card *, .skill-card *, .sidebar *, .profile-photo * {
+    background: var(--pure-black) !important;
+    background-image: none !important;
+    color: var(--pure-white) !important;
+}
+
+/* Remove all pseudo-element overlays that introduce greys */
+*::before, *::after {
+    background: none !important;
+    background-image: none !important;
+    display: none !important;
+    content: "" !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Text rules: primary white; secondary/muted via opacity only */
+body, h1, h2, h3, h4, h5, h6, p, a, li, span, button { color: var(--pure-white) !important; }
+.secondary { color: rgba(255,255,255,0.75) !important; }
+.muted { color: rgba(255,255,255,0.55) !important; }
+
+/* Images and media remain untouched and full color */
+img, picture, video, canvas, svg {
+    background: transparent !important;
+    background-color: transparent !important;
+    filter: none !important;
+    -webkit-filter: none !important;
+    mix-blend-mode: normal !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 9999 !important;
+}
+
+/* Allow shadows only via .cursor-active or :hover; shadows must be light, white-tinted only */
+.cursor-active header, .cursor-active .project-card, .cursor-active .sidebar, .cursor-active .profile-photo, .cursor-active .section {
+    box-shadow: 0 20px 50px rgba(255,255,255,0.08) !important;
+}
+
+/* Ensure badges/tags/buttons have transparent black-free backgrounds and white text */
+.badge, .tag, .project-card span, .nav-links a, .btn, .btn-ghost { background: transparent !important; color: var(--pure-white) !important; border-color: transparent !important; }
+
+/* Neutralize scrollbar thumbs that used gradients */
+::-webkit-scrollbar-track { background: #000000 !important; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08) !important; border: none !important; }
+
+/* Final safety: any inline style setting rgba/gradient/background is overridden unless it's a photo url() */
+*[style]:not(img):not(picture):not(video):not(svg) {
+    background: var(--pure-black) !important;
+    background-image: none !important;
+    color: var(--pure-white) !important;
+}
+
+
+
+
+/* REMOVED: unused styles file. The project uses `minimal_bw.css`. */
+
+
+
+
