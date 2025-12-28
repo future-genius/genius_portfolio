@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="minimal_bw.css">
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <!-- SVG icon sprite (monochrome, stroke-based) -->
   <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;pointer-events:none;">
     <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
@@ -70,7 +71,7 @@
   <div class="mouse-bg" id="mouse-bg" aria-hidden="true"></div>
 
   <div class="content">
-    <main class="container">
+    <main id="main" class="container">
       <!-- design tokens panel removed per request -->
       <section id="hero" class="hero">
         <div class="hero-left">
@@ -294,6 +295,8 @@
     </footer>
   </div>
 
+    <button id="back-to-top" aria-hidden="true" title="Back to top">↑</button>
+
   <script>
     // Sidebar toggle and controls (B/W only)
     (function(){
@@ -391,6 +394,61 @@
       }
     });
   })();
+  </script>
+  <script>
+    // Focus trap for the sidebar and reduced-motion integration + back-to-top
+    (function(){
+      const sidebar = document.getElementById('sidebar');
+      const hamburger = document.getElementById('hamburger');
+      const closeBtn = document.getElementById('sidebar-close');
+      const overlay = document.getElementById('site-overlay');
+      const back = document.getElementById('back-to-top');
+
+      // Respect prefers-reduced-motion in the main reset/play routine
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      // Patch the resetAndPlay to short-circuit when reduced motion is requested
+      try{
+        const originalReset = window.resetAndPlay;
+        // if resetAndPlay exists globally (it is defined in the other script), wrap it
+        if (typeof originalReset === 'function'){
+          window.resetAndPlay = function(){
+            if (prefersReduced){
+              // Immediately reveal everything without animation
+              document.querySelectorAll('.reveal').forEach(el=>el.classList.add('reveal-animated'));
+              return;
+            }
+            return originalReset();
+          };
+        }
+      }catch(e){/* ignore if not available yet */}
+
+      // Trap focus inside sidebar when open
+      function trap(e){
+        if (!document.body.classList.contains('sidebar-open')) return;
+        if (!sidebar) return;
+        const focusable = Array.from(sidebar.querySelectorAll('a,button,[tabindex]:not([tabindex="-1"])')).filter(Boolean);
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length-1];
+        if (e.key === 'Tab'){
+          if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+        }
+      }
+      document.addEventListener('keydown', trap);
+
+      // Move focus into sidebar when opened and restore on close
+      const origOpen = window.openSidebar || function(){ document.body.classList.add('sidebar-open'); };
+      window.openSidebar = function(){ origOpen(); if (sidebar) { sidebar.setAttribute('aria-hidden','false'); setTimeout(()=>{ const f = sidebar.querySelector('a,button'); if (f) f.focus(); }, 60); } if (overlay) overlay.setAttribute('aria-hidden','false'); };
+      const origClose = window.closeSidebar || function(){ document.body.classList.remove('sidebar-open'); };
+      window.closeSidebar = function(){ origClose(); if (sidebar) { sidebar.setAttribute('aria-hidden','true'); } if (overlay) overlay.setAttribute('aria-hidden','true'); if (hamburger) hamburger.focus(); };
+
+      // Back-to-top behavior
+      if (back){
+        window.addEventListener('scroll', ()=>{ if (window.scrollY > 420) back.classList.add('show'); else back.classList.remove('show'); });
+        back.addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
+      }
+    })();
   </script>
 
   <script>

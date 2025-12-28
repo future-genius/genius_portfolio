@@ -313,4 +313,25 @@ body.sidebar-open .site-overlay{display:block}
 .icon-btn .icon{width:18px;height:18px}
 .project-card .muted a.icon-btn{color:var(--muted-text)}
 
+/* Accessibility helpers */
+.skip-link{position:fixed;left:14px;top:8px;padding:8px 12px;border-radius:6px;background:var(--panel);color:var(--text);border:1px solid var(--panel-border);transform:translateY(-120%);transition:transform .18s ease,opacity .12s ease;z-index:100005}
+.skip-link:focus{transform:none;opacity:1;outline:none}
+
+/* Back to top button */
+#back-to-top{position:fixed;right:18px;bottom:18px;padding:10px;border-radius:10px;background:var(--panel);border:1px solid var(--panel-border);color:var(--text);cursor:pointer;display:none;z-index:100004}
+#back-to-top.show{display:block}
+
+/* Focus visible style (non-color change) */
+*:focus{outline:none}
+*:focus-visible{outline:2px dashed var(--text);outline-offset:3px}
+
+/* Slightly larger hit target for hamburger */
+.hamburger{padding:8px;border-radius:8px;background:transparent;border:0;display:inline-flex;align-items:center;justify-content:center}
+
+/* Respect reduced motion preference: turn off heavy animations */
+@media (prefers-reduced-motion: reduce){
+  .reveal, .section, .project-card, .card-inner{transition:none !important;animation:none !important}
+  .card-tilt{pointer-events:none}
+}
+
 
