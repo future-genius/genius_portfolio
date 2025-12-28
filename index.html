@@ -126,6 +126,10 @@ img, picture, video, canvas, iframe, object{max-width:100%;height:auto;display:b
 /* Small helper for the hamburger */
 .hamburger{background:transparent;border:1px solid var(--text);color:var(--text);padding:6px 10px;border-radius:6px;font-weight:600}
 
+/* Icon used for menu/sidebar open-close (use attached asset). Invert to ensure white on black. */
+.menu-icon{width:22px;height:22px;display:block;filter:invert(1);}
+.close-icon{transform:rotate(90deg);}
+
 /* Ensure no other colors appear from UA styles */
 *{background-color:transparent}
 
@@ -342,7 +346,9 @@ body.sidebar-open .site-overlay{display:block}
     <div class="container header-inner">
       <div class="brand" aria-hidden="true"></div>
       <div>
-        <button id="hamburger" class="hamburger" aria-expanded="false" aria-controls="sidebar">Menu</button>
+        <button id="hamburger" class="hamburger" aria-expanded="false" aria-controls="sidebar">
+          <img src="assets/images/sidebar-icon.png" alt="Open menu" class="menu-icon"/>
+        </button>
       </div>
     </div>
   </header>
@@ -363,7 +369,9 @@ body.sidebar-open .site-overlay{display:block}
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
       <div class="dash-title">Menu</div>
       <div>
-        <button id="sidebar-close" class="hamburger" aria-label="Close sidebar"><svg aria-hidden="true" width="14" height="14"><use href="#i-close"></use></svg></button>
+        <button id="sidebar-close" class="hamburger" aria-label="Close sidebar">
+          <img src="assets/images/sidebar-icon.png" alt="Close sidebar" class="menu-icon close-icon"/>
+        </button>
       </div>
     </div>
     <nav>

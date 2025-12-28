@@ -118,6 +118,10 @@ img, picture, video, canvas, iframe, object{max-width:100%;height:auto;display:b
 /* Small helper for the hamburger */
 .hamburger{background:transparent;border:1px solid var(--text);color:var(--text);padding:6px 10px;border-radius:6px;font-weight:600}
 
+/* Icon used for menu/sidebar open-close (use attached asset). Invert to ensure white on black. */
+.menu-icon{width:22px;height:22px;display:block;filter:invert(1)}
+.close-icon{transform:rotate(90deg)}
+
 /* Ensure no other colors appear from UA styles */
 *{background-color:transparent}
 
