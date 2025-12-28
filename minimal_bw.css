@@ -209,6 +209,16 @@ section{position:relative}
 .reveal-left{transform:translateX(40px)}
 .reveal.reveal-animated{opacity:1;transform:translateY(0) translateX(0)}
 
+/* Back-compat: accept legacy .is-visible and canonical .reveal-animated as equivalent visible state */
+.reveal.is-visible,
+.reveal.reveal-animated,
+.reveal.reveal-animated.is-visible {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: opacity .5s ease, transform .5s ease;
+  will-change: auto;
+}
+
 /* Per-section visual differentiation (subtle, grayscale accents) */
 /* stronger left-border on desktop for clearer section separation */
 #about .section-box{border-left:6px solid var(--accent-1);padding-left:20px}
