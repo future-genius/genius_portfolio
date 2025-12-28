@@ -554,6 +554,77 @@
     })();
   </script>
   <!-- Canvas-based visual effect removed to comply with strict B/W, no gradients/rgba/shadows constraints -->
+  <!-- Reveal replay script (pure opacity + transform; no colors) -->
+  <script>
+  (function(){
+    'use strict';
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function forceTop(){ try{ window.scrollTo(0,0); }catch(e){} }
+
+    function collectRevealTargets(root){
+      if(!root) return [];
+      const sel = ['.reveal','h1','h2','h3','p','li','.project-card','.gui-box','.contact-link'];
+      const nodes = new Set();
+      sel.forEach(s => Array.from(root.querySelectorAll(s)).forEach(n=>nodes.add(n)));
+      return Array.from(nodes);
+    }
+
+    function resetAll(){
+      // clear any flags preventing replay
+      document.querySelectorAll('.in-view, .reveal-animated').forEach(n=>{ n.classList.remove('in-view'); n.classList.remove('reveal-animated'); });
+      // ensure base reveal state exists
+      document.querySelectorAll('.reveal').forEach(el=>{
+        el.style.transitionDelay = '';
+        // enforce initial hidden transform & opacity via inline style fallback only if not present via CSS
+        el.style.opacity = el.style.opacity || '';
+      });
+    }
+
+    function playGroup(list, baseDelay){
+      list.forEach((el,i)=>{
+        const d = baseDelay + i * 50;
+        setTimeout(()=> el.classList.add('reveal-animated'), d);
+      });
+      return baseDelay + list.length * 50;
+    }
+
+    function init(){
+      forceTop();
+      resetAll();
+      if (prefersReduced){
+        document.querySelectorAll('.reveal').forEach(el=>el.classList.add('reveal-animated'));
+        return;
+      }
+
+      const header = document.querySelector('header');
+      const hero = document.getElementById('hero');
+      const sections = Array.from(document.querySelectorAll('main.container section')).filter(s=>s.id !== 'hero');
+
+      // reveal header then hero with subtle stagger
+      let delay = 40;
+      delay = playGroup(collectRevealTargets(header), delay);
+      delay = playGroup(collectRevealTargets(hero), delay + 80);
+
+      // observe sections and play when they enter
+      const observer = new IntersectionObserver((entries, obs)=>{
+        entries.forEach(ent=>{
+          if (ent.isIntersecting){
+            playGroup(collectRevealTargets(ent.target), 0);
+            obs.unobserve(ent.target);
+          }
+        });
+      }, { root:null, rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+
+      sections.forEach(s=> observer.observe(s));
+    }
+
+    window.addEventListener('load', init);
+    window.addEventListener('pageshow', init);
+    // expose for manual trigger
+    window.replayReveals = init;
+  })();
+  </script>
   <script>
     // Collapsible sections on small screens: click H2 to toggle
     (function(){
