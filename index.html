@@ -833,6 +833,9 @@ body.sidebar-open .site-overlay{display:block}
         allTargets.forEach(el=>{
           el.classList.remove('reveal-animated');
           if(!el.classList.contains('reveal')) el.classList.add('reveal');
+          // ensure no inline opacity/transform remain from previous runs — inline styles would block CSS transitions
+          el.style.opacity = '';
+          el.style.transform = '';
           el.style.transitionDelay = '';
         });
 
@@ -965,11 +968,12 @@ body.sidebar-open .site-overlay{display:block}
       document.addEventListener('DOMContentLoaded', function(){
         try{
           const roots = targets();
+          // Only add the base .reveal class; DO NOT write inline opacity/transform (inline styles override CSS and block animation)
           roots.forEach(r=> collectChildren(r).forEach(el=>{
-            // enforce immediate hidden starting state
-            el.classList.add('reveal');
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(60px)';
+            if(!el.classList.contains('reveal')) el.classList.add('reveal');
+            // clear any stale inline styles that could interfere
+            el.style.opacity = '';
+            el.style.transform = '';
           }));
           // force a reflow then trigger the replay
           void document.body.offsetHeight;
