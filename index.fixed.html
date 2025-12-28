@@ -30,31 +30,21 @@
     <div class="container header-inner">
       <div class="brand" aria-hidden="true"></div>
       <div>
-        <button id="hamburger" class="hamburger" aria-expanded="false" aria-controls="sidebar">
-          <img src="assets/images/sidebar-icon.png" alt="Open menu" class="menu-icon"/>
+        <button id="hamburger" class="hamburger" aria-expanded="false" aria-controls="sidebar" aria-label="Open menu">
+          <svg class="icon" width="22" height="22" aria-hidden="true"><use href="#i-menu"></use></svg>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Sticky top section constants for quick navigation and visual separation -->
-  <div class="section-constants">
-    <div class="container const-list">
-      <a href="#about">ABOUT</a>
-      <a href="#education">EDUCATION</a>
-      <a href="#skills">SKILLS</a>
-      <a href="#projects">PROJECTS</a>
-      <a href="#certifications">CERTIFICATIONS</a>
-      <a href="#contact">CONTACT</a>
-    </div>
-  </div>
+  <!-- Top section links moved into sidebar only to keep page minimal; removed visual duplicate nav -->
 
   <aside id="sidebar" aria-label="Sidebar">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
       <div class="dash-title">Menu</div>
       <div>
         <button id="sidebar-close" class="hamburger" aria-label="Close sidebar">
-          <img src="assets/images/sidebar-icon.png" alt="Close sidebar" class="menu-icon close-icon"/>
+          <svg class="icon close-icon" width="20" height="20" aria-hidden="true"><use href="#i-close"></use></svg>
         </button>
       </div>
     </div>
