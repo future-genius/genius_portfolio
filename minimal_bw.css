@@ -204,10 +204,12 @@ section{position:relative}
 /* Section box wrapper to visually group section content (B/W only) */
 .section-box{border:1px solid var(--panel-border);padding:28px;border-radius:12px;background:var(--panel);margin-top:20px}
 
-/* Reveal animation base (pure black/white only). Elements start hidden and translate then fade in. */
-.reveal{opacity:0;transform:translateY(40px);transition:opacity 480ms cubic-bezier(.22,.9,.28,1),transform 480ms cubic-bezier(.22,.9,.28,1);will-change:opacity,transform}
-.reveal-left{transform:translateX(40px)}
-.reveal.reveal-animated{opacity:1;transform:translateY(0) translateX(0)}
+/* Reveal animation base (pure black/white only). Elements start hidden and translate then fade in.
+  Subtle "float-in and settle" effect: translateY ~28px, opacity transition, gentle ease-out curve.
+  Only opacity and transform are animated. */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 520ms cubic-bezier(.2,0,.05,1),transform 520ms cubic-bezier(.2,0,.05,1);will-change:opacity,transform}
+.reveal-left{transform:translateX(28px)}
+.reveal.reveal-animated{opacity:1;transform:none}
 
 /* Back-compat: accept legacy .is-visible and canonical .reveal-animated as equivalent visible state */
 .reveal.is-visible,
@@ -345,5 +347,39 @@ body.sidebar-open .site-overlay{display:block}
   .reveal, .section, .project-card, .card-inner{transition:none !important;animation:none !important}
   .card-tilt{pointer-events:none}
 }
+
+/* ===== Luther-like floating background & HUD (monochrome only) ===== */
+.background-shapes{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.shape{position:absolute;border-radius:50%;opacity:0.06;filter:blur(40px);will-change:transform}
+.shape-1{width:520px;height:520px;right:-120px;top:-160px;background:radial-gradient(circle, rgba(255,255,255,0.18), rgba(255,255,255,0.02));animation:float 36s infinite cubic-bezier(0.4,0,0.6,1)}
+.shape-2{width:420px;height:420px;left:-140px;bottom:8%;background:radial-gradient(circle, rgba(255,255,255,0.12), rgba(255,255,255,0.02));animation:float 42s infinite cubic-bezier(0.4,0,0.6,1) reverse}
+.shape-3{width:360px;height:360px;right:6%;bottom:6%;background:radial-gradient(circle, rgba(255,255,255,0.14), rgba(255,255,255,0.02));animation:float 38s infinite cubic-bezier(0.4,0,0.6,1)}
+.float-blob{position:absolute;width:320px;height:240px;border-radius:40% 60% 50% 50%/50% 40% 60% 50%;left:4%;top:-80px;background:radial-gradient(circle at 35% 35%, rgba(255,255,255,0.12), rgba(255,255,255,0.02));filter:blur(25px);opacity:0.06;animation:drift 45s infinite linear}
+.float-ring{position:absolute;width:280px;height:280px;border-radius:50%;right:12%;top:15%;border:1.2px solid rgba(255,255,255,0.06);opacity:0.07;animation:slowRotate 60s infinite linear}
+.float-square{position:absolute;width:180px;height:180px;right:5%;top:60%;border-radius:20px;background:linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));filter:blur(15px);opacity:0.05;animation:float 40s infinite ease-in-out}
+.grid-layer{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);background-size:48px 48px;opacity:0.28;mix-blend-mode:overlay;animation:gridShift 120s linear infinite}
+.accent-line-1,.accent-line-2{position:absolute;opacity:0.6;pointer-events:none}
+.accent-line-1{width:700px;height:1px;left:-300px;top:12%;background:linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);transform:rotate(12deg);animation:slideHorizontal 18s infinite linear}
+.accent-line-2{width:1px;height:500px;right:8%;top:25%;background:linear-gradient(180deg, transparent, rgba(255,255,255,0.12), transparent);animation:slideVertical 22s infinite linear}
+
+@keyframes gridShift {0%{background-position:0 0}100%{background-position:100px 100px}}
+
+@keyframes float{
+  0%,100%{transform:translateY(0) translateX(0) scale(1)}
+  25%{transform:translateY(-50px) translateX(40px) scale(1.05)}
+  50%{transform:translateY(-100px) translateX(-30px) scale(0.98)}
+  75%{transform:translateY(-50px) translateX(60px) scale(1.02)}
+}
+
+@keyframes drift{
+  0%{transform:translate3d(0,0,0) scale(1) rotate(0deg)}
+  25%{transform:translate3d(40px,-40px,0) scale(1.02) rotate(5deg)}
+  50%{transform:translate3d(-30px,-80px,0) scale(0.98) rotate(10deg)}
+  75%{transform:translate3d(50px,-30px,0) scale(1.03) rotate(-5deg)}
+  100%{transform:translate3d(0,0,0) scale(1) rotate(360deg)}
+}
+
+@keyframes slowRotate{0%{transform:rotate(0deg) translateY(-10px)}50%{transform:rotate(180deg) translateY(10px)}100%{transform:rotate(360deg) translateY(-10px)}}
+
 
 

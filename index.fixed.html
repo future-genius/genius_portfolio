@@ -70,6 +70,18 @@
   <!-- Mouse-tracked subtle background (visual only) -->
   <div class="mouse-bg" id="mouse-bg" aria-hidden="true"></div>
 
+  <!-- Luther-like background shapes (monochrome, decorative only) -->
+  <div class="background-shapes" aria-hidden="true">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    <div class="float-blob"></div>
+    <div class="float-ring"></div>
+    <div class="grid-layer"></div>
+    <div class="accent-line-1"></div>
+    <div class="accent-line-2"></div>
+  </div>
+
   <div class="content">
     <main id="main" class="container">
       <!-- design tokens panel removed per request -->
@@ -451,248 +463,42 @@
     })();
   </script>
 
+  <!-- Simplified: use a single external reveal controller (reveal-fix.js) -->
+  <script src="reveal-fix.js"></script>
+
+  <!-- Ensure relevant elements have the base .reveal class before animation runs; then trigger the controller -->
   <script>
-    // Entrance animation controller: replay on every refresh (pure B/W, opacity+translate only)
     (function(){
-      // Utility: collect target elements inside a wrapper to animate
-      function collectTargets(root){
-        if(!root) return [];
+      function targets(){
+        const sels = ['header','main#main','#hero','main.container section'];
+        const nodes = [];
+        sels.forEach(s => Array.from(document.querySelectorAll(s)).forEach(n=>nodes.push(n)));
+        return nodes;
+      }
+      function collectChildren(root){
         const sel = ['h1','h2','h3','p','li','.project-card','.gui-box','.contact-link'];
-        const nodes = [root];
-        sel.forEach(s=> nodes.push(...Array.from(root.querySelectorAll(s))));
-        return nodes.filter(Boolean);
+        const list = [];
+        sel.forEach(s=> Array.from(root.querySelectorAll(s)).forEach(el=> list.push(el)));
+        return list;
       }
 
-      function resetAndPlay(){
-        // force top
-        try{ window.scrollTo(0,0); }catch(e){}
-
-        const header = document.querySelector('header');
-        const hero = document.getElementById('hero');
-        const sections = Array.from(document.querySelectorAll('main.container section')).filter(s=>s.id !== 'hero');
-
-        // remove any previous in-view flags to ensure replay
-        document.querySelectorAll('.in-view').forEach(n=>n.classList.remove('in-view'));
-
-        // prepare all targets: add base reveal class and remove animated flag
-        const allTargets = [];
-        [header, hero].forEach(r=>{ allTargets.push(...collectTargets(r)); });
-        sections.forEach(s=> allTargets.push(...collectTargets(s)));
-
-        allTargets.forEach(el=>{
-          el.classList.remove('reveal-animated');
-          if(!el.classList.contains('reveal')) el.classList.add('reveal');
-          el.style.transitionDelay = '';
-        });
-
-        // play header then hero immediately with small stagger
-        function playGroup(group, baseDelay){
-          group.forEach((el,i)=>{
-            const d = baseDelay + i * 40;
-            setTimeout(()=> el.classList.add('reveal-animated'), d);
-          });
-          return baseDelay + group.length * 40;
+      // Add .reveal to targets early and trigger the reveal controller on DOM ready
+      function bootstrap(){
+        try{
+          const roots = targets();
+          roots.forEach(r=> collectChildren(r).forEach(el=> el.classList.add('reveal')));
+        }catch(e){/* ignore */}
+        // Defer the actual play to the controller (it listens on load/pageshow)
+        if (document.readyState === 'complete'){
+          if(window.replayReveals) window.replayReveals();
+        } else {
+          window.addEventListener('load', function(){ if(window.replayReveals) window.replayReveals(); });
+          window.addEventListener('pageshow', function(){ if(window.replayReveals) window.replayReveals(); });
         }
-
-        let delay = 60;
-        delay = playGroup(collectTargets(header), delay);
-        delay = playGroup(collectTargets(hero), delay + 80);
-
-        // sections animate as they enter viewport using IntersectionObserver
-        const io = new IntersectionObserver((entries, obs)=>{
-          entries.forEach(entry=>{
-            if(entry.isIntersecting){
-              playGroup(collectTargets(entry.target), 0);
-              obs.unobserve(entry.target);
-            }
-          });
-        }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
-
-        sections.forEach(s=> io.observe(s));
       }
 
-      window.addEventListener('load', resetAndPlay);
-      window.addEventListener('pageshow', resetAndPlay);
-    })();
-
-    // Mouse-tracked tilt for cards and boxes
-    (function(){
-      const elements = Array.from(document.querySelectorAll('.project-card, .gui-box, .contact-link'));
-      if (!elements.length) return;
-      let raf = null;
-      elements.forEach(el=>{
-        el.classList.add('card-tilt');
-        const inner = document.createElement('div'); inner.className='card-inner';
-        // move existing children into inner
-        while(el.firstChild) inner.appendChild(el.firstChild);
-        el.appendChild(inner);
-        const shadow = document.createElement('div'); shadow.className='card-shadow'; el.appendChild(shadow);
-
-        function onMove(e){
-          if (raf) cancelAnimationFrame(raf);
-          raf = requestAnimationFrame(()=>{
-            const rect = el.getBoundingClientRect();
-            const cx = rect.left + rect.width/2;
-            const cy = rect.top + rect.height/2;
-            const pointerX = e.clientX || (e.touches && e.touches[0] && e.touches[0].clientX) || cx;
-            const pointerY = e.clientY || (e.touches && e.touches[0] && e.touches[0].clientY) || cy;
-            const dx = (pointerX - cx) / rect.width; // -0.5 .. 0.5
-            const dy = (pointerY - cy) / rect.height;
-            const rotY = dx * 10; // degrees
-            const rotX = -dy * 8;
-            const transZ = Math.min(12, Math.abs(dx*20 + dy*20));
-            inner.style.transform = `perspective(600px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(${transZ}px)`;
-            shadow.style.opacity = Math.min(0.22, 0.06 + Math.abs(dx)+Math.abs(dy));
-          });
-        }
-        function onLeave(){ if (raf) cancelAnimationFrame(raf); inner.style.transform='none'; shadow.style.opacity='0.12'; }
-        el.addEventListener('mousemove', onMove);
-        el.addEventListener('touchmove', onMove, {passive:true});
-        el.addEventListener('mouseleave', onLeave);
-        el.addEventListener('touchend', onLeave);
-      });
-    })();
-  </script>
-  <!-- Canvas-based visual effect removed to comply with strict B/W, no gradients/rgba/shadows constraints -->
-  <!-- Reveal replay script (pure opacity + transform; no colors) -->
-  <script>
-  (function(){
-    'use strict';
-    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    function forceTop(){ try{ window.scrollTo(0,0); }catch(e){} }
-
-    function collectRevealTargets(root){
-      if(!root) return [];
-      const sel = ['.reveal','h1','h2','h3','p','li','.project-card','.gui-box','.contact-link'];
-      const nodes = new Set();
-      sel.forEach(s => Array.from(root.querySelectorAll(s)).forEach(n=>nodes.add(n)));
-      return Array.from(nodes);
-    }
-
-    function resetAll(){
-      // clear any flags preventing replay
-      document.querySelectorAll('.in-view, .reveal-animated').forEach(n=>{ n.classList.remove('in-view'); n.classList.remove('reveal-animated'); });
-      // ensure base reveal state exists
-      document.querySelectorAll('.reveal').forEach(el=>{
-        el.style.transitionDelay = '';
-        // enforce initial hidden transform & opacity via inline style fallback only if not present via CSS
-        el.style.opacity = el.style.opacity || '';
-      });
-    }
-
-    function playGroup(list, baseDelay){
-      list.forEach((el,i)=>{
-        const d = baseDelay + i * 50;
-        setTimeout(()=> el.classList.add('reveal-animated'), d);
-      });
-      return baseDelay + list.length * 50;
-    }
-
-    function init(){
-      forceTop();
-      resetAll();
-      if (prefersReduced){
-        document.querySelectorAll('.reveal').forEach(el=>el.classList.add('reveal-animated'));
-        return;
-      }
-
-      const header = document.querySelector('header');
-      const hero = document.getElementById('hero');
-      const sections = Array.from(document.querySelectorAll('main.container section')).filter(s=>s.id !== 'hero');
-
-      // reveal header then hero with subtle stagger
-      let delay = 40;
-      delay = playGroup(collectRevealTargets(header), delay);
-      delay = playGroup(collectRevealTargets(hero), delay + 80);
-
-      // observe sections and play when they enter
-      const observer = new IntersectionObserver((entries, obs)=>{
-        entries.forEach(ent=>{
-          if (ent.isIntersecting){
-            playGroup(collectRevealTargets(ent.target), 0);
-            obs.unobserve(ent.target);
-          }
-        });
-      }, { root:null, rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
-
-      sections.forEach(s=> observer.observe(s));
-    }
-
-    window.addEventListener('load', init);
-    window.addEventListener('pageshow', init);
-    // expose for manual trigger
-    window.replayReveals = init;
-  })();
-  </script>
-  <script>
-    // Collapsible sections on small screens: click H2 to toggle
-    (function(){
-      function setupCollapsibles(){
-        const mq = window.matchMedia('(max-width:900px)');
-        document.querySelectorAll('section').forEach(sec => {
-          const h2 = sec.querySelector('h2');
-          if (!h2) return;
-          h2.setAttribute('tabindex', '0');
-          h2.addEventListener('click', ()=>{
-            if (!mq.matches) return; // only collapse on small screens
-            sec.classList.toggle('collapsed');
-            const expanded = !sec.classList.contains('collapsed');
-            h2.setAttribute('aria-expanded', expanded);
-          });
-          h2.addEventListener('keydown', (e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); h2.click(); } });
-        });
-      }
-      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setupCollapsibles); else setupCollapsibles();
-    })();
-  </script>
-  <script>
-    // Defensive overlay handler: ensure overlay always closes sidebar even if other handlers fail
-    (function(){
-      const overlay = document.getElementById('site-overlay');
-      const hamburger = document.getElementById('hamburger');
-      if (!overlay) return;
-      overlay.addEventListener('click', function(e){
-        e.stopPropagation();
-        document.body.classList.remove('sidebar-open');
-        if (hamburger) hamburger.setAttribute('aria-expanded','false');
-        this.setAttribute('aria-hidden','true');
-      });
-
-      // expose helpers in case other scopes need them
-      window.openSidebar = window.openSidebar || function(){ document.body.classList.add('sidebar-open'); if (hamburger) hamburger.setAttribute('aria-expanded','true'); overlay.setAttribute('aria-hidden','false'); };
-      window.closeSidebar = window.closeSidebar || function(){ document.body.classList.remove('sidebar-open'); if (hamburger) hamburger.setAttribute('aria-expanded','false'); overlay.setAttribute('aria-hidden','true'); };
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootstrap); else bootstrap();
     })();
   </script>
 </body>
 </html>
-
-<!-- Safety: ensure inline hidden state then replay on DOM ready (forces opacity/transform) -->
-<script>
-  (function(){
-    function targets(){
-      const sels = ['header','main#main','#hero','main.container section'];
-      const nodes = [];
-      sels.forEach(s => Array.from(document.querySelectorAll(s)).forEach(n=>nodes.push(n)));
-      return nodes;
-    }
-    function collectChildren(root){
-      const sel = ['h1','h2','h3','p','li','.project-card','.gui-box','.contact-link'];
-      const list = [];
-      sel.forEach(s=> Array.from(root.querySelectorAll(s)).forEach(el=> list.push(el)));
-      return list;
-    }
-    document.addEventListener('DOMContentLoaded', function(){
-      try{
-        const roots = targets();
-        roots.forEach(r=> collectChildren(r).forEach(el=>{
-          el.classList.add('reveal');
-          el.style.opacity = '0';
-          el.style.transform = 'translateY(60px)';
-        }));
-        void document.body.offsetHeight;
-        setTimeout(function(){ if(window.replayReveals) window.replayReveals(); else if(window.resetAndPlay) window.resetAndPlay(); }, 60);
-      }catch(e){/* ignore */}
-    });
-  })();
-</script>
