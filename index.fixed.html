@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HARIHARAN R — Portfolio</title>
+  <meta name="description" content="Portfolio — HARIHARAN R — Electronics & Communication Engineer | Data Science & IoT">
+  <link rel="stylesheet" href="minimal_bw.css">
+</head>
+<body>
+  <!-- SVG icon sprite (monochrome, stroke-based) -->
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;pointer-events:none;">
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M6 18L18 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M6 4v16l14-8z" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="M8.5 7.5L3 12l5.5 4.5M15.5 7.5L21 12l-5.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 1 0-5.66L12.66 6a4 4 0 0 1 5.66 5.66l-1.41 1.41" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M14 10a4 4 0 0 1 0 5.66L11.34 18a4 4 0 0 1-5.66-5.66L6.09 11.0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M7 11l3 3 4-5 5 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="i-cert" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M7 21l5-4 5 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M12 2c-5.5 0-10 4.5-10 10 0 4.4 2.9 8.1 6.9 9.4.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.2-1.5-1.2-1.5-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 .1 1.6.9 1.6.9.9 1.6 2.4 1.1 3 .8.1-.7.4-1.1.7-1.4-2.2-.3-4.5-1.1-4.5-4.8 0-1.1.4-2 1.1-2.7-.1-.3-.5-1.4.1-2.9 0 0 .9-.3 3 .9.9-.3 1.9-.4 2.9-.4s2 .1 2.9.4c2.1-1.2 3-.9 3-.9.6 1.5.2 2.6.1 2.9.7.7 1.1 1.6 1.1 2.7 0 3.7-2.4 4.5-4.6 4.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.7.5 4-1.3 6.9-5 6.9-9.4 0-5.5-4.5-10-10-10z" stroke="currentColor" stroke-width="0.4" fill="none"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M8 11v6M8 8v.01M12 11v6M16 11v6M12 8v9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="i-insta" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="17.5" cy="6.5" r="0.7" fill="currentColor"/></symbol>
+    <symbol id="i-data" viewBox="0 0 24 24"><path d="M3 7h6v10H3zM15 3h6v14h-6zM9 11h6v6H9z" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M20 17H7a4 4 0 010-8c.6 0 1.2.2 1.7.5A6 6 0 1120 17z" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="1" stroke="currentColor" stroke-width="1.2" fill="none"/><rect x="3" y="14" width="18" height="6" rx="1" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="7" cy="7" r="0.8" fill="currentColor"/><circle cx="7" cy="17" r="0.8" fill="currentColor"/></symbol>
+    <symbol id="i-ml" viewBox="0 0 24 24"><path d="M12 3v6M12 15v6M3 12h6M15 12h6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.09 4.18 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.72c.12.9.38 1.76.77 2.56a2 2 0 0 1-.45 2.11L9.91 9.91a16 16 0 0 0 6 6l1.5-1.5a2 2 0 0 1 2.11-.45c.8.39 1.66.65 2.56.77A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </svg>
+  <header>
+    <div class="container header-inner">
+      <div class="brand" aria-hidden="true"></div>
+      <div>
+        <button id="hamburger" class="hamburger" aria-expanded="false" aria-controls="sidebar">Menu</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sticky top section constants for quick navigation and visual separation -->
+  <div class="section-constants">
+    <div class="container const-list">
+      <a href="#about">ABOUT</a>
+      <a href="#education">EDUCATION</a>
+      <a href="#skills">SKILLS</a>
+      <a href="#projects">PROJECTS</a>
+      <a href="#certifications">CERTIFICATIONS</a>
+      <a href="#contact">CONTACT</a>
+    </div>
+  </div>
+
+  <aside id="sidebar" aria-label="Sidebar">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+      <div class="dash-title">Menu</div>
+      <div>
+        <button id="sidebar-close" class="hamburger" aria-label="Close sidebar"><svg aria-hidden="true" width="14" height="14"><use href="#i-close"></use></svg></button>
+      </div>
+    </div>
+    <nav>
+      <a href="#hero"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#i-data"></use></svg> Home</a>
+      <a href="#about"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#i-cert"></use></svg> About</a>
+      <a href="#education"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#i-server"></use></svg> Education</a>
+      <a href="#skills"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#i-ml"></use></svg> Skills</a>
+      <a href="#projects"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#i-image"></use></svg> Projects</a>
+      <a href="#certifications"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#i-cloud"></use></svg> Certification Courses</a>
+      <a href="#contact"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#i-link"></use></svg> Contact</a>
+    </nav>
+    <hr/>
+    <div class="sidebar-contacts" style="margin-top:10px;">
+      <div style="margin-top:8px;"><a href="https://drive.google.com/file/d/1PZBWu0eUWw-9nS5dT3uVwDd-zZdn7G-Y/view?usp=sharing" target="_blank" rel="noopener noreferrer">View CV</a></div>
+    </div>
+  </aside>
+
+  <!-- overlay used on small screens when sidebar is open -->
+  <div class="site-overlay" id="site-overlay" aria-hidden="true"></div>
+
+  <!-- Mouse-tracked subtle background (visual only) -->
+  <div class="mouse-bg" id="mouse-bg" aria-hidden="true"></div>
+
+  <div class="content">
+    <main class="container">
+      <!-- design tokens panel removed per request -->
+      <section id="hero" class="hero">
+        <div class="hero-left">
+          <img src="assets/images/profile_image.png" alt="Profile photo" class="profile-photo pro" id="mainProfile"/>
+        </div>
+        <div class="hero-right">
+            <h1 class="hero-name">HARIHARAN R</h1>
+            <p class="muted">Electronics &amp; Communication Engineer | Data Science &amp; Applications</p>
+            <p>I build end-to-end systems that connect embedded devices to data-driven backends and clear, user-friendly frontends. Currently pursuing a BS in Data Science &amp; Applications at IIT Madras.</p>
+        </div>
+      </section>
+
+      <section id="about">
+        <h2>About Me</h2>
+        <!-- floating GUI for about -->
+        <span class="float-box bottom-right animate" aria-hidden="true"></span>
+        <div class="section-box">
+          <p>I am Hariharan R — an Electronics &amp; Communication Engineer with experience in IoT, embedded systems and data-driven applications. I build reliable firmware, design edge-to-cloud integrations and create user-friendly frontends. My work focuses on practical solutions that are maintainable and measurable.</p>
+
+          <h3>Summary</h3>
+          <p class="muted">Electronics &amp; Communication Engineer | IoT &amp; Data Science | Embedded firmware · Cloud · Machine Learning</p>
+
+          <h3>Focus</h3>
+          <ul>
+            <li>Embedded firmware &amp; hardware integration</li>
+            <li>IoT platforms and secure device connectivity</li>
+            <li>Data pipelines, model deployment and monitoring</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="education">
+        <h2>Education</h2>
+        <span class="float-box bottom-left" aria-hidden="true"></span>
+        <span class="float-box small top-right" aria-hidden="true"></span>
+        <div class="section-box">
+          <div style="margin-bottom:10px;">
+              <strong>BE — Electronics &amp; Communication Engineering</strong>
+                  <div class="muted">SRM Valliammai Engineering College, Kattankulathur — <span class="muted">2023-2027</span></div>
+                  <div class="muted" style="margin-top:6px;">Coursework: IoT Systems, Sensor Interfacing, Embedded Networking, MQTT, Low-power Design</div>
+          </div>
+
+          <div style="margin-top:12px;">
+            <strong>BS — Data Science &amp; Applications</strong>
+            <div class="muted">IIT Madras — Currently Pursuing — <span class="muted">2023-2027</span></div>
+            <div class="muted" style="margin-top:6px;">Focus: IoT data pipelines, edge analytics, model deployment for embedded devices</div>
+          </div>
+        </div>
+      </section>
+      <div style="height:18px"></div>
+
+      <section id="skills">
+        <h2>Technical Skills</h2>
+        <!-- subtle background icon for skills -->
+        <svg class="bg-icon skills-bg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-ml"></use></svg>
+        <span class="float-box top-right" aria-hidden="true"></span>
+        <span class="float-box small bottom-left" aria-hidden="true"></span>
+        <div class="section-box">
+          <div class="gui-grid">
+            <div class="gui-box">
+              <strong>Programming</strong>
+              <div class="muted">Python, C, C++, Bash</div>
+            </div>
+            <div class="gui-box">
+              <strong>Data & ML</strong>
+              <div class="muted">Pandas, NumPy, Scikit-learn, TensorFlow</div>
+            </div>
+            <div class="gui-box">
+              <strong>Embedded</strong>
+              <div class="muted">STM32, ESP32, FreeRTOS, Embedded C</div>
+            </div>
+            <div class="gui-box">
+              <strong>Dev & Cloud</strong>
+              <div class="muted">Flask, Docker, AWS/GCP basics</div>
+            </div>
+          </div>
+
+          <h3 style="margin-top:12px">Tools & Platforms</h3>
+          <ul>
+            <li>Git, CI/CD</li>
+            <li>Docker, containerization</li>
+            <li>SQL and NoSQL databases</li>
+            <li>Data visualization (Matplotlib, Plotly)</li>
+          </ul>
+        </div>
+      </section>
+      <div style="height:18px"></div>
+
+      <section id="projects" class="projects">
+        <h2>Featured Projects</h2>
+        <span class="float-box top-left" aria-hidden="true"></span>
+        <div class="gui-grid">
+          <div class="project-card">
+            <div style="height:160px;margin-bottom:12px;overflow:hidden;border-radius:8px;background:#000;display:flex;align-items:center;justify-content:center;">
+              <svg class="icon preview-icon" aria-hidden="true" width="56" height="56"><use href="#i-image"></use></svg>
+            </div>
+            <h3>Agent 34</h3>
+            <p class="muted">IoT &amp; VR-based hologram interaction system with real-time data processing and gesture recognition.</p>
+            <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+              <a href="#" class="muted icon-btn"><svg class="icon" aria-hidden="true" width="18" height="18"><use href="#i-play"></use></svg><span>Demo</span></a>
+              <a href="#" class="muted icon-btn"><svg class="icon" aria-hidden="true" width="18" height="18"><use href="#i-code"></use></svg><span>Code</span></a>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div style="height:160px;margin-bottom:12px;overflow:hidden;border-radius:8px;background:#000;display:flex;align-items:center;justify-content:center;">
+              <img src="assets/images/lazy-notez.png" alt="Lazy Notez" style="width:100%;height:100%;object-fit:cover;"/>
+            </div>
+            <h3>Lazy Notez</h3>
+            <p class="muted">Web app for organizing student notes, with tagging, search and offline-ready reading.</p>
+            <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+              <a href="https://lazy-notez.netlify.app/" target="_blank" rel="noopener noreferrer" class="muted icon-btn"><svg class="icon" aria-hidden="true" width="18" height="18"><use href="#i-play"></use></svg><span>Live</span></a>
+              <a href="#" class="muted icon-btn"><svg class="icon" aria-hidden="true" width="18" height="18"><use href="#i-github"></use></svg><span>Repo</span></a>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div style="height:160px;margin-bottom:12px;overflow:hidden;border-radius:8px;background:#000;display:flex;align-items:center;justify-content:center;">
+              <svg class="icon preview-icon" aria-hidden="true" width="56" height="56"><use href="#i-image"></use></svg>
+            </div>
+            <h3>Hospital Management System</h3>
+            <p class="muted">A modular web system to manage patients, appointments and records with role-based access.</p>
+            <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+              <a href="#" class="muted icon-btn"><svg class="icon" aria-hidden="true" width="18" height="18"><use href="#i-link"></use></svg><span>Details</span></a>
+              <a href="#" class="muted icon-btn"><svg class="icon" aria-hidden="true" width="18" height="18"><use href="#i-github"></use></svg><span>Repo</span></a>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div style="height:160px;margin-bottom:12px;overflow:hidden;border-radius:8px;background:#000;display:flex;align-items:center;justify-content:center;">
+              <svg class="icon preview-icon" aria-hidden="true" width="56" height="56"><use href="#i-image"></use></svg>
+            </div>
+            <h3>Qumail</h3>
+            <p class="muted">Secure internal messaging system built with privacy-first design.</p>
+            <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+              <a href="#" class="muted icon-btn"><svg class="icon" aria-hidden="true" width="18" height="18"><use href="#i-link"></use></svg><span>Overview</span></a>
+              <a href="#" class="muted icon-btn"><svg class="icon" aria-hidden="true" width="18" height="18"><use href="#i-code"></use></svg><span>Source</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div style="height:18px"></div>
+
+      <section id="certifications">
+        <h2>Certification Course</h2>
+        <svg class="bg-icon certs-bg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#i-cloud"></use></svg>
+        <p class="muted">Selected certificates and completed online courses.</p>
+        <div class="section-box">
+          <div class="gui-grid">
+            <div class="project-card">
+              <div style="height:140px;overflow:hidden;border-radius:8px;margin-bottom:10px;background:#000;display:flex;align-items:center;justify-content:center;">
+                <img src="assets/images/Analog Circuits and Systems.png" alt="Analog Circuits certificate" class="cert-thumb" style="width:100%;height:100%;object-fit:cover;"/>
+              </div>
+              <div class="muted">Analog Circuits and Systems — Online Course</div>
+              <a href="#" class="muted" style="display:inline-block;margin-top:6px;">View Certificate</a>
+            </div>
+
+            <div class="project-card">
+              <div style="height:140px;overflow:hidden;border-radius:8px;margin-bottom:10px;background:#000;display:flex;align-items:center;justify-content:center;">
+                <img src="assets/images/Introduction to Industry 4.0 and Industrial Internet of Things.png" alt="Industry 4.0 certificate" class="cert-thumb" style="width:100%;height:100%;object-fit:cover;"/>
+              </div>
+              <div class="muted">Introduction to Industry 4.0 & IIoT</div>
+              <a href="https://drive.google.com/file/d/1Rz8DdzRmsfYO38DfoZgxLeq-9rTViZxc/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="muted" style="display:inline-block;margin-top:6px;">View Certificate</a>
+            </div>
+
+            <div class="project-card">
+              <div style="height:140px;overflow:hidden;border-radius:8px;margin-bottom:10px;background:#000;display:flex;align-items:center;justify-content:center;">
+                <img src="assets/images/Building Machine Learning Applications.png" alt="Building ML Applications" class="cert-thumb" style="width:100%;height:100%;object-fit:cover;"/>
+              </div>
+              <div class="muted">Building ML Applications</div>
+              <a href="https://drive.google.com/file/d/1pR9ZOaA5Trg4lxvgS0Jfp_rrjZljPdgC/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="muted" style="display:inline-block;margin-top:6px;">View Certificate</a>
+            </div>
+
+            <div class="project-card">
+              <div style="height:140px;overflow:hidden;border-radius:8px;margin-bottom:10px;background:#000;display:flex;align-items:center;justify-content:center;">
+                <img src="assets/images/Embedded for Beginners.png" alt="Embedded for Beginners" class="cert-thumb" style="width:100%;height:100%;object-fit:cover;"/>
+              </div>
+              <div class="muted">Embedded for Beginners</div>
+              <a href="https://drive.google.com/file/d/1WUbOKYJwjbU5b9HXBP0xE_OOuc1X3qRk/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="muted" style="display:inline-block;margin-top:6px;">View Certificate</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2>Get In Touch</h2>
+        <span class="float-box top-right small" aria-hidden="true"></span>
+        <div class="section-box">
+          <p class="muted">I'm open to collaboration, freelance work and full-time opportunities. Reach out via any of the channels below.</p>
+
+          <div class="contact-links">
+            <div class="contact-link">
+              <strong><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-phone"></use></svg> PHONE</strong>
+              <div class="muted" style="margin-top:6px;"><a href="tel:0867423676">0867423676</a></div>
+            </div>
+            <div class="contact-link">
+              <strong><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-linkedin"></use></svg> LINKEDIN</strong>
+              <div class="muted" style="margin-top:6px;"><a href="https://www.linkedin.com/in/future-genius/" target="_blank">linkedin.com/in/future-genius/</a></div>
+            </div>
+            <div class="contact-link">
+              <strong><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-github"></use></svg> GITHUB</strong>
+              <div class="muted" style="margin-top:6px;"><a href="https://github.com/future-genius" target="_blank">github.com/future-genius</a></div>
+            </div>
+            <div class="contact-link">
+              <strong><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-insta"></use></svg> INSTAGRAM</strong>
+              <div class="muted" style="margin-top:6px;"><a href="https://www.instagram.com/hawkeye_hari/" target="_blank">@hawkeye_hari</a></div>
+            </div>
+            <div class="contact-link">
+              <strong><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#i-link"></use></svg> LOCATION</strong>
+              <div class="muted" style="margin-top:6px;">Chennai, India</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="container">
+      <p>Crafted with passion &amp; innovation.</p>
+      <p class="thankyou">Thank you for visiting my portfolio. Please reach out if you'd like to collaborate.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Sidebar toggle and controls (B/W only)
+    (function(){
+      const hamburger = document.getElementById('hamburger');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('site-overlay');
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+      const closeBtn = document.getElementById('sidebar-close');
+      const body = document.body;
+
+      function openSidebar(){
+        console.log('openSidebar called');
+        body.classList.add('sidebar-open');
+        hamburger && hamburger.setAttribute('aria-expanded','true');
+        if (overlay) overlay.setAttribute('aria-hidden','false');
+      }
+      function closeSidebar(){
+        console.log('closeSidebar called');
+        body.classList.remove('sidebar-open');
+        hamburger && hamburger.setAttribute('aria-expanded','false');
+        if (overlay) overlay.setAttribute('aria-hidden','true');
+      }
+
+      hamburger && hamburger.addEventListener('click', (e)=>{ e.stopPropagation(); if (body.classList.contains('sidebar-open')) closeSidebar(); else openSidebar(); });
+      closeBtn && closeBtn.addEventListener('click', (e)=>{ e.stopPropagation(); closeSidebar(); });
+      overlay && overlay.addEventListener('click', (e)=>{ console.log('overlay click'); e.stopPropagation(); closeSidebar(); });
+      // Toggle button inside sidebar: open/close
+      if (sidebarToggle){
+        sidebarToggle.addEventListener('click', (e)=>{ e.stopPropagation(); if (body.classList.contains('sidebar-open')) closeSidebar(); else openSidebar(); });
+      }
+
+      // Close sidebar when clicking a link (mobile)
+      sidebar && sidebar.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{ if(window.innerWidth < 900) closeSidebar(); }));
+
+      // Close when clicking outside (any viewport) — if sidebar is open and click is outside, close it
+      document.addEventListener('click', (e)=>{
+        try {
+          if (!sidebar) return;
+          if (!sidebar.contains(e.target) && !(hamburger && hamburger.contains(e.target))){
+            if (body.classList.contains('sidebar-open')) closeSidebar();
+          }
+        } catch(err){ console.warn('sidebar click handler error', err); }
+      });
+    })();
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (!href || href === '#') return;
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+  // Wrap each section in a .section-box and reorder sections to requested order
+  (function(){
+    const order = ['about','education','skills','projects','certifications','contact'];
+    const container = document.querySelector('main.container');
+    const overlay = document.getElementById('site-overlay');
+    if (!container) return;
+
+    order.forEach(id => {
+      const sec = document.getElementById(id);
+      if (!sec) return;
+      // wrap children in section-box if not already
+      if (!sec.querySelector('.section-box')){
+        const wrapper = document.createElement('div');
+        wrapper.className = 'section-box';
+        while (sec.firstChild){ wrapper.appendChild(sec.firstChild); }
+        sec.appendChild(wrapper);
+      }
+      container.appendChild(sec);
+    });
+
+      // keyboard shortcuts: 'm' toggles sidebar, 't' & 'h' also toggle, Esc closes
+    document.addEventListener('keydown', (e)=>{
+      const tag = document.activeElement && document.activeElement.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || document.activeElement.isContentEditable) return;
+      const body = document.body;
+      const hamburger = document.getElementById('hamburger');
+      const sidebar = document.getElementById('sidebar');
+      if (e.key === 'm' || e.key === 'M' || e.key === 't' || e.key === 'T' || e.key === 'h' || e.key === 'H'){
+        body.classList.toggle('sidebar-open');
+        if (hamburger) hamburger.setAttribute('aria-expanded', body.classList.contains('sidebar-open') ? 'true' : 'false');
+        if (overlay) overlay.setAttribute('aria-hidden', body.classList.contains('sidebar-open') ? 'false' : 'true');
+      }
+      if (e.key === 'Escape'){
+        body.classList.remove('sidebar-open');
+        if (hamburger) hamburger.setAttribute('aria-expanded','false');
+        if (overlay) overlay.setAttribute('aria-hidden','true');
+      }
+    });
+  })();
+  </script>
+
+  <script>
+    // Entrance animation controller: replay on every refresh (pure B/W, opacity+translate only)
+    (function(){
+      // Utility: collect target elements inside a wrapper to animate
+      function collectTargets(root){
+        if(!root) return [];
+        const sel = ['h1','h2','h3','p','li','.project-card','.gui-box','.contact-link'];
+        const nodes = [root];
+        sel.forEach(s=> nodes.push(...Array.from(root.querySelectorAll(s))));
+        return nodes.filter(Boolean);
+      }
+
+      function resetAndPlay(){
+        // force top
+        try{ window.scrollTo(0,0); }catch(e){}
+
+        const header = document.querySelector('header');
+        const hero = document.getElementById('hero');
+        const sections = Array.from(document.querySelectorAll('main.container section')).filter(s=>s.id !== 'hero');
+
+        // remove any previous in-view flags to ensure replay
+        document.querySelectorAll('.in-view').forEach(n=>n.classList.remove('in-view'));
+
+        // prepare all targets: add base reveal class and remove animated flag
+        const allTargets = [];
+        [header, hero].forEach(r=>{ allTargets.push(...collectTargets(r)); });
+        sections.forEach(s=> allTargets.push(...collectTargets(s)));
+
+        allTargets.forEach(el=>{
+          el.classList.remove('reveal-animated');
+          if(!el.classList.contains('reveal')) el.classList.add('reveal');
+          el.style.transitionDelay = '';
+        });
+
+        // play header then hero immediately with small stagger
+        function playGroup(group, baseDelay){
+          group.forEach((el,i)=>{
+            const d = baseDelay + i * 40;
+            setTimeout(()=> el.classList.add('reveal-animated'), d);
+          });
+          return baseDelay + group.length * 40;
+        }
+
+        let delay = 60;
+        delay = playGroup(collectTargets(header), delay);
+        delay = playGroup(collectTargets(hero), delay + 80);
+
+        // sections animate as they enter viewport using IntersectionObserver
+        const io = new IntersectionObserver((entries, obs)=>{
+          entries.forEach(entry=>{
+            if(entry.isIntersecting){
+              playGroup(collectTargets(entry.target), 0);
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+
+        sections.forEach(s=> io.observe(s));
+      }
+
+      window.addEventListener('load', resetAndPlay);
+      window.addEventListener('pageshow', resetAndPlay);
+    })();
+
+    // Mouse-tracked tilt for cards and boxes
+    (function(){
+      const elements = Array.from(document.querySelectorAll('.project-card, .gui-box, .contact-link'));
+      if (!elements.length) return;
+      let raf = null;
+      elements.forEach(el=>{
+        el.classList.add('card-tilt');
+        const inner = document.createElement('div'); inner.className='card-inner';
+        // move existing children into inner
+        while(el.firstChild) inner.appendChild(el.firstChild);
+        el.appendChild(inner);
+        const shadow = document.createElement('div'); shadow.className='card-shadow'; el.appendChild(shadow);
+
+        function onMove(e){
+          if (raf) cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(()=>{
+            const rect = el.getBoundingClientRect();
+            const cx = rect.left + rect.width/2;
+            const cy = rect.top + rect.height/2;
+            const pointerX = e.clientX || (e.touches && e.touches[0] && e.touches[0].clientX) || cx;
+            const pointerY = e.clientY || (e.touches && e.touches[0] && e.touches[0].clientY) || cy;
+            const dx = (pointerX - cx) / rect.width; // -0.5 .. 0.5
+            const dy = (pointerY - cy) / rect.height;
+            const rotY = dx * 10; // degrees
+            const rotX = -dy * 8;
+            const transZ = Math.min(12, Math.abs(dx*20 + dy*20));
+            inner.style.transform = `perspective(600px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(${transZ}px)`;
+            shadow.style.opacity = Math.min(0.22, 0.06 + Math.abs(dx)+Math.abs(dy));
+          });
+        }
+        function onLeave(){ if (raf) cancelAnimationFrame(raf); inner.style.transform='none'; shadow.style.opacity='0.12'; }
+        el.addEventListener('mousemove', onMove);
+        el.addEventListener('touchmove', onMove, {passive:true});
+        el.addEventListener('mouseleave', onLeave);
+        el.addEventListener('touchend', onLeave);
+      });
+    })();
+  </script>
+  <!-- Canvas-based visual effect removed to comply with strict B/W, no gradients/rgba/shadows constraints -->
+  <script>
+    // Collapsible sections on small screens: click H2 to toggle
+    (function(){
+      function setupCollapsibles(){
+        const mq = window.matchMedia('(max-width:900px)');
+        document.querySelectorAll('section').forEach(sec => {
+          const h2 = sec.querySelector('h2');
+          if (!h2) return;
+          h2.setAttribute('tabindex', '0');
+          h2.addEventListener('click', ()=>{
+            if (!mq.matches) return; // only collapse on small screens
+            sec.classList.toggle('collapsed');
+            const expanded = !sec.classList.contains('collapsed');
+            h2.setAttribute('aria-expanded', expanded);
+          });
+          h2.addEventListener('keydown', (e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); h2.click(); } });
+        });
+      }
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setupCollapsibles); else setupCollapsibles();
+    })();
+  </script>
+  <script>
+    // Defensive overlay handler: ensure overlay always closes sidebar even if other handlers fail
+    (function(){
+      const overlay = document.getElementById('site-overlay');
+      const hamburger = document.getElementById('hamburger');
+      if (!overlay) return;
+      overlay.addEventListener('click', function(e){
+        e.stopPropagation();
+        document.body.classList.remove('sidebar-open');
+        if (hamburger) hamburger.setAttribute('aria-expanded','false');
+        this.setAttribute('aria-hidden','true');
+      });
+
+      // expose helpers in case other scopes need them
+      window.openSidebar = window.openSidebar || function(){ document.body.classList.add('sidebar-open'); if (hamburger) hamburger.setAttribute('aria-expanded','true'); overlay.setAttribute('aria-hidden','false'); };
+      window.closeSidebar = window.closeSidebar || function(){ document.body.classList.remove('sidebar-open'); if (hamburger) hamburger.setAttribute('aria-expanded','false'); overlay.setAttribute('aria-hidden','true'); };
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+/* Strict black-and-white portfolio stylesheet (dark variant)
+  - Background: near-black
+  - Panels: dark gray
+  - Text: white
+  - No colors beyond grayscale
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+:root{
+  --bg: #000000;
+  --panel: #0f0f0f;
+  --header-bar: #151515;
+  --panel-border: #252525;
+  --text: #ffffff;
+  --muted-text: #bfbfbf;
+  --container-width: 1100px;
+  --sidebar-width: 260px;
+  --accent-1: #2a2a2a;
+  --accent-2: #1f1f1f;
+  --accent-3: #333333;
+  --accent-4: #262626;
+  --accent-5: #3a3a3a;
+  --accent-6: #1b1b1b;
+}
+
+*{box-sizing:border-box}
+html,body{
+  height:100%;
+  background:var(--bg);
+  color:var(--text);
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  margin:0;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.container{max-width:var(--container-width);margin:0 auto;padding:36px 24px}
+
+/* Header */
+header{padding:18px 0;border-bottom:1px solid var(--panel-border)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{font-weight:700;letter-spacing:0.6px}
+nav a{color:var(--muted-text);text-decoration:none;margin-left:16px;font-size:0.95rem}
+
+/* Sticky section constants bar below header */
+.section-constants{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--panel-border);z-index:70;padding:8px 0}
+.section-constants .const-list{display:flex;gap:10px;align-items:center;justify-content:flex-start}
+.section-constants a{color:var(--muted-text);padding:8px 12px;border-radius:8px;border:1px solid transparent;text-decoration:none}
+.section-constants a:hover{color:var(--text);border-color:var(--panel-border);background:var(--panel)}
+
+/* Sidebar layout */
+body.sidebar-open #sidebar{transform:translateX(0)}
+#sidebar{
+  position:fixed;left:0;top:0;bottom:0;width:var(--sidebar-width);background:var(--panel);border-right:1px solid var(--panel-border);padding:20px 16px;overflow:auto;transform:translateX(-100%);transition:transform .25s ease-in-out;z-index:60
+}
+#sidebar .dash-title{font-weight:700;margin-bottom:12px}
+#sidebar nav a{display:flex;align-items:center;gap:10px;padding:10px 12px;text-decoration:none;color:var(--muted-text);border-radius:8px;margin-bottom:10px;border:1px solid transparent;background:transparent}
+#sidebar nav a:hover, #sidebar nav a:focus{background:var(--panel);border-color:var(--panel-border);color:var(--text)}
+#sidebar nav a .icon{width:18px;height:18px;flex:0 0 18px;stroke:currentColor;fill:none}
+#sidebar nav{padding-top:8px}
+
+/* Content area next to sidebar; sidebar stays closed by default on all sizes and opens when body.sidebar-open is set */
+.content{margin-left:0;padding-left:0;transition:margin .22s ease}
+/* On any viewport, opening the sidebar pushes content */
+body.sidebar-open .content{margin-left:var(--sidebar-width)}
+@media(min-width:900px){
+  /* do not auto-open the sidebar on large screens; user can open it via the Menu control */
+}
+
+/* Mobile sidebar: make it overlay and wider */
+@media(max-width:900px){
+  #sidebar{width:80%;max-width:360px;box-shadow:none;border-right:1px solid var(--panel-border);}
+  body.sidebar-open #sidebar{transform:translateX(0)}
+  .content{margin-left:0}
+}
+
+/* Hero */
+.hero{display:flex;align-items:center;gap:40px;padding:36px 0}
+.hero-left{flex:0 0 320px}
+.hero-right{flex:1;width:auto}
+
+/* Center hero name vertically next to photo on wider viewports */
+@media(min-width:900px){
+  .hero-left{flex:0 0 280px}
+  .hero-right{display:flex;flex-direction:column;justify-content:center}
+  .hero-right .hero-name{margin-bottom:6px;font-size:2.2rem}
+}
+.hero h1{font-size:2.1rem;margin:0 0 8px}
+.hero-right .hero-name{font-size:2rem;margin:0 0 8px;letter-spacing:0.8px;text-transform:uppercase;font-weight:700;line-height:1}
+.muted{opacity:0.9}
+
+/* Panel for inline SVG decorations (black strokes only) */
+.panel{background:var(--panel);border:1px solid var(--panel-border);padding:14px;border-radius:8px}
+.panel svg{width:100%;height:auto;display:block}
+.panel svg *{stroke:var(--text);fill:none}
+
+.projects article{margin:18px 0;padding:12px 0;border-top:1px solid var(--panel-border)}
+
+footer{border-top:1px solid var(--panel-border);padding:18px 0;margin-top:28px}
+
+/* Links */
+a{color:var(--text);text-decoration:underline}
+
+/* Bitmap images allowed (used for certificates); keep grayscale look via surrounding panels */
+img, picture, video, canvas, iframe, object{max-width:100%;height:auto;display:block}
+
+/* Remove shadows/animations to keep it crisp */
+*{box-shadow:none !important;text-shadow:none !important}
+
+/* Responsive tweaks */
+@media(max-width:900px){
+  .hero{flex-direction:column}
+  .hero-right{width:100%}
+  header .container{display:flex;align-items:center;justify-content:space-between}
+}
+
+/* Small helper for the hamburger */
+.hamburger{background:transparent;border:1px solid var(--text);color:var(--text);padding:6px 10px;border-radius:6px;font-weight:600}
+
+/* Ensure no other colors appear from UA styles */
+*{background-color:transparent}
+
+/* Floating GUI boxes and lightweight UI elements (B/W only, no shadows/gradients) */
+section{position:relative}
+.float-box{
+  position:absolute;
+  width:56px;
+  height:56px;
+  border:1px solid var(--text);
+  background:transparent;
+  border-radius:8px;
+  pointer-events:none;
+  opacity:0.95;
+  will-change:transform,opacity;
+  transition:transform .6s ease, opacity .6s ease;
+}
+.float-box.small{width:36px;height:36px;border-radius:6px}
+.float-box.tall{width:44px;height:72px;border-radius:6px}
+.float-box.top-left{top:-12px;left:-12px}
+.float-box.top-right{top:-12px;right:-12px}
+.float-box.bottom-left{bottom:-12px;left:-12px}
+.float-box.bottom-right{bottom:-12px;right:-12px}
+
+@keyframes floatY {
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+ 100%{transform:translateY(0)}
+}
+.float-box.animate{animation:floatY 6s ease-in-out infinite}
+
+/* GUI content boxes used inside sections */
+.gui-box{border:1px solid var(--panel-border);padding:14px;border-radius:10px;background:var(--panel);color:var(--text)}
+.gui-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px}
+
+/* Profile photo and frame options */
+.profile-photo{width:320px;height:320px;border-radius:12px;overflow:hidden;border:4px solid var(--panel-border);display:block;object-fit:cover;object-position:center center}
+.profile-photo.round{border-radius:50%}
+.profile-photo.double{box-shadow:0 0 0 6px rgba(255,255,255,0.02) inset}
+.profile-photo.pro{border-radius:14px;border:6px solid rgba(255,255,255,0.03);box-shadow:0 6px 30px rgba(0,0,0,0.6);transform:translateZ(0)}
+.profile-photo.glass{border-radius:12px;border:1px solid rgba(255,255,255,0.06);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter:blur(4px)}
+.profile-photo.outline{padding:6px;border-radius:14px;border:2px solid var(--text);box-shadow:0 0 0 6px rgba(255,255,255,0.02) inset}
+.frame-options{display:flex;gap:8px;margin-top:10px}
+.frame-options button{background:transparent;border:1px solid var(--panel-border);padding:6px;border-radius:6px;color:var(--muted-text);cursor:pointer}
+.frame-options button.active{border-color:var(--text);color:var(--text)}
+
+/* Entrance animation for sections: float in on load */
+.section{transform:translateY(18px);opacity:0;transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .5s ease;will-change:transform,opacity}
+.section.in-view{transform:none;opacity:1}
+
+/* Card tilt / mouse tracking */
+.card-tilt{transform-style:preserve-3d;will-change:transform}
+.card-tilt .card-inner{transition:transform .15s ease-out;transform-origin:center center;display:block}
+.card-tilt:hover .card-inner{transition:transform .08s ease-out}
+.card-shadow{pointer-events:none;position:absolute;inset:0;border-radius:inherit;box-shadow:0 8px 30px rgba(0,0,0,0.45);opacity:0.12;transition:opacity .18s ease}
+.project-card{position:relative;overflow:visible}
+
+/* Design tokens showcase */
+.design-tokens{display:flex;gap:12px;align-items:center;margin:12px 0;padding:10px;border-radius:8px;background:transparent}
+.design-tokens .token{border:1px solid var(--panel-border);padding:10px;border-radius:8px;background:var(--panel);text-align:center}
+.design-tokens .token .name{display:block;color:var(--muted-text);font-size:0.85rem}
+.design-tokens .token .value{display:block;color:var(--text);font-weight:700}
+.design-tokens .token.small{font-size:0.8rem}
+.design-tokens .token.medium{font-size:1rem}
+.design-tokens .token.large{font-size:1.25rem}
+.design-tokens .token.xlarge{font-size:1.6rem}
+
+/* Hide decorative floats on very small screens to avoid clutter */
+@media(max-width:520px){
+  .float-box{display:none}
+}
+
+/* Responsive profile photo sizing */
+@media(max-width:900px){
+  .profile-photo{width:200px;height:200px}
+}
+
+/* Section box wrapper to visually group section content (B/W only) */
+.section-box{border:1px solid var(--panel-border);padding:28px;border-radius:12px;background:var(--panel);margin-top:20px}
+
+/* Reveal animation base (pure black/white only). Elements start hidden and translate then fade in. */
+.reveal{opacity:0;transform:translateY(60px);transition:opacity 600ms cubic-bezier(.4,0,.2,1),transform 600ms cubic-bezier(.4,0,.2,1);will-change:opacity,transform}
+.reveal-left{transform:translateX(60px)}
+.reveal.reveal-animated{opacity:1;transform:translateY(0) translateX(0)}
+
+/* Per-section visual differentiation (subtle, grayscale accents) */
+/* stronger left-border on desktop for clearer section separation */
+#about .section-box{border-left:6px solid var(--accent-1);padding-left:20px}
+#education .section-box{border-left:6px solid var(--accent-2);padding-left:20px}
+#skills .section-box{border-left:6px solid var(--accent-3);padding-left:20px}
+#projects .section-box{border-left:6px solid var(--accent-4);padding-left:20px}
+#certifications .section-box{border-left:6px solid var(--accent-5);padding-left:20px}
+#contact .section-box{border-left:6px solid var(--accent-6);padding-left:20px}
+
+@media(max-width:900px){
+  #about .section-box, #education .section-box, #skills .section-box, #projects .section-box, #certifications .section-box, #contact .section-box{border-left-width:3px;padding-left:16px}
+  .hero-right .hero-name{font-size:1.25rem}
+}
+
+/* Hide large decorative background icons site-wide to show content clearly */
+.bg-icon{display:none !important}
+
+/* Sidebar toggle inside the sidebar */
+.sidebar-toggle{background:transparent;border:1px solid var(--text);color:var(--text);padding:6px 10px;border-radius:6px;font-weight:600;cursor:pointer}
+.sidebar-toggle:focus{outline:2px solid #333}
+
+/* Section header bar (title area) */
+.section > h2{display:inline-block;background:var(--header-bar);padding:12px 16px;border-radius:6px;margin-bottom:14px;color:var(--text);font-size:1.35rem;font-weight:700}
+
+/* Project card grid */
+.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
+.project-card{background:var(--panel);border:1px solid var(--panel-border);padding:18px;border-radius:12px;color:var(--text)}
+
+/* Hover and focus styles to make UI feel professional while keeping B/W */
+.project-card{transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease}
+.project-card:hover, .project-card:focus-within{transform:translateY(-6px);border-color:#2a2a2a}
+.project-card:active{transform:translateY(-2px)}
+
+.project-card h3{margin-top:6px;font-size:1.05rem;font-weight:700;color:var(--text)}
+
+.contact-link{transition:transform .16s ease, border-color .16s ease}
+.contact-link:hover{transform:translateY(-4px);border-color:#2a2a2a}
+
+.cert-thumb{border-radius:6px;border:1px solid var(--panel-border);display:block}
+
+/* Make certificate thumbnails and project previews more prominent */
+.project-card .cert-thumb, .project-card > div img{height:160px;object-fit:cover}
+
+/* Improve contact section readability */
+.contact-link strong{display:block;font-size:0.98rem;font-weight:700}
+.contact-link .muted, .contact-link a{font-size:0.95rem}
+
+/* Slightly larger section spacing for clearer visual separation */
+.section{padding:10px 0}
+
+/* Responsive adjustments for smaller screens */
+@media(max-width:520px){
+  .section > h2{font-size:1.15rem;padding:10px 12px}
+  .project-card h3{font-size:1rem}
+  .project-card .cert-thumb, .project-card > div img{height:120px}
+  .section-box{padding:18px}
+}
+.cert-thumb:hover{transform:scale(1.02)}
+
+/* Floating feel: subtle separators and spacing */
+.section-box{box-shadow:0 6px 18px rgba(0,0,0,0.35)}
+
+/* Overlay for mobile sidebar */
+#sidebar{position:fixed;left:0;top:0;bottom:0;width:var(--sidebar-width);background:var(--panel);border-right:1px solid var(--panel-border);padding:20px 16px;overflow:auto;transform:translateX(-100%);transition:transform .25s ease-in-out;z-index:100000}
+.site-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:99999;display:none}
+body.sidebar-open .site-overlay{display:block}
+/* make overlay clearly clickable to close the sidebar */
+.site-overlay{cursor:pointer;pointer-events:auto}
+
+/* ensure content stays under overlay */
+.content{position:relative;z-index:1}
+
+/* Mouse-tracked background layer (subtle radial light/parallax) */
+.mouse-bg{position:fixed;inset:0;pointer-events:none;z-index:0;mix-blend-mode:normal}
+.mouse-bg::before,.mouse-bg::after{display:none}
+
+/* Canvas-based B/W mouse effect container */
+.mouse-bg canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+
+/* Collapsible sections on small screens */
+.section h2{cursor:pointer}
+.section.collapsed .section-box{display:none}
+.section.collapsed h2::after{content:' ▸';font-weight:600}
+.section h2::after{content:' ▾';font-weight:600;margin-left:8px}
+
+/* Responsive project grid */
+.gui-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+
+/* Certificate thumbnails */
+.cert-thumb{display:block;width:100%;height:auto;border:1px solid var(--panel-border);border-radius:6px}
+
+/* Contact cards */
+.contact-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.contact-link{background:var(--panel);border:1px solid var(--panel-border);padding:12px;border-radius:8px;text-align:center;color:var(--text)}
+
+/* Small helper: muted text */
+.muted{color:var(--muted-text)}
+
+/* Icon helpers (monochrome, stroke-based) */
+.icon{display:inline-block;vertical-align:middle;fill:none;stroke:currentColor;stroke-width:1.4}
+.preview-icon{opacity:0.95}
+.icon-btn{display:inline-flex;align-items:center;gap:8px;padding:6px 8px;border-radius:6px;border:1px solid transparent;text-decoration:none;color:var(--muted-text);background:transparent}
+.icon-btn:hover, .icon-btn:focus{color:var(--text);border-color:var(--panel-border);outline:none}
+.icon-btn .icon{width:18px;height:18px}
+.project-card .muted a.icon-btn{color:var(--muted-text)}
+
+
