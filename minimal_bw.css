@@ -196,9 +196,8 @@ section{position:relative}
   .float-box{display:none}
 }
 
-/* Responsive profile photo sizing */
 @media(max-width:900px){
-  .profile-photo{width:200px;height:200px}
+  .profile-photo{width:280px;height:280px}
 }
 
 /* Section box wrapper to visually group section content (B/W only) */
