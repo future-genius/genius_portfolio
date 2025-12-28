@@ -9,19 +9,19 @@
 
 :root{
   --bg: #000000;
-  --panel: #0f0f0f;
-  --header-bar: #151515;
-  --panel-border: #252525;
+  --panel: #000000;
+  --header-bar: #000000;
+  --panel-border: #ffffff;
   --text: #ffffff;
-  --muted-text: #bfbfbf;
+  --muted-text: #ffffff;
   --container-width: 1100px;
   --sidebar-width: 260px;
-  --accent-1: #2a2a2a;
-  --accent-2: #1f1f1f;
-  --accent-3: #333333;
-  --accent-4: #262626;
-  --accent-5: #3a3a3a;
-  --accent-6: #1b1b1b;
+  --accent-1: #ffffff;
+  --accent-2: #ffffff;
+  --accent-3: #ffffff;
+  --accent-4: #ffffff;
+  --accent-5: #ffffff;
+  --accent-6: #ffffff;
 }
 
 *{box-sizing:border-box}
@@ -52,7 +52,7 @@ nav a{color:var(--muted-text);text-decoration:none;margin-left:16px;font-size:0.
 /* Sidebar layout */
 body.sidebar-open #sidebar{transform:translateX(0)}
 #sidebar{
-  position:fixed;left:0;top:0;bottom:0;width:var(--sidebar-width);background:var(--panel);border-right:1px solid var(--panel-border);padding:20px 16px;overflow:auto;transform:translateX(-100%);transition:transform .25s ease-in-out;z-index:60
+  position:fixed;left:0;top:0;bottom:0;width:var(--sidebar-width);background:var(--bg);border-right:1px solid var(--panel-border);padding:20px 16px;overflow:auto;transform:translateX(-100%);transition:transform .25s ease-in-out;z-index:60
 }
 #sidebar .dash-title{font-weight:700;margin-bottom:12px}
 #sidebar nav a{display:flex;align-items:center;gap:10px;padding:10px 12px;text-decoration:none;color:var(--muted-text);border-radius:8px;margin-bottom:10px;border:1px solid transparent;background:transparent}
@@ -160,10 +160,10 @@ section{position:relative}
 /* Profile photo and frame options */
 .profile-photo{width:320px;height:320px;border-radius:12px;overflow:hidden;border:4px solid var(--panel-border);display:block;object-fit:cover;object-position:center center}
 .profile-photo.round{border-radius:50%}
-.profile-photo.double{box-shadow:0 0 0 6px rgba(255,255,255,0.02) inset}
-.profile-photo.pro{border-radius:14px;border:6px solid rgba(255,255,255,0.03);box-shadow:0 6px 30px rgba(0,0,0,0.6);transform:translateZ(0)}
-.profile-photo.glass{border-radius:12px;border:1px solid rgba(255,255,255,0.06);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter:blur(4px)}
-.profile-photo.outline{padding:6px;border-radius:14px;border:2px solid var(--text);box-shadow:0 0 0 6px rgba(255,255,255,0.02) inset}
+.profile-photo.double{border-width:4px}
+.profile-photo.pro{border-radius:14px;border:6px solid var(--text)}
+.profile-photo.glass{border-radius:12px;border:1px solid var(--text)}
+.profile-photo.outline{padding:6px;border-radius:14px;border:2px solid var(--text)}
 .frame-options{display:flex;gap:8px;margin-top:10px}
 .frame-options button{background:transparent;border:1px solid var(--panel-border);padding:6px;border-radius:6px;color:var(--muted-text);cursor:pointer}
 .frame-options button.active{border-color:var(--text);color:var(--text)}
@@ -178,12 +178,12 @@ section{position:relative}
 .card-tilt{transform-style:preserve-3d;will-change:transform}
 .card-tilt .card-inner{transition:transform .15s ease-out;transform-origin:center center;display:block}
 .card-tilt:hover .card-inner{transition:transform .08s ease-out}
-.card-shadow{pointer-events:none;position:absolute;inset:0;border-radius:inherit;box-shadow:0 8px 30px rgba(0,0,0,0.45);opacity:0.12;transition:opacity .18s ease}
+.card-shadow{pointer-events:none;position:absolute;inset:0;border-radius:inherit;opacity:0;transition:opacity .18s ease}
 .project-card{position:relative;overflow:visible}
 
 /* Design tokens showcase */
 .design-tokens{display:flex;gap:12px;align-items:center;margin:12px 0;padding:10px;border-radius:8px;background:transparent}
-.design-tokens .token{border:1px solid var(--panel-border);padding:10px;border-radius:8px;background:var(--panel);text-align:center}
+.design-tokens .token{border:1px solid var(--panel-border);padding:10px;border-radius:8px;background:var(--bg);text-align:center}
 .design-tokens .token .name{display:block;color:var(--muted-text);font-size:0.85rem}
 .design-tokens .token .value{display:block;color:var(--text);font-weight:700}
 .design-tokens .token.small{font-size:0.8rem}
@@ -204,12 +204,24 @@ section{position:relative}
 /* Section box wrapper to visually group section content (B/W only) */
 .section-box{border:1px solid var(--panel-border);padding:28px;border-radius:12px;background:var(--panel);margin-top:20px}
 
-/* Reveal animation base (pure black/white only). Elements start hidden and translate then fade in.
-  Subtle "float-in and settle" effect: translateY ~28px, opacity transition, gentle ease-out curve.
-  Only opacity and transform are animated. */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity 520ms cubic-bezier(.2,0,.05,1),transform 520ms cubic-bezier(.2,0,.05,1);will-change:opacity,transform}
-.reveal-left{transform:translateX(28px)}
-.reveal.reveal-animated{opacity:1;transform:none}
+/* Professional reveal animation: smooth float-in entrance.
+   Elements start below final position (24px down) and fade in.
+   Uses smooth cubic-bezier easing for polished feel.
+   Supports staggered delays for line-by-line/block-by-block effect. */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal{
+  opacity: 0;
+  transform: translateY(24px);
+  animation: slideUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+.reveal.reveal-animated{
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
 
 /* Back-compat: accept legacy .is-visible and canonical .reveal-animated as equivalent visible state */
 .reveal.is-visible,
@@ -247,17 +259,17 @@ section{position:relative}
 
 /* Project card grid */
 .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
-.project-card{background:var(--panel);border:1px solid var(--panel-border);padding:18px;border-radius:12px;color:var(--text)}
+.project-card{background:var(--bg);border:1px solid var(--panel-border);padding:18px;border-radius:12px;color:var(--text)}
 
 /* Hover and focus styles to make UI feel professional while keeping B/W */
 .project-card{transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease}
-.project-card:hover, .project-card:focus-within{transform:translateY(-6px);border-color:#2a2a2a}
+.project-card:hover, .project-card:focus-within{transform:translateY(-6px);border-color:var(--text)}
 .project-card:active{transform:translateY(-2px)}
 
 .project-card h3{margin-top:6px;font-size:1.05rem;font-weight:700;color:var(--text)}
 
 .contact-link{transition:transform .16s ease, border-color .16s ease}
-.contact-link:hover{transform:translateY(-4px);border-color:#2a2a2a}
+.contact-link:hover{transform:translateY(-4px);border-color:var(--text)}
 
 .cert-thumb{border-radius:6px;border:1px solid var(--panel-border);display:block}
 
@@ -285,7 +297,7 @@ section{position:relative}
 
 /* Overlay for mobile sidebar */
 #sidebar{position:fixed;left:0;top:0;bottom:0;width:var(--sidebar-width);background:var(--panel);border-right:1px solid var(--panel-border);padding:20px 16px;overflow:auto;transform:translateX(-100%);transition:transform .25s ease-in-out;z-index:100000}
-.site-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:99999;display:none}
+.site-overlay{position:fixed;inset:0;background:#000000;z-index:99999;display:none;opacity:0.6}
 body.sidebar-open .site-overlay{display:block}
 /* make overlay clearly clickable to close the sidebar */
 .site-overlay{cursor:pointer;pointer-events:auto}
@@ -314,7 +326,7 @@ body.sidebar-open .site-overlay{display:block}
 
 /* Contact cards */
 .contact-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
-.contact-link{background:var(--panel);border:1px solid var(--panel-border);padding:12px;border-radius:8px;text-align:center;color:var(--text)}
+.contact-link{background:var(--bg);border:1px solid var(--panel-border);padding:12px;border-radius:8px;text-align:center;color:var(--text)}
 
 /* Small helper: muted text */
 .muted{color:var(--muted-text)}
@@ -347,39 +359,5 @@ body.sidebar-open .site-overlay{display:block}
   .reveal, .section, .project-card, .card-inner{transition:none !important;animation:none !important}
   .card-tilt{pointer-events:none}
 }
-
-/* ===== Luther-like floating background & HUD (monochrome only) ===== */
-.background-shapes{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.shape{position:absolute;border-radius:50%;opacity:0.06;filter:blur(40px);will-change:transform}
-.shape-1{width:520px;height:520px;right:-120px;top:-160px;background:radial-gradient(circle, rgba(255,255,255,0.18), rgba(255,255,255,0.02));animation:float 36s infinite cubic-bezier(0.4,0,0.6,1)}
-.shape-2{width:420px;height:420px;left:-140px;bottom:8%;background:radial-gradient(circle, rgba(255,255,255,0.12), rgba(255,255,255,0.02));animation:float 42s infinite cubic-bezier(0.4,0,0.6,1) reverse}
-.shape-3{width:360px;height:360px;right:6%;bottom:6%;background:radial-gradient(circle, rgba(255,255,255,0.14), rgba(255,255,255,0.02));animation:float 38s infinite cubic-bezier(0.4,0,0.6,1)}
-.float-blob{position:absolute;width:320px;height:240px;border-radius:40% 60% 50% 50%/50% 40% 60% 50%;left:4%;top:-80px;background:radial-gradient(circle at 35% 35%, rgba(255,255,255,0.12), rgba(255,255,255,0.02));filter:blur(25px);opacity:0.06;animation:drift 45s infinite linear}
-.float-ring{position:absolute;width:280px;height:280px;border-radius:50%;right:12%;top:15%;border:1.2px solid rgba(255,255,255,0.06);opacity:0.07;animation:slowRotate 60s infinite linear}
-.float-square{position:absolute;width:180px;height:180px;right:5%;top:60%;border-radius:20px;background:linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));filter:blur(15px);opacity:0.05;animation:float 40s infinite ease-in-out}
-.grid-layer{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);background-size:48px 48px;opacity:0.28;mix-blend-mode:overlay;animation:gridShift 120s linear infinite}
-.accent-line-1,.accent-line-2{position:absolute;opacity:0.6;pointer-events:none}
-.accent-line-1{width:700px;height:1px;left:-300px;top:12%;background:linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);transform:rotate(12deg);animation:slideHorizontal 18s infinite linear}
-.accent-line-2{width:1px;height:500px;right:8%;top:25%;background:linear-gradient(180deg, transparent, rgba(255,255,255,0.12), transparent);animation:slideVertical 22s infinite linear}
-
-@keyframes gridShift {0%{background-position:0 0}100%{background-position:100px 100px}}
-
-@keyframes float{
-  0%,100%{transform:translateY(0) translateX(0) scale(1)}
-  25%{transform:translateY(-50px) translateX(40px) scale(1.05)}
-  50%{transform:translateY(-100px) translateX(-30px) scale(0.98)}
-  75%{transform:translateY(-50px) translateX(60px) scale(1.02)}
-}
-
-@keyframes drift{
-  0%{transform:translate3d(0,0,0) scale(1) rotate(0deg)}
-  25%{transform:translate3d(40px,-40px,0) scale(1.02) rotate(5deg)}
-  50%{transform:translate3d(-30px,-80px,0) scale(0.98) rotate(10deg)}
-  75%{transform:translate3d(50px,-30px,0) scale(1.03) rotate(-5deg)}
-  100%{transform:translate3d(0,0,0) scale(1) rotate(360deg)}
-}
-
-@keyframes slowRotate{0%{transform:rotate(0deg) translateY(-10px)}50%{transform:rotate(180deg) translateY(10px)}100%{transform:rotate(360deg) translateY(-10px)}}
-
 
 
