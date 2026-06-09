@@ -14,6 +14,7 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+  <canvas id="three-bg-canvas"></canvas>
 
   <header class="header">
     <div class="container">
@@ -29,10 +30,10 @@
         <ul class="nav-links" id="nav-menu">
           <li><a href="#home">Home</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#education">Education</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
           <li><a href="#certifications">Certifications</a></li>
+          <li><a href="#achievements">Achievements</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -64,8 +65,9 @@
         <h2 class="section-title">About</h2>
         <div class="about-grid">
           <div class="about-text">
-            <p>I'm an XR-focused engineer driven by the mission to redefine human-computer interaction. My work sits at the intersection of computer vision, AI, embedded systems, and spatial computing — building interfaces that feel like they belong in the future.</p>
-            <p>From real-time gesture recognition systems to 6-DoF motion tracking, I engineer solutions that push the boundary of what's possible. I don't build for competition — I build because these technologies should exist.</p>
+            <h3 class="profile-name">Hariharan R</h3>
+            <p class="profile-role">XR Developer | ECE Student | IIT Madras BS Data Science</p>
+            <p class="profile-bio">Passionate XR developer focused on building immersive systems using Unity, Computer Vision, Sensor Fusion, and AI-based interaction design. Working on real-time gesture interaction systems and spatial computing interfaces for next-generation human-computer interaction.</p>
             <h3>Core Competencies</h3>
             <ul class="expertise-list">
               <li>XR development with Unity & OpenXR pipelines</li>
@@ -116,67 +118,234 @@
     <section id="skills" class="section">
       <div class="container">
         <h2 class="section-title">Skills</h2>
-        <div class="skills-grid">
-          <div class="skill-category">
-            <h3>XR & 3D</h3>
-            <div class="skill-tags">
-              <span class="skill-tag">Unity</span>
-              <span class="skill-tag">OpenXR</span>
-              <span class="skill-tag">XR Interaction Toolkit</span>
-              <span class="skill-tag">C#</span>
-              <span class="skill-tag">3D Spatial Computing</span>
+        <div class="skills-spatial-container">
+          <!-- Left side: Semantic Skill Cards -->
+          <div class="skills-list-panel">
+            <div class="skill-category glass-panel">
+              <h3>XR & 3D</h3>
+              <div class="skill-tags">
+                <span class="skill-tag" data-skill="unity">Unity Engine</span>
+                <span class="skill-tag" data-skill="csharp">C# Programming</span>
+                <span class="skill-tag" data-skill="xrtoolkit">XR Interaction Toolkit</span>
+                <span class="skill-tag">OpenXR</span>
+                <span class="skill-tag">3D Spatial Computing</span>
+              </div>
+            </div>
+            <div class="skill-category glass-panel">
+              <h3>AI & Computer Vision</h3>
+              <div class="skill-tags">
+                <span class="skill-tag" data-skill="python">Python</span>
+                <span class="skill-tag" data-skill="computervision">Computer Vision (OpenCV, MediaPipe)</span>
+                <span class="skill-tag" data-skill="ai-design">AI-assisted interaction design</span>
+                <span class="skill-tag">TensorFlow</span>
+              </div>
+            </div>
+            <div class="skill-category glass-panel">
+              <h3>Hardware & Embedded</h3>
+              <div class="skill-tags">
+                <span class="skill-tag" data-skill="arduino">Arduino / IoT Systems</span>
+                <span class="skill-tag" data-skill="sensorfusion">Sensor Fusion (IMU-based tracking)</span>
+                <span class="skill-tag">MPU6050</span>
+                <span class="skill-tag">ESP32</span>
+              </div>
+            </div>
+            <div class="skill-category glass-panel">
+              <h3>Software & Web</h3>
+              <div class="skill-tags">
+                <span class="skill-tag">Data Structures</span>
+                <span class="skill-tag">System Design</span>
+                <span class="skill-tag">Flask</span>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">PWA</span>
+              </div>
             </div>
           </div>
-          <div class="skill-category">
-            <h3>AI / Computer Vision</h3>
-            <div class="skill-tags">
-              <span class="skill-tag">Python</span>
-              <span class="skill-tag">OpenCV</span>
-              <span class="skill-tag">MediaPipe</span>
-              <span class="skill-tag">Machine Learning</span>
-              <span class="skill-tag">TensorFlow</span>
+
+          <!-- Right Side: Floating Holographic Skill Orbit -->
+          <div class="skills-orbit-panel glass-panel">
+            <div class="skills-orbit-header">
+              <h3>Spatial Interaction Network</h3>
+              <p>Hover nodes to inspect skill connections</p>
+            </div>
+            <div id="skills-orbit-viewport">
+              <canvas id="skills-orbit-canvas"></canvas>
+              <div class="orbit-center-node">
+                <span class="node-title">XR Core</span>
+                <span class="node-desc">Hover a Skill</span>
+              </div>
             </div>
           </div>
-          <div class="skill-category">
-            <h3>Embedded / Hardware</h3>
-            <div class="skill-tags">
-              <span class="skill-tag">Arduino</span>
-              <span class="skill-tag">MPU6050</span>
-              <span class="skill-tag">Sensor Fusion</span>
-              <span class="skill-tag">ESP32</span>
-              <span class="skill-tag">IMU Integration</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="certifications" class="section">
+      <div class="container">
+        <h2 class="section-title">Certifications</h2>
+        <div class="certifications-grid">
+          <div class="cert-card" data-id="cert-vr-unity" data-type="cert"
+               data-title="VR Development with Unity XR Toolkit"
+               data-issuer="Learn XR / Unity XR"
+               data-status="Certified"
+               data-link="https://drive.google.com/file/d/1Uze4EZL45INzNDNIt8CfDAM6rrbqtKHK/view?usp=sharing"
+               data-image="assets/images/vr_unity_xr_cert.png"
+               data-details="Deep exposure to virtual reality environments using Unity Engine and OpenXR. Validates skills in spatial object manipulation, VR telemetry, locomotion systems, mapping control nodes, and custom raycast interactions. Developed spatial interfaces that leverage standard controller structures.">
+            <div class="cert-image">
+              <img src="assets/images/vr_unity_xr_cert.png" alt="VR Development with Unity XR Toolkit certificate" />
+            </div>
+            <div class="cert-content-box">
+              <span class="cert-badge-status status-certified">Certified</span>
+              <h3>VR Development with Unity XR Toolkit</h3>
+              <p class="cert-issuer">Learn XR / Unity XR</p>
+              <button class="btn-detail-trigger">Details →</button>
             </div>
           </div>
-          <div class="skill-category">
-            <h3>Software / Core</h3>
-            <div class="skill-tags">
-              <span class="skill-tag">Data Structures</span>
-              <span class="skill-tag">System Design</span>
-              <span class="skill-tag">API Integration</span>
-              <span class="skill-tag">C/C++</span>
-              <span class="skill-tag">JavaScript</span>
+
+          <div class="cert-card" data-id="cert-csharp-unity" data-type="cert"
+               data-title="C# Programming Fundamentals with Unity"
+               data-issuer="Learn XR / Unity XR"
+               data-status="Certified"
+               data-link="https://drive.google.com/file/d/1UggKWuDXti1Rxtrth6xJlsuikcXXmaLV/view?usp=sharing"
+               data-image="assets/images/csharp_unity_cert.png"
+               data-details="Validation of modular C# scripts within the Unity framework. Covers game loop architecture, dynamic memory optimization, custom event actions, object pool implementations, and hardware state hooks, forming a robust foundation for building high-performance, low-latency spatial applications.">
+            <div class="cert-image">
+              <img src="assets/images/csharp_unity_cert.png" alt="C# Programming Fundamentals with Unity certificate" />
+            </div>
+            <div class="cert-content-box">
+              <span class="cert-badge-status status-certified">Certified</span>
+              <h3>C# Programming Fundamentals with Unity</h3>
+              <p class="cert-issuer">Learn XR / Unity XR</p>
+              <button class="btn-detail-trigger">Details →</button>
             </div>
           </div>
-          <div class="skill-category">
-            <h3>Tools</h3>
-            <div class="skill-tags">
-              <span class="skill-tag">Git</span>
-              <span class="skill-tag">GitHub</span>
-              <span class="skill-tag">Unity</span>
-              <span class="skill-tag">MATLAB</span>
-              <span class="skill-tag">VS Code</span>
-              <span class="skill-tag">Linux</span>
+
+          <div class="cert-card" data-id="cert-data-analytics" data-type="cert"
+               data-title="Data Analytics with Python"
+               data-issuer="NPTEL"
+               data-status="Completed"
+               data-link="https://drive.google.com/file/d/1DdzfuynmpmF4iHll8_kYb9b9li-MwRXZ/view?usp=sharing"
+               data-image="assets/images/data_analytics_python_cert.png"
+               data-details="Focuses on Python statistical analysis, processing structured and unstructured data, scientific computation with NumPy/Pandas, data modeling, and predictive metrics. Fundamental training for computer vision state-estimation pipelines.">
+            <div class="cert-image">
+              <img src="assets/images/data_analytics_python_cert.png" alt="Data Analytics with Python certificate" />
+            </div>
+            <div class="cert-content-box">
+              <span class="cert-badge-status status-completed">Completed</span>
+              <h3>Data Analytics with Python</h3>
+              <p class="cert-issuer">NPTEL</p>
+              <button class="btn-detail-trigger">Details →</button>
             </div>
           </div>
-          <div class="skill-category">
-            <h3>Web & Platforms</h3>
-            <div class="skill-tags">
-              <span class="skill-tag">Flask</span>
-              <span class="skill-tag">React</span>
-              <span class="skill-tag">REST APIs</span>
-              <span class="skill-tag">PostgreSQL</span>
-              <span class="skill-tag">PWA</span>
+
+          <div class="cert-card" data-id="cert-ml-apps" data-type="cert"
+               data-title="Building Machine Learning Applications"
+               data-issuer="NPTEL"
+               data-status="Completed"
+               data-link="https://drive.google.com/file/d/1pR9ZOaA5Trg4lxvgS0Jfp_rrjZljPdgC/view?usp=sharing"
+               data-image="assets/images/Building Machine Learning Applications.png"
+               data-details="Covers regression frameworks, supervised classification, deep neural networks, clustering, and deployment workflows. Applied to object recognition and real-time landmark classification pipelines.">
+            <div class="cert-image">
+              <img src="assets/images/Building Machine Learning Applications.png" alt="Building ML Applications certificate" />
             </div>
+            <div class="cert-content-box">
+              <span class="cert-badge-status status-completed">Completed</span>
+              <h3>Building ML Applications</h3>
+              <p class="cert-issuer">NPTEL</p>
+              <button class="btn-detail-trigger">Details →</button>
+            </div>
+          </div>
+
+          <div class="cert-card" data-id="cert-embedded" data-type="cert"
+               data-title="Embedded for Beginners"
+               data-issuer="NPTEL"
+               data-status="Completed"
+               data-link="https://drive.google.com/file/d/1WUbOKYJwjbU5b9HXBP0xE_OOuc1X3qRk/view?usp=sharing"
+               data-image="assets/images/Embedded for Beginners.png"
+               data-details="Fundamental validation of microcontrollers, C programming for bare-metal registers, ADC/DAC interfaces, timers, SPI, I2C protocols, and sensor polling. Key knowledge for integrating IMU components in spatial control tracking.">
+            <div class="cert-image">
+              <img src="assets/images/Embedded for Beginners.png" alt="Embedded for Beginners certificate" />
+            </div>
+            <div class="cert-content-box">
+              <span class="cert-badge-status status-completed">Completed</span>
+              <h3>Embedded for Beginners</h3>
+              <p class="cert-issuer">NPTEL</p>
+              <button class="btn-detail-trigger">Details →</button>
+            </div>
+          </div>
+
+          <div class="cert-card" data-id="cert-iiot" data-type="cert"
+               data-title="Introduction to Industry 4.0 & IIoT"
+               data-issuer="NPTEL"
+               data-status="Completed"
+               data-link="https://drive.google.com/file/d/1Rz8DdzRmsfYO38DfoZgxLeq-9rTViZxc/view?usp=sharing"
+               data-image="assets/images/Introduction to Industry 4.0 and Industrial Internet of Things.png"
+               data-details="In-depth coverage of industrial internet of things (IIoT), sensor networks, data acquisition systems, cloud architecture connectivity, and cyber-physical security layers.">
+            <div class="cert-image">
+              <img src="assets/images/Introduction to Industry 4.0 and Industrial Internet of Things.png" alt="Industry 4.0 and IIoT certificate" />
+            </div>
+            <div class="cert-content-box">
+              <span class="cert-badge-status status-completed">Completed</span>
+              <h3>Industry 4.0 & IIoT</h3>
+              <p class="cert-issuer">NPTEL</p>
+              <button class="btn-detail-trigger">Details →</button>
+            </div>
+          </div>
+
+          <div class="cert-card" data-id="cert-analog" data-type="cert"
+               data-title="Analog Circuits and Systems"
+               data-issuer="NPTEL"
+               data-status="Completed"
+               data-link="#"
+               data-image="assets/images/Analog Circuits and Systems.png"
+               data-details="Validation of operational amplifiers (Op-Amps), filter designs, feedback system analysis, signal oscillators, and transistor behavior. Core hardware knowledge essential for developing clean analog sensor fusion inputs.">
+            <div class="cert-image">
+              <img src="assets/images/Analog Circuits and Systems.png" alt="Analog Circuits and Systems certificate" />
+            </div>
+            <div class="cert-content-box">
+              <span class="cert-badge-status status-completed">Completed</span>
+              <h3>Analog Circuits and Systems</h3>
+              <p class="cert-issuer">NPTEL</p>
+              <button class="btn-detail-trigger">Details →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="achievements" class="section">
+      <div class="container">
+        <h2 class="section-title">Achievements</h2>
+        <div class="achievements-grid">
+          <div class="achievement-card scroll-trigger-badge">
+            <div class="achievement-badge-icon">
+              <!-- Trophy Icon SVG -->
+              <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+                <path d="M4 22h16" />
+                <path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34" />
+                <path d="M12 2a5 5 0 0 0-5 5v3c0 3.31 2.69 6 6 6s6-2.69 6-6V7a5 5 0 0 0-5-5z" />
+              </svg>
+            </div>
+            <span class="achievement-rank">2nd Prize Winner</span>
+            <h3>Hack Hustle 2.0</h3>
+            <p>Secured Second Prize at Hack Hustle 2.0 conducted by Tech Society, Saveetha Engineering College as part of the team &ldquo;Coducks&rdquo;.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--white); font-weight: 600;">Problem Statement: Privacy-Preserving Patient Memory Layer (Healthcare)</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--gray-400);">Built an AI-agent-based system focused on secure and intelligent longitudinal healthcare records. Strengthened skills in rapid problem solving, AI systems design, and real-world health tech integration.</p>
+          </div>
+
+          <div class="achievement-card scroll-trigger-badge">
+            <div class="achievement-badge-icon">
+              <!-- Shield/Medal Icon SVG -->
+              <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <circle cx="12" cy="11" r="3" />
+                <path d="M12 14v4" />
+              </svg>
+            </div>
+            <span class="achievement-rank">Titan Award</span>
+            <h3>Social Media Titan Award &ndash; HPL</h3>
+            <p>Received the Social Media Titan Award as part of Team Hexaware in HPL. Recognized for contribution in digital engagement, creativity, and impactful online presence as part of a competitive team environment.</p>
           </div>
         </div>
       </div>
@@ -186,106 +355,80 @@
       <div class="container">
         <h2 class="section-title">Projects</h2>
         <div class="projects-grid">
-          <article class="project-card">
-            <div class="project-image placeholder">
-              <div class="placeholder-content">VisionTouch</div>
+          <article class="project-card" data-id="project-visiontouch" data-type="project"
+                   data-title="VisionTouch"
+                   data-description="An AI-based real-time gesture interface system leveraging computer vision for touchless interaction and spatial control. This system tracks user hand motions through dynamic media landmark capture, allowing seamless web navigations and coordinate mappings without physical wear. Features custom low-pass filter logic to smooth coordinate adjustments, providing precise human-computer interaction in mid-air."
+                   data-tech="Python, OpenCV, MediaPipe, NumPy, Computer Vision"
+                   data-github="https://github.com/future-genius"
+                   data-demo=""
+                   data-image="assets/images/vision_touch_logo.png">
+            <div class="project-image">
+              <img src="assets/images/vision_touch_logo.png" alt="VisionTouch AI Gesture Interface" />
             </div>
             <div class="project-content">
-              <h3>VisionTouch: AI Gesture Interface</h3>
-              <p class="project-description">Touchless interaction system using real-time hand tracking via MediaPipe and OpenCV. Enables users to control digital interfaces through mid-air gestures — no wearables, no controllers. Built as a foundation for Iron Man-style spatial UIs.</p>
+              <h3>VisionTouch</h3>
+              <p class="project-description">AI-based real-time gesture interface system using computer vision for touchless interaction and spatial control.</p>
               <div class="project-tech">
                 <span class="tech-badge">Python</span>
                 <span class="tech-badge">OpenCV</span>
                 <span class="tech-badge">MediaPipe</span>
                 <span class="tech-badge">Computer Vision</span>
               </div>
-              <div class="project-links">
-                <a href="https://github.com/future-genius" target="_blank" rel="noopener noreferrer" class="link">Source Code →</a>
+              <div class="project-footer">
+                <button class="btn btn-detail-trigger">Details →</button>
               </div>
             </div>
           </article>
 
-          <article class="project-card">
+          <article class="project-card" data-id="project-agent34" data-type="project"
+                   data-title="Agent 34"
+                   data-description="Advanced XR + sensor fusion tracking ecosystem mapping real-time orientations. Combines 6-DoF positional IMU telemetry (using custom MPU6050 signal processing algorithms) with secondary optical verification. Implements low-latency spatial math inside Unity to translate sensor output into immersive space coordinates."
+                   data-tech="Arduino, MPU6050, Sensor Fusion, Python, Unity, C#"
+                   data-github="https://github.com/future-genius"
+                   data-demo=""
+                   data-image="assets/images/profile_image.png">
             <div class="project-image placeholder">
-              <div class="placeholder-content">6-DoF</div>
+              <div class="placeholder-content">Agent 34</div>
             </div>
             <div class="project-content">
-              <h3>XR 6-DoF Tracking System</h3>
-              <p class="project-description">Custom 6 degrees-of-freedom motion tracking pipeline fusing IMU sensor data (MPU6050) with computer vision. Achieves low-latency positional tracking for XR applications without commercial hardware dependency.</p>
+              <h3>Agent 34</h3>
+              <p class="project-description">Advanced XR + sensor fusion system combining IMU-based tracking, vision systems, and immersive interaction logic for real-time spatial computing applications.</p>
               <div class="project-tech">
                 <span class="tech-badge">Arduino</span>
                 <span class="tech-badge">MPU6050</span>
                 <span class="tech-badge">Sensor Fusion</span>
-                <span class="tech-badge">Python</span>
+                <span class="tech-badge">Unity / C#</span>
               </div>
-              <div class="project-links">
-                <a href="https://github.com/future-genius" target="_blank" rel="noopener noreferrer" class="link">Repository →</a>
+              <div class="project-footer">
+                <button class="btn btn-detail-trigger">Details →</button>
               </div>
             </div>
           </article>
 
-          <article class="project-card">
+          <article class="project-card" data-id="project-lazynotez" data-type="project"
+                   data-title="Lazy Notez"
+                   data-description="A full-stack notes database and academic content repository built for scalability and collaboration. Designed for offline usability through a progressive web app (PWA) framework, smart text indexing, and relational PostgreSQL integration. Winner of the Hack Hustle 2.0 Second Prize."
+                   data-tech="Flask, React, PostgreSQL, PWA, Nginx"
+                   data-github="https://github.com/future-genius"
+                   data-demo="https://lazy-notez.netlify.app/"
+                   data-image="assets/images/lazy-notez-app.png">
             <div class="project-image">
-              <img src="assets/images/lazy-notez.png" alt="Lazy Notez interface" />
+              <img src="assets/images/lazy-notez-app.png" alt="Lazy Notez interface" />
             </div>
             <div class="project-content">
               <h3>Lazy Notez</h3>
-              <p class="project-description">Full-stack note management platform built as Project Lead. Features offline-first PWA architecture, intelligent tagging, and real-time search. Deployed and actively used by students. Winner project at HackHustle 2.0.</p>
+              <p class="project-description">Student resource-sharing platform designed for scalable academic content distribution and collaboration across departments.</p>
               <div class="project-tech">
                 <span class="tech-badge">Flask</span>
                 <span class="tech-badge">React</span>
                 <span class="tech-badge">PostgreSQL</span>
                 <span class="tech-badge">PWA</span>
               </div>
-              <div class="project-links">
-                <a href="https://lazy-notez.netlify.app/" target="_blank" rel="noopener noreferrer" class="link">Live Demo →</a>
-                <a href="https://github.com/future-genius" target="_blank" rel="noopener noreferrer" class="link">Source Code →</a>
+              <div class="project-footer">
+                <button class="btn btn-detail-trigger">Details →</button>
               </div>
             </div>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="certifications" class="section">
-      <div class="container">
-        <h2 class="section-title">Certifications</h2>
-        <div class="certifications-grid">
-          <div class="cert-card">
-            <div class="cert-image">
-              <img src="assets/images/Analog Circuits and Systems.png" alt="Analog Circuits and Systems certificate" />
-            </div>
-            <h3>Analog Circuits and Systems</h3>
-            <p class="cert-issuer">NPTEL</p>
-            <a href="#" class="cert-link">View Certificate</a>
-          </div>
-
-          <div class="cert-card">
-            <div class="cert-image">
-              <img src="assets/images/Introduction to Industry 4.0 and Industrial Internet of Things.png" alt="Industry 4.0 and IIoT certificate" />
-            </div>
-            <h3>Industry 4.0 & IIoT</h3>
-            <p class="cert-issuer">NPTEL</p>
-            <a href="https://drive.google.com/file/d/1Rz8DdzRmsfYO38DfoZgxLeq-9rTViZxc/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="cert-link">View Certificate</a>
-          </div>
-
-          <div class="cert-card">
-            <div class="cert-image">
-              <img src="assets/images/Building Machine Learning Applications.png" alt="Building ML Applications certificate" />
-            </div>
-            <h3>Building ML Applications</h3>
-            <p class="cert-issuer">NPTEL</p>
-            <a href="https://drive.google.com/file/d/1pR9ZOaA5Trg4lxvgS0Jfp_rrjZljPdgC/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="cert-link">View Certificate</a>
-          </div>
-
-          <div class="cert-card">
-            <div class="cert-image">
-              <img src="assets/images/Embedded for Beginners.png" alt="Embedded for Beginners certificate" />
-            </div>
-            <h3>Embedded for Beginners</h3>
-            <p class="cert-issuer">NPTEL</p>
-            <a href="https://drive.google.com/file/d/1WUbOKYJwjbU5b9HXBP0xE_OOuc1X3qRk/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="cert-link">View Certificate</a>
-          </div>
         </div>
       </div>
     </section>
@@ -316,7 +459,7 @@
           <a href="https://linkedin.com/in/future-genius/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">LinkedIn</a>
           <a href="https://github.com/future-genius" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">GitHub</a>
           <a href="https://instagram.com/hawkeye_hari/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">Instagram</a>
-          <a href="https://drive.google.com/file/d/1SGsd9QH0fYk9iSzwU2lUntYhoWN3pqgM/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Download CV">Download CV</a>
+          <a href="https://drive.google.com/file/d/1tdnNUTykXHVEIQzq6Cr76LXzCZ-6KW7c/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Download CV">Download CV</a>
         </div>
       </div>
     </section>
@@ -324,12 +467,24 @@
 
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 Hariharan R</p>
+      <p>&copy; 2026 Hariharan R</p>
     </div>
   </footer>
 
   <button id="back-to-top" class="back-to-top" aria-label="Back to top" hidden>↑</button>
 
+  <!-- High-Tech Frosted Glass Details Modal -->
+  <div id="spatial-modal" class="modal-overlay" aria-hidden="true" role="dialog" hidden>
+    <div class="modal-container">
+      <button id="modal-close" class="modal-close" aria-label="Close modal">&times;</button>
+      <div id="modal-content-container" class="modal-content">
+        <!-- populated dynamically by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Three.js CDN Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="main.js"></script>
 </body>
 </html>

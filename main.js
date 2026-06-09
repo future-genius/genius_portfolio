@@ -35,6 +35,14 @@ function throttle(func, limit) {
   let width = window.innerWidth;
   let height = window.innerHeight;
 
+  // Layered scene groups for background / mid / foreground separation
+  let backgroundLayer, midLayer, foregroundLayer;
+  let depthPlanes = [];
+  let telemetryOrbits = [];
+  let cameraNodes = [];
+  let imuNodes = [];
+  let dataStreamLines = [];
+
   // Connection Probe lines
   let probeLines;
 
@@ -89,15 +97,30 @@ function throttle(func, limit) {
     }));
     scene.add(probeLines);
 
+    // Create layered scene groups
+    backgroundLayer = new THREE.Group();
+    midLayer = new THREE.Group();
+    foregroundLayer = new THREE.Group();
+    backgroundLayer.renderOrder = 0;
+    midLayer.renderOrder = 1;
+    foregroundLayer.renderOrder = 2;
+    scene.add(backgroundLayer, midLayer, foregroundLayer);
+
     // 3. Setup Cursor Particle Field Ripple
     createRippleParticles();
 
     // 4. Generate Procedural 3D Objects
+    createDepthMapPlanes();
+    createCameraNodes();
+    createIMUSensorCluster();
+    createSensorGraph();
+    createTelemetryOrbit();
+    createDataStreams();
+
     createVRHeadset();
     createARGlasses();
     createHoloHand();
     createControllerModule();
-
     createCameraCube();
     // On mobile devices, reduce scene complexity for performance
     if (!isMobile) {
@@ -189,7 +212,7 @@ function throttle(func, limit) {
     rippleParticles.geometry.attributes.position.needsUpdate = true;
   }
 
-  function registerObject(group, baseX, baseY, baseZ, rotX, rotY, scale) {
+  function registerObject(group, baseX, baseY, baseZ, rotX, rotY, scale, parent = scene) {
     group.position.set(baseX, baseY, baseZ);
     group.scale.setScalar(scale);
 
@@ -206,7 +229,7 @@ function throttle(func, limit) {
       rotSpeedY: 0.002 + Math.random() * 0.002
     };
 
-    scene.add(group);
+    parent.add(group);
     objects.push(group);
   }
 
@@ -374,6 +397,159 @@ function throttle(func, limit) {
     ctrlGroup.add(grip);
 
     registerObject(ctrlGroup, -5.2, -0.8, -8.5, 0.2, -0.15, 1.05);
+  }
+
+  function createDepthMapPlanes() {
+    const depthGroup = new THREE.Group();
+    const planeMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.08, side: THREE.DoubleSide });
+    const lineMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.12 });
+
+    for (let i = 0; i < 3; i++) {
+      const plane = new THREE.Mesh(new THREE.PlaneGeometry(8, 6, 8, 6), planeMat);
+      plane.rotation.x = -Math.PI / 2.8;
+      plane.position.set(0, -1.4 + i * 0.5, -14.5 + i * 0.35);
+      plane.userData.phase = Math.random() * Math.PI * 2;
+
+      const edges = new THREE.EdgesGeometry(plane.geometry);
+      const grid = new THREE.LineSegments(edges, lineMat);
+      plane.add(grid);
+      depthGroup.add(plane);
+      depthPlanes.push(plane);
+    }
+
+    registerObject(depthGroup, 0, 0, 0, 0, 0, 1, backgroundLayer);
+  }
+
+  function createCameraNodes() {
+    const camerasGroup = new THREE.Group();
+    const nodeMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.82 });
+    const ringMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.18 });
+
+    const positions = [
+      new THREE.Vector3(4.8, 1.8, -10.2),
+      new THREE.Vector3(5.6, 0.3, -12.0),
+      new THREE.Vector3(3.4, -2.1, -10.8)
+    ];
+
+    positions.forEach((pos, index) => {
+      const camBody = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.18, 0.18), nodeMat);
+      camBody.position.copy(pos);
+      camerasGroup.add(camBody);
+
+      const ring = new THREE.LineSegments(
+        new THREE.EdgesGeometry(new THREE.TorusGeometry(0.6, 0.01, 4, 24)),
+        ringMat
+      );
+      ring.rotation.x = Math.PI / 2;
+      ring.position.copy(pos).add(new THREE.Vector3(0, 0, 0));
+      camerasGroup.add(ring);
+      cameraNodes.push({ body: camBody, ring });
+    });
+
+    registerObject(camerasGroup, 0, 0, 0, 0, 0, 1, midLayer);
+  }
+
+  function createIMUSensorCluster() {
+    const imuGroup = new THREE.Group();
+    const cubeMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.75 });
+    const edgeMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.16 });
+
+    const cubePositions = [
+      new THREE.Vector3(-3.8, 1.7, -12.2),
+      new THREE.Vector3(-4.4, 0.4, -11.2),
+      new THREE.Vector3(-3.2, 0.2, -12.6)
+    ];
+
+    cubePositions.forEach((pos, index) => {
+      const cube = new THREE.Mesh(new THREE.BoxGeometry(0.28 - index * 0.04, 0.22 - index * 0.04, 0.18), cubeMat);
+      cube.position.copy(pos);
+      imuGroup.add(cube);
+      imuNodes.push(cube);
+
+      const edges = new THREE.EdgesGeometry(cube.geometry);
+      imuGroup.add(new THREE.LineSegments(edges, edgeMat));
+    });
+
+    const bridgeMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.09 });
+    const linkGeo = new THREE.BufferGeometry().setFromPoints(cubePositions);
+    imuGroup.add(new THREE.Line(linkGeo, bridgeMat));
+
+    registerObject(imuGroup, 0, 0, 0, 0, 0, 1, midLayer);
+  }
+
+  function createSensorGraph() {
+    const graphGroup = new THREE.Group();
+    const nodeMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.85 });
+    const lineMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.12 });
+
+    const graphPoints = [
+      new THREE.Vector3(-1.2, 2.5, -13.4),
+      new THREE.Vector3(-0.2, 1.2, -12.8),
+      new THREE.Vector3(0.9, 2.6, -13.1),
+      new THREE.Vector3(0.1, 0.5, -12.2),
+      new THREE.Vector3(1.5, 1.0, -12.7)
+    ];
+
+    graphPoints.forEach(point => {
+      const node = new THREE.Mesh(new THREE.SphereGeometry(0.06, 6, 6), nodeMat);
+      node.position.copy(point);
+      graphGroup.add(node);
+    });
+
+    for (let i = 0; i < graphPoints.length - 1; i++) {
+      const segment = new THREE.BufferGeometry().setFromPoints([graphPoints[i], graphPoints[i + 1]]);
+      graphGroup.add(new THREE.Line(segment, lineMat));
+    }
+
+    registerObject(graphGroup, 0, 0, 0, 0, 0, 1, midLayer);
+  }
+
+  function createTelemetryOrbit() {
+    const orbitGroup = new THREE.Group();
+    const ringMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.18 });
+    const indicatorMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.95 });
+
+    const ring = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.RingGeometry(0.78, 0.84, 32)), ringMat);
+    ring.rotation.x = Math.PI / 2;
+    orbitGroup.add(ring);
+
+    for (let i = 0; i < 3; i++) {
+      const indicator = new THREE.Mesh(new THREE.SphereGeometry(0.05, 6, 6), indicatorMat);
+      indicator.position.set(Math.cos((i / 3) * Math.PI * 2) * 0.82, Math.sin((i / 3) * Math.PI * 2) * 0.82, 0);
+      orbitGroup.add(indicator);
+      telemetryOrbits.push({ indicator, angle: (i / 3) * Math.PI * 2 });
+    }
+
+    const base = new THREE.Mesh(new THREE.CircleGeometry(0.24, 24), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.12 }));
+    base.rotation.x = -Math.PI / 2;
+    orbitGroup.add(base);
+
+    registerObject(orbitGroup, 0.8, -2.2, -9.2, 0.18, 0.18, 1.05, midLayer);
+  }
+
+  function createDataStreams() {
+    const streamGroup = new THREE.Group();
+    const streamMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.12, blending: THREE.AdditiveBlending });
+
+    const centers = [
+      new THREE.Vector3(-2.2, -1.5, -11.8),
+      new THREE.Vector3(1.4, -2.6, -11.2),
+      new THREE.Vector3(2.0, 2.1, -12.8)
+    ];
+
+    centers.forEach(center => {
+      const points = [];
+      for (let i = 0; i < 8; i++) {
+        points.push(new THREE.Vector3(center.x + i * 0.18 - 0.63, center.y + Math.sin(i * 0.65) * 0.12, center.z + Math.cos(i) * 0.1));
+      }
+      const geo = new THREE.BufferGeometry().setFromPoints(points);
+      const line = new THREE.Line(geo, streamMat);
+      streamGroup.add(line);
+      line.userData.basePoints = points;
+      dataStreamLines.push(line);
+    });
+
+    registerObject(streamGroup, 0, 0, 0, 0, 0, 1, midLayer);
   }
 
   // 5. Floating Camera Cubes (Procedural)
@@ -837,6 +1013,9 @@ function throttle(func, limit) {
     // 4. Connect Probe to closest objects + Magnetic Pull
     updateProbeLines();
 
+    // 4.5 Animate layered system elements
+    animateLayerSystems();
+
     // 5. Camera Parallax
     if (camera) {
       const targetCamX = mouse.x * 2.5;
@@ -935,6 +1114,45 @@ function throttle(func, limit) {
       }
     }
     rippleParticles.geometry.attributes.position.needsUpdate = true;
+  }
+
+  function animateLayerSystems() {
+    const hoverInfluence = Math.max(0, 1 - mouse3D.distanceTo(new THREE.Vector3(0, 0, -12)) * 0.08);
+
+    depthPlanes.forEach((plane, idx) => {
+      plane.rotation.z = Math.sin(time * 0.25 + plane.userData.phase) * 0.03;
+      plane.position.y = plane.userData.baseY || plane.position.y + Math.sin(time * 0.18 + idx) * 0.001;
+      plane.material.opacity = 0.06 + idx * 0.01;
+    });
+
+    telemetryOrbits.forEach((orbit) => {
+      orbit.angle += 0.015;
+      const radius = 0.82 + Math.sin(time * 0.6) * 0.03;
+      orbit.indicator.position.set(Math.cos(orbit.angle) * radius, Math.sin(orbit.angle) * radius, 0);
+    });
+
+    cameraNodes.forEach(node => {
+      const dist = node.body.position.distanceTo(mouse3D);
+      const scaleTarget = dist < 2 ? 1.15 : 1.0;
+      node.body.scale.setScalar(node.body.scale.x + (scaleTarget - node.body.scale.x) * 0.06);
+      node.ring.material.opacity = dist < 2.6 ? 0.4 : 0.14;
+    });
+
+    imuNodes.forEach((cube, idx) => {
+      cube.rotation.x += 0.0025 + idx * 0.001;
+      cube.rotation.y += 0.0015 + idx * 0.0008;
+    });
+
+    dataStreamLines.forEach(line => {
+      const points = line.userData.basePoints;
+      const positions = line.geometry.attributes.position.array;
+      points.forEach((point, i) => {
+        const offset = Math.sin(time * 2.2 + i * 0.7) * 0.03;
+        positions[i * 3 + 1] = point.y + offset;
+      });
+      line.geometry.attributes.position.needsUpdate = true;
+      line.material.opacity = hoverInfluence > 0.2 ? 0.24 : 0.12;
+    });
   }
 
   // Handle Mouse Movements
